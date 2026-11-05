@@ -129,21 +129,21 @@ if (!item) {
 console.log(`📖 [Selected Item] [${item.uid}] ${item.title} (${item.reference})`);
 console.log(`   Type: ${item.type} | Category: ${item.category} | Event: ${item.event_tag} | Used: ${item.used_count} times`);
 
-// ── 5. Select Layout & Theme (10 Layouts × 10 Themes = 100 Variations) ──
+// ── 5. Select Layout & Theme (20 Layouts × 10 Themes = 200 Unique Variations) ──
 const totalGenerations = db.getGenerationCount();
 const layoutList = RoyalCardTemplate.LAYOUT_KEYS || Object.keys(RoyalCardTemplate.LAYOUTS);
 const themeList = RoyalCardTemplate.THEME_KEYS || Object.keys(RoyalCardTemplate.THEMES);
 
-// Serial rotation ensures each run picks a unique (Layout, Theme) pair
-const layoutIndex = totalGenerations % layoutList.length;
-const themeIndex = (totalGenerations * 3 + Math.floor(totalGenerations / 10)) % themeList.length;
+// Pure random selection across all 20 designs (10 architectural + 10 scenic backgrounds)
+const randomLayoutIndex = Math.floor(Math.random() * layoutList.length);
+const randomThemeIndex = Math.floor(Math.random() * themeList.length);
 
-const selectedLayout = forcedLayout || layoutList[layoutIndex];
-const selectedTheme = forcedTheme || themeList[themeIndex];
+const selectedLayout = forcedLayout || layoutList[randomLayoutIndex];
+const selectedTheme = forcedTheme || themeList[randomThemeIndex];
 
-console.log(`🎨 [Design] Serial Rotation Step #${totalGenerations + 1}:`);
-console.log(`   ► Layout: "${selectedLayout}" (${layoutIndex + 1}/${layoutList.length})`);
-console.log(`   ► Theme:  "${selectedTheme}" (${themeIndex + 1}/${themeList.length})`);
+console.log(`🎨 [Design] Random Selection (from ${layoutList.length} Layouts × ${themeList.length} Themes):`);
+console.log(`   ► Layout: "${selectedLayout}"`);
+console.log(`   ► Theme:  "${selectedTheme}"`);
 
 // ── 6. Render 1080x1080 Canvas ──
 const canvas = createCanvas(1080, 1080);

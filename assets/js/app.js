@@ -594,6 +594,15 @@ function closeShareModal() { if (elements.shareModal) elements.shareModal.classL
 // ── Canvas Preview Modal ──
 function openPreviewModal(item) {
   activePreviewItem = item;
+  // Automatically randomize layout & theme on open so user discovers all 200 variations!
+  if (window.RoyalCardTemplate) {
+    const layouts = window.RoyalCardTemplate.LAYOUT_KEYS || Object.keys(window.RoyalCardTemplate.LAYOUTS || {});
+    const themes = window.RoyalCardTemplate.THEME_KEYS || Object.keys(window.RoyalCardTemplate.THEMES || {});
+    if (layouts.length) currentPreviewLayout = layouts[Math.floor(Math.random() * layouts.length)];
+    if (themes.length) currentPreviewTheme = themes[Math.floor(Math.random() * themes.length)];
+    if (elements.previewLayoutSelect) elements.previewLayoutSelect.value = currentPreviewLayout;
+    if (elements.previewThemeSelect) elements.previewThemeSelect.value = currentPreviewTheme;
+  }
   renderPreviewCanvas(item, currentPreviewLayout, currentPreviewTheme);
   if (elements.previewModal) elements.previewModal.classList.add('active');
 }
