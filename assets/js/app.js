@@ -10,6 +10,7 @@ let filteredItems = [];
 let currentFilter = 'all';
 let currentSearch = '';
 let activePreviewItem = null;
+let currentPreviewLayout = 'mihrab-arch';
 let currentPreviewTheme = 'royal-emerald';
 
 // ── DOM Elements ──
@@ -35,7 +36,9 @@ const elements = {
   addModal: document.getElementById('addModal'),
   previewModal: document.getElementById('previewModal'),
   previewCanvas: document.getElementById('previewCanvas'),
+  previewLayoutSelect: document.getElementById('previewLayoutSelect'),
   previewThemeSelect: document.getElementById('previewThemeSelect'),
+  btnRandomCombo: document.getElementById('btnRandomCombo'),
   btnDownloadPreview: document.getElementById('btnDownloadPreview'),
   btnSharePreview: document.getElementById('btnSharePreview'),
   shareModal: document.getElementById('shareModal'),
@@ -264,13 +267,43 @@ function setupEventListeners() {
     });
   }
 
-  // Preview Theme Switcher
+  // Preview Layout Switcher (10 Distinct Architectures)
+  if (elements.previewLayoutSelect) {
+    elements.previewLayoutSelect.addEventListener('change', (e) => {
+      currentPreviewLayout = e.target.value;
+      if (activePreviewItem) {
+        renderPreviewCanvas(activePreviewItem, currentPreviewLayout, currentPreviewTheme);
+      }
+    });
+  }
+
+  // Preview Theme Switcher (10 Royal Color Palettes)
   if (elements.previewThemeSelect) {
     elements.previewThemeSelect.addEventListener('change', (e) => {
       currentPreviewTheme = e.target.value;
       if (activePreviewItem) {
-        renderPreviewCanvas(activePreviewItem, currentPreviewTheme);
+        renderPreviewCanvas(activePreviewItem, currentPreviewLayout, currentPreviewTheme);
       }
+    });
+  }
+
+  // Random Combination Button (Cycles across 100 designs)
+  if (elements.btnRandomCombo) {
+    elements.btnRandomCombo.addEventListener('click', () => {
+      if (!window.RoyalCardTemplate) return;
+      const layouts = window.RoyalCardTemplate.LAYOUT_KEYS || Object.keys(window.RoyalCardTemplate.LAYOUTS);
+      const themes = window.RoyalCardTemplate.THEME_KEYS || Object.keys(window.RoyalCardTemplate.THEMES);
+
+      currentPreviewLayout = layouts[Math.floor(Math.random() * layouts.length)];
+      currentPreviewTheme = themes[Math.floor(Math.random() * themes.length)];
+
+      if (elements.previewLayoutSelect) elements.previewLayoutSelect.value = currentPreviewLayout;
+      if (elements.previewThemeSelect) elements.previewThemeSelect.value = currentPreviewTheme;
+
+      if (activePreviewItem) {
+        renderPreviewCanvas(activePreviewItem, currentPreviewLayout, currentPreviewTheme);
+      }
+      showToast('🎲 নতুন র‍্যান্ডম ডিজাইন ও কালার কম্বিনেশন রেন্ডার হয়েছে!');
     });
   }
 
@@ -399,7 +432,7 @@ function closeShareModal() {
 // ── Canvas Preview Modal ──
 function openPreviewModal(item) {
   activePreviewItem = item;
-  renderPreviewCanvas(item, currentPreviewTheme);
+  renderPreviewCanvas(item, currentPreviewLayout, currentPreviewTheme);
   if (elements.previewModal) elements.previewModal.classList.add('active');
 }
 
@@ -408,12 +441,15 @@ function closePreviewModal() {
   activePreviewItem = null;
 }
 
-function renderPreviewCanvas(item, theme) {
+function renderPreviewCanvas(item, layout, theme) {
   if (!elements.previewCanvas || !window.RoyalCardTemplate) return;
   elements.previewCanvas.width = 1080;
   elements.previewCanvas.height = 1080;
 
-  window.RoyalCardTemplate.render(elements.previewCanvas, item, { theme: theme });
+  window.RoyalCardTemplate.render(elements.previewCanvas, item, {
+    layout: layout || currentPreviewLayout,
+    theme: theme || currentPreviewTheme
+  });
 
   if (elements.btnDownloadPreview) {
     elements.btnDownloadPreview.onclick = () => {

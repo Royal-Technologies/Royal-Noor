@@ -125,40 +125,62 @@
     </section>
   </main>
 
-  <!-- ── Modal: Canvas Card Preview & Customizer ── -->
+  <!-- ── Modal: Canvas Card Preview & 100 Designs Customizer ── -->
   <div class="modal-overlay" id="previewModal">
-    <div class="modal-box" style="max-width:480px; padding:20px 24px; text-align:center;">
+    <div class="modal-box" style="max-width:540px; padding:18px 22px; text-align:center;">
       <button class="modal-close" onclick="closePreviewModal()">✕</button>
-      <h3 style="color:var(--gold); margin-bottom:8px; font-size:18px;">🖼️ রয়েল কার্ড প্রিভিউ (১০৮০×১০৮০)</h3>
+      <h3 style="color:var(--gold); margin-bottom:10px; font-size:18px;">🖼️ রয়েল কার্ড কাস্টমাইজার (১০ ডিজাইন × ১০ কালার = ১০০ রূপ)</h3>
 
-      <div style="margin-bottom:12px; display:inline-flex; align-items:center; gap:8px;">
-        <label style="font-size:13px; color:var(--text-muted);">রয়েল থিম বেছে নিন:</label>
-        <select id="previewThemeSelect" class="form-control" style="width:auto; padding:5px 12px; font-size:13px;">
-          <option value="royal-emerald">১. পান্না সবুজ (Royal Emerald)</option>
-          <option value="midnight-navy">২. গভীর নীলকান্ত (Midnight Navy)</option>
-          <option value="imperial-black">৩. কাবার গিলাফ ও সোনা (Imperial Onyx)</option>
-          <option value="warm-parchment">৪. মদিনা পাণ্ডুলিপি (Illuminated Parchment)</option>
-          <option value="royal-maroon">৫. দামেস্ক মেরুন (Damascus Crimson)</option>
-          <option value="ottoman-turquoise">৬. অটোমান ফিরোজা (Ottoman Turquoise)</option>
-          <option value="desert-amber">৭. মরু জাফরান ও অ্যাম্বার (Hijaz Amber)</option>
-          <option value="amethyst-violet">৮. রাজকীয় বেগুনি (Royal Amethyst)</option>
-          <option value="andalusian-mihrab">৯. আন্দালুসীয় মেহরাব (Andalusian Mihrab)</option>
-          <option value="classic-ivory">১০. শুভ্র মুক্তা আইভরি (Classic Pearl Ivory)</option>
-        </select>
+      <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
+        <div style="display:inline-flex; align-items:center; gap:6px;">
+          <label style="font-size:12px; font-weight:600; color:var(--text-muted);">ডিজাইন:</label>
+          <select id="previewLayoutSelect" class="form-control" style="width:auto; padding:5px 10px; font-size:12px;">
+            <option value="mihrab-arch">১. মেহরাব আর্চ (Mihrab)</option>
+            <option value="royal-minimal">২. রাজকীয় মিনিমাল (Minimal)</option>
+            <option value="geometric-mandala">৩. ইসলামিক রজেট (Rosette)</option>
+            <option value="illuminated-manuscript">৪. মদিনা পাণ্ডুলিপি (Manuscript)</option>
+            <option value="iznik-tiles">৫. অটোমান ইজনিক (Iznik)</option>
+            <option value="architectural-pillars">৬. রাজকীয় স্তম্ভ (Pillars)</option>
+            <option value="celestial-crescent">৭. হিলাল ও তারকা (Celestial)</option>
+            <option value="alhambra-palace">৮. আলহামব্রা প্যালেস (Alhambra)</option>
+            <option value="octagram-medallion">৯. আটকোণা সিল (Octagram)</option>
+            <option value="kiswah-gold-ribbon">১০. কাবার গিলাফ ফিতা (Kiswah)</option>
+          </select>
+        </div>
+
+        <div style="display:inline-flex; align-items:center; gap:6px;">
+          <label style="font-size:12px; font-weight:600; color:var(--text-muted);">কালার:</label>
+          <select id="previewThemeSelect" class="form-control" style="width:auto; padding:5px 10px; font-size:12px;">
+            <option value="royal-emerald">১. পান্না সবুজ (Emerald)</option>
+            <option value="midnight-navy">২. গভীর নীলকান্ত (Navy)</option>
+            <option value="imperial-black">৩. কাবার গিলাফ (Onyx)</option>
+            <option value="warm-parchment">৪. মদিনা ভিন্টেজ (Parchment)</option>
+            <option value="royal-maroon">৫. দামেস্ক মেরুন (Maroon)</option>
+            <option value="ottoman-turquoise">৬. অটোমান ফিরোজা (Teal)</option>
+            <option value="desert-amber">৭. মরু জাফরান (Amber)</option>
+            <option value="amethyst-violet">৮. রাজকীয় বেগুনি (Violet)</option>
+            <option value="andalusian-olive">৯. আন্দালুসীয় অলিভ (Olive)</option>
+            <option value="classic-ivory">১০. শুভ্র আইভরি (Ivory)</option>
+          </select>
+        </div>
+
+        <button id="btnRandomCombo" class="btn btn-glass" style="padding:4px 12px; font-size:12px;" title="র্যান্ডম ডিজাইন ও কালার">
+          🎲 র‍্যান্ডম
+        </button>
       </div>
 
-      <div style="max-width:min(320px, 42vh); margin:0 auto 14px; border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.5);">
+      <div style="max-width:min(320px, 42vh); margin:0 auto 12px; border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.5);">
         <canvas id="previewCanvas" style="width:100%; height:auto; display:block;"></canvas>
       </div>
 
       <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap;">
-        <button id="btnDownloadPreview" class="btn btn-gold" style="padding:8px 18px; font-size:14px;">
+        <button id="btnDownloadPreview" class="btn btn-gold" style="padding:7px 16px; font-size:13px;">
           📥 ডাউনলোড ১০৮০×১০৮০ PNG
         </button>
-        <button id="btnSharePreview" class="btn btn-emerald" style="padding:8px 18px; font-size:14px;">
+        <button id="btnSharePreview" class="btn btn-emerald" style="padding:7px 16px; font-size:13px;">
           📤 কার্ড শেয়ার করুন
         </button>
-        <button class="btn btn-glass" style="color:var(--text); border-color:var(--card-border); padding:8px 16px; font-size:14px;" onclick="closePreviewModal()">
+        <button class="btn btn-glass" style="color:var(--text); border-color:var(--card-border); padding:7px 14px; font-size:13px;" onclick="closePreviewModal()">
           বন্ধ করুন
         </button>
       </div>

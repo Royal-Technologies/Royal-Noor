@@ -229,8 +229,8 @@ window.ROYAL_NOOR_DATA = [
     "target_day": null,
     "target_month": null,
     "priority": 10,
-    "used_count": 0,
-    "last_used_at": null,
+    "used_count": 1,
+    "last_used_at": "2026-11-05T07:50:50.135Z",
     "is_active": 1,
     "created_at": "2026-11-05 06:49:00"
   },

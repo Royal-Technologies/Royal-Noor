@@ -158,19 +158,76 @@ npm run init-db
 
 ---
 
-## 🤖 সোশ্যাল মিডিয়া অটোমেশন (Make.com / Webhook)
+## 🤖 সোশ্যাল মিডিয়া অটোমেশন গাইড (Social Media Automation Guide)
 
-প্রতিদিন জেনারেট হওয়া `cards/today.json` ফাইলটিতে সোশ্যাল মিডিয়ার জন্য সম্পূর্ণ প্রস্তুত করা ক্যাপশন ও ছবির লিঙ্ক থাকে:
-```json
-{
-  "cardId": "RN-20261105-OQAP",
-  "title": "সূরা আল-বাকারা",
-  "reference": "সূরা আল-বাকারা : ১৫২",
-  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nفَاذْكُرُونِي أَذْكُرْكُمْ وَاشْكُرُوا لِي وَلَا تَكْفُرُونِ\n\n❝ অতএব তোমরা আমাকে স্মরণ কর, আমিও তোমাদেরকে স্মরণ করব। আর তোমরা আমার প্রতি কৃতজ্ঞ হও এবং অকৃতজ্ঞ হয়ো না। ❞\n— [ সূরা আল-বাকারা : ১৫২ ]\n\n🌐 ওয়েবসাইট: https://www.royaltechbd.com/\n🏷️ নিবেদনে: Royal Technologies",
-  "imageUrl": "https://royal-technologies.github.io/Royal-Noor/cards/today.png"
+যেকোনো ব্যক্তি, প্রতিষ্ঠান বা সোশ্যাল মিডিয়া ম্যানেজার এই রিপোজিটরির লাইভ আপডেট করা ফাইল ২টি ব্যবহার করে সম্পূর্ণ বিনামূল্যে এবং স্বয়ংক্রিয়ভাবে ফেসবুক পেজ, ইনস্টাগ্রাম, হোয়াটসঅ্যাপ চ্যানেল, টেলিগ্রাম বা এক্সে (টুইটার) প্রতিদিন নূরানি ইসলামিক পোস্ট শিডিউল করতে পারবেন।
+
+### 📌 লাইভ সোর্স ফাইল লিঙ্কসমূহ (Raw URLs):
+* 🖼️ **আজকের পোস্ট রেডি ইমেজ (১০৮০×১০৮০ PNG):**  
+  [https://raw.githubusercontent.com/Royal-Technologies/Royal-Noor/main/cards/today.png](https://raw.githubusercontent.com/Royal-Technologies/Royal-Noor/main/cards/today.png)  
+  *(GitHub ভিউ: [cards/today.png](https://github.com/Royal-Technologies/Royal-Noor/blob/main/cards/today.png) | ওয়েব CDN: `https://royal-technologies.github.io/Royal-Noor/cards/today.png`)*
+
+* 📋 **আজকের পোস্ট ক্যাপশন ও মেটাডাটা (JSON):**  
+  [https://raw.githubusercontent.com/Royal-Technologies/Royal-Noor/main/cards/today.json](https://raw.githubusercontent.com/Royal-Technologies/Royal-Noor/main/cards/today.json)  
+  *(GitHub ভিউ: [cards/today.json](https://github.com/Royal-Technologies/Royal-Noor/blob/main/cards/today.json))*
+
+---
+
+### ⏰ স্বয়ংক্রিয় আপডেট সময় ও শিডিউল পোস্টিং গাইডলাইন
+
+গিটহাব অ্যাকশনসের মাধ্যমে ফাইল ২টি **প্রতিদিন ২ বার** স্বয়ংক্রিয়ভাবে নতুন বাণী ও নতুন ডিজাইনে আপডেট হয়:
+
+| আপডেট স্লট | বাংলাদেশ সময় (BST / UTC+6) | আন্তর্জাতিক সময় (GMT / UTC) | অটোমেশন শিডিউল পোস্টিংয়ের আদর্শ সময় |
+|:---|:---|:---|:---|
+| **১ম আপডেট (সকাল)** | **সকাল ০৬:০০ টা** | **00:00 (12:00 AM) GMT** | **সকাল ০৮:০০ টা BST (02:00 GMT)** |
+| **২য় আপডেট (সন্ধ্যা)** | **সন্ধ্যা ০৬:০০ টা** | **12:00 (12:00 PM) GMT** | **রাত ০৮:০০ টা BST (14:00 GMT)** |
+
+> [!TIP]
+> **কেন সকাল ৮টা ও রাত ৮টায় শিডিউল করবেন?**  
+> ফাইলটি সকাল ৬টায় আপডেট সম্পন্ন হওয়ার পর **সকাল ৮:০০ টায়** পোস্ট করলে এবং সন্ধ্যা ৬টায় আপডেট সম্পন্ন হওয়ার পর **রাত ৮:০০ টায়** পোস্ট করলে সোশ্যাল মিডিয়া প্ল্যাটফর্মগুলোতে (Facebook & Instagram) সবচেয়ে বেশি মানুষের কাছে পৌঁছায় (Peak Engagement Time)।
+
+---
+
+### 🎨 ১০০টি ভিন্ন ডিজাইনের জাদু (Visual Diversity)
+- **১০টি ভিন্ন লেআউট কাঠামো** (মেহরাব, মিনিমাল, রজেট, পাণ্ডুলিপি, ইজনিক টাইলস, স্তম্ভ, সেলিস্টিয়াল, আলহামব্রা, আটকোণা ও কাবার গিলাফ ফিতা)
+- **১০টি রাজকীয় কালার থিম** (পান্না সবুজ, গভীর নীলকান্ত, কাবার গিলাফ সোনা, মদিনা ভিন্টেজ, দামেস্ক মেরুন, ফিরোজা, মরু জাফরান, বেগুনি, অলিভ ও শুভ্র আইভরি)
+- **মোট ১০০টি কম্বিনেশন (১০×১০):** ফলে আপনার সোশ্যাল মিডিয়া পেজে কখনোই একঘেয়েমি আসবে না; প্রতিটি পোস্ট সম্পূর্ণ ভিন্ন রূপ ও ফ্রেম নিয়ে প্রকাশিত হবে।
+
+---
+
+### 🛠️ অটোমেশন বাস্তবায়নের উপায়সমূহ (How to Set Up)
+
+#### পদ্ধতি ১: Make.com / Zapier দিয়ে (No-Code, সবচেয়ে সহজ)
+1. **Trigger:** `HTTP / Webhook` বা `Schedule` মডিউল ব্যবহার করে প্রতিদিন সকাল ০৭:৫০ এবং রাত ০৭:৫০-এ `https://raw.githubusercontent.com/Royal-Technologies/Royal-Noor/main/cards/today.json` থেকে JSON ফেচ করুন।
+2. **Action:** Facebook Pages / Instagram Business / Telegram / Buffer মডিউল যুক্ত করুন:
+   - **Photo URL:** `{{data.imageUrl}}`
+   - **Caption:** `{{data.caption}}`
+3. সেভ করে সক্রিয় করে দিন। ব্যস! প্রতিদিন নির্ধারিত সময়ে স্বয়ংক্রিয় পোস্ট হতে থাকবে।
+
+#### পদ্ধতি ২: পাইথন স্ক্রিপ্ট / ক্রনজব দিয়ে (Python Auto-Poster)
+```python
+import requests
+
+# ১. আজকের ক্যাপশন ও ইমেজ ফেচ
+res = requests.get("https://raw.githubusercontent.com/Royal-Technologies/Royal-Noor/main/cards/today.json")
+data = res.json()
+
+caption = data["caption"]
+image_url = data["imageUrl"]
+
+# ২. ফেসবুক পেজে অটো-পোস্ট (Facebook Graph API)
+page_id = "YOUR_PAGE_ID"
+access_token = "YOUR_PAGE_ACCESS_TOKEN"
+
+post_url = f"https://graph.facebook.com/v20.0/{page_id}/photos"
+payload = {
+    "url": image_url,
+    "message": caption,
+    "access_token": access_token
 }
+response = requests.post(post_url, data=payload)
+print("Facebook Post Response:", response.json())
 ```
-এটি Make.com বা Zapier দিয়ে স্বয়ংক্রিয়ভাবে ফেসবুক পেজ বা ইনস্টাগ্রামে পোস্ট করা যায়।
 
 ---
 

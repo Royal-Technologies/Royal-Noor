@@ -2,11 +2,9 @@ name: Daily Royal Noor Generation & Publishing
 
 on:
   schedule:
-    # 00:00 UTC = 06:00 AM Dhaka (Morning / Fajr Noor)
-    # 06:20 UTC = 12:20 PM Dhaka (Noon Noor)
-    # 12:00 UTC = 06:00 PM Dhaka (Evening / Maghrib Noor)
+    # 00:00 GMT / UTC = সকাল ০৬:০০ টা বাংলাদেশ সময় (06:00 AM BST)
     - cron: '0 0 * * *'
-    - cron: '20 6 * * *'
+    # 12:00 GMT / UTC = সন্ধ্যা ০৬:০০ টা বাংলাদেশ সময় (06:00 PM BST)
     - cron: '0 12 * * *'
   workflow_dispatch:
     inputs:
@@ -18,8 +16,12 @@ on:
         description: 'Type: quran or hadith (or empty for auto)'
         required: false
         default: ''
+      layout:
+        description: 'Layout (mihrab-arch, royal-minimal, geometric-mandala, illuminated-manuscript, iznik-tiles, architectural-pillars, celestial-crescent, alhambra-palace, octagram-medallion, kiswah-gold-ribbon)'
+        required: false
+        default: ''
       theme:
-        description: 'Theme (royal-emerald, midnight-navy, imperial-black, warm-parchment)'
+        description: 'Theme (royal-emerald, midnight-navy, imperial-black, warm-parchment, royal-maroon, ottoman-turquoise, desert-amber, amethyst-violet, andalusian-olive, classic-ivory)'
         required: false
         default: ''
 
@@ -33,6 +35,7 @@ jobs:
       TZ: Asia/Dhaka
       NOOR_TAG: ${{ github.event.inputs.event_tag }}
       NOOR_TYPE: ${{ github.event.inputs.force_type }}
+      NOOR_LAYOUT: ${{ github.event.inputs.layout }}
       NOOR_THEME: ${{ github.event.inputs.theme }}
 
     steps:

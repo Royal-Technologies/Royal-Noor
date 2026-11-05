@@ -1,6 +1,6 @@
 /**
- * Royal Noor — 1080x1080 Islamic Card Template Engine
- * 10 Distinct Royal Themes & Serial Rotation
+ * Royal Noor — 1080x1080 Islamic Card Engine
+ * 10 Distinct Layout Architectures × 10 Royal Color Themes = 100 Unique Designs
  * Brand: Royal Noor — আলোর পথে প্রতিদিন
  * Credits: Royal Technologies (https://www.royaltechbd.com/)
  */
@@ -17,14 +17,15 @@
   const W = 1080;
   const H = 1080;
 
-  // 10 Distinct Royal Islamic Themes
+  // ═════════════════════════════════════════════════════════════════
+  // 1. TEN DISTINCT COLOR PALETTES (১০টি কালার থিম)
+  // ═════════════════════════════════════════════════════════════════
   const THEMES = {
     'royal-emerald': {
       key: 'royal-emerald',
       name: 'পান্না সবুজ (Royal Emerald)',
       bgGrad: ['#011710', '#05291E', '#093E2F'],
       cardBg: '#042118',
-      innerBg: 'rgba(2, 25, 18, 0.7)',
       primaryGold: '#E5C383',
       secondaryGold: '#BF9546',
       accentGold: '#F9ECCE',
@@ -32,9 +33,7 @@
       banglaColor: '#FAF6EE',
       metaColor: '#D8BF89',
       borderColor: 'rgba(229, 195, 131, 0.45)',
-      cornerColor: '#E5C383',
-      patternColor: 'rgba(229, 195, 131, 0.035)',
-      patternType: 'lattice',
+      subtleLine: 'rgba(229, 195, 131, 0.18)',
       badgeBg: 'rgba(229, 195, 131, 0.15)',
       badgeBorder: 'rgba(229, 195, 131, 0.35)',
       badgeText: '#F9ECCE',
@@ -45,7 +44,6 @@
       name: 'গভীর নীলকান্ত (Midnight Navy)',
       bgGrad: ['#030C1A', '#081A36', '#0E2850'],
       cardBg: '#071830',
-      innerBg: 'rgba(4, 14, 28, 0.7)',
       primaryGold: '#EAC875',
       secondaryGold: '#C59E3F',
       accentGold: '#FDF2D4',
@@ -53,9 +51,7 @@
       banglaColor: '#F1F5F9',
       metaColor: '#D4B365',
       borderColor: 'rgba(234, 200, 117, 0.45)',
-      cornerColor: '#EAC875',
-      patternColor: 'rgba(234, 200, 117, 0.035)',
-      patternType: 'stars',
+      subtleLine: 'rgba(234, 200, 117, 0.18)',
       badgeBg: 'rgba(234, 200, 117, 0.15)',
       badgeBorder: 'rgba(234, 200, 117, 0.35)',
       badgeText: '#FDF2D4',
@@ -66,7 +62,6 @@
       name: 'কাবার গিলাফ ও সোনা (Imperial Onyx)',
       bgGrad: ['#07080A', '#0F1116', '#171A21'],
       cardBg: '#0C0E13',
-      innerBg: 'rgba(8, 9, 12, 0.75)',
       primaryGold: '#F5D77F',
       secondaryGold: '#C99E32',
       accentGold: '#FFF4D6',
@@ -74,9 +69,7 @@
       banglaColor: '#FAF9F6',
       metaColor: '#D9B45C',
       borderColor: 'rgba(245, 215, 127, 0.5)',
-      cornerColor: '#F5D77F',
-      patternColor: 'rgba(245, 215, 127, 0.03)',
-      patternType: 'diamonds',
+      subtleLine: 'rgba(245, 215, 127, 0.18)',
       badgeBg: 'rgba(245, 215, 127, 0.15)',
       badgeBorder: 'rgba(245, 215, 127, 0.38)',
       badgeText: '#FFF4D6',
@@ -87,17 +80,14 @@
       name: 'মদিনা পাণ্ডুলিপি (Illuminated Parchment)',
       bgGrad: ['#1E1610', '#2E2218', '#3F2F22'],
       cardBg: '#F8F3E6',
-      innerBg: '#F3ECE0',
       primaryGold: '#946E26',
       secondaryGold: '#6A4A0E',
       accentGold: '#B8892E',
       arabicColor: '#1A120B',
       banglaColor: '#2B1E14',
       metaColor: '#6B4D18',
-      borderColor: 'rgba(148, 110, 38, 0.38)',
-      cornerColor: '#946E26',
-      patternColor: 'rgba(148, 110, 38, 0.04)',
-      patternType: 'manuscript',
+      borderColor: 'rgba(148, 110, 38, 0.4)',
+      subtleLine: 'rgba(148, 110, 38, 0.2)',
       badgeBg: 'rgba(148, 110, 38, 0.1)',
       badgeBorder: 'rgba(148, 110, 38, 0.32)',
       badgeText: '#6A4A0E',
@@ -108,7 +98,6 @@
       name: 'দামেস্ক মেরুন (Damascus Crimson)',
       bgGrad: ['#1A040B', '#2D0A16', '#441223'],
       cardBg: '#22060F',
-      innerBg: 'rgba(24, 4, 11, 0.72)',
       primaryGold: '#F2CB75',
       secondaryGold: '#D49D34',
       accentGold: '#FCEECC',
@@ -116,9 +105,7 @@
       banglaColor: '#FDF5EC',
       metaColor: '#DEB059',
       borderColor: 'rgba(242, 203, 117, 0.45)',
-      cornerColor: '#F2CB75',
-      patternColor: 'rgba(242, 203, 117, 0.035)',
-      patternType: 'lattice',
+      subtleLine: 'rgba(242, 203, 117, 0.18)',
       badgeBg: 'rgba(242, 203, 117, 0.15)',
       badgeBorder: 'rgba(242, 203, 117, 0.35)',
       badgeText: '#FCEECC',
@@ -129,7 +116,6 @@
       name: 'অটোমান ফিরোজা (Ottoman Turquoise)',
       bgGrad: ['#021B21', '#062F38', '#0A4652'],
       cardBg: '#04262E',
-      innerBg: 'rgba(2, 25, 30, 0.72)',
       primaryGold: '#62E5D5',
       secondaryGold: '#E5C370',
       accentGold: '#FBF3D4',
@@ -137,9 +123,7 @@
       banglaColor: '#EFFFFD',
       metaColor: '#52D4C4',
       borderColor: 'rgba(98, 229, 213, 0.42)',
-      cornerColor: '#E5C370',
-      patternColor: 'rgba(98, 229, 213, 0.035)',
-      patternType: 'diamonds',
+      subtleLine: 'rgba(98, 229, 213, 0.18)',
       badgeBg: 'rgba(98, 229, 213, 0.15)',
       badgeBorder: 'rgba(98, 229, 213, 0.35)',
       badgeText: '#FBF3D4',
@@ -150,7 +134,6 @@
       name: 'মরু জাফরান ও অ্যাম্বার (Hijaz Amber)',
       bgGrad: ['#1F0E04', '#361808', '#4F260E'],
       cardBg: '#271105',
-      innerBg: 'rgba(28, 12, 3, 0.72)',
       primaryGold: '#F7BA45',
       secondaryGold: '#DC8D24',
       accentGold: '#FCE7B8',
@@ -158,9 +141,7 @@
       banglaColor: '#FAF4EC',
       metaColor: '#DE9837',
       borderColor: 'rgba(247, 186, 69, 0.45)',
-      cornerColor: '#F7BA45',
-      patternColor: 'rgba(247, 186, 69, 0.035)',
-      patternType: 'stars',
+      subtleLine: 'rgba(247, 186, 69, 0.18)',
       badgeBg: 'rgba(247, 186, 69, 0.15)',
       badgeBorder: 'rgba(247, 186, 69, 0.35)',
       badgeText: '#FCE7B8',
@@ -171,7 +152,6 @@
       name: 'রাজকীয় বেগুনি (Royal Amethyst)',
       bgGrad: ['#12071E', '#200D35', '#32164F'],
       cardBg: '#1A0B2A',
-      innerBg: 'rgba(18, 7, 30, 0.72)',
       primaryGold: '#EFD48E',
       secondaryGold: '#CFA64F',
       accentGold: '#F9EED4',
@@ -179,20 +159,17 @@
       banglaColor: '#F8F3FC',
       metaColor: '#D8B568',
       borderColor: 'rgba(239, 212, 142, 0.45)',
-      cornerColor: '#EFD48E',
-      patternColor: 'rgba(239, 212, 142, 0.035)',
-      patternType: 'lattice',
+      subtleLine: 'rgba(239, 212, 142, 0.18)',
       badgeBg: 'rgba(239, 212, 142, 0.15)',
       badgeBorder: 'rgba(239, 212, 142, 0.35)',
       badgeText: '#F9EED4',
       isDark: true
     },
-    'andalusian-mihrab': {
-      key: 'andalusian-mihrab',
-      name: 'আন্দালুসীয় মেহরাব (Andalusian Mihrab)',
+    'andalusian-olive': {
+      key: 'andalusian-olive',
+      name: 'আন্দালুসীয় অলিভ (Moorish Olive)',
       bgGrad: ['#071A12', '#0D2B1F', '#164230'],
       cardBg: '#092218',
-      innerBg: 'rgba(7, 24, 17, 0.75)',
       primaryGold: '#E7C67E',
       secondaryGold: '#BA943E',
       accentGold: '#F8EED5',
@@ -200,9 +177,7 @@
       banglaColor: '#FAF7F0',
       metaColor: '#D2AD5E',
       borderColor: 'rgba(231, 198, 126, 0.45)',
-      cornerColor: '#E7C67E',
-      patternColor: 'rgba(231, 198, 126, 0.035)',
-      patternType: 'mihrab',
+      subtleLine: 'rgba(231, 198, 126, 0.18)',
       badgeBg: 'rgba(231, 198, 126, 0.15)',
       badgeBorder: 'rgba(231, 198, 126, 0.35)',
       badgeText: '#F8EED5',
@@ -213,17 +188,14 @@
       name: 'শুভ্র মুক্তা আইভরি (Classic Pearl Ivory)',
       bgGrad: ['#161B22', '#21262D', '#30363D'],
       cardBg: '#FCFAF5',
-      innerBg: '#F6F3EC',
       primaryGold: '#967228',
       secondaryGold: '#705315',
       accentGold: '#BD9645',
       arabicColor: '#0C1B16',
       banglaColor: '#172420',
       metaColor: '#705315',
-      borderColor: 'rgba(150, 114, 40, 0.4)',
-      cornerColor: '#967228',
-      patternColor: 'rgba(150, 114, 40, 0.04)',
-      patternType: 'manuscript',
+      borderColor: 'rgba(150, 114, 40, 0.42)',
+      subtleLine: 'rgba(150, 114, 40, 0.2)',
       badgeBg: 'rgba(150, 114, 40, 0.1)',
       badgeBorder: 'rgba(150, 114, 40, 0.32)',
       badgeText: '#705315',
@@ -231,22 +203,70 @@
     }
   };
 
-  const THEME_ORDER = [
-    'royal-emerald',
-    'midnight-navy',
-    'imperial-black',
-    'warm-parchment',
-    'royal-maroon',
-    'ottoman-turquoise',
-    'desert-amber',
-    'amethyst-violet',
-    'andalusian-mihrab',
-    'classic-ivory'
-  ];
+  const THEME_KEYS = Object.keys(THEMES);
 
-  /**
-   * Helper: Wrap text into lines fitting max width
-   */
+  // ═════════════════════════════════════════════════════════════════
+  // 2. TEN DISTINCT ARCHITECTURAL LAYOUTS (১০টি সম্পূর্ণ ভিন্ন ডিজাইন)
+  // ═════════════════════════════════════════════════════════════════
+  const LAYOUTS = {
+    'mihrab-arch': {
+      key: 'mihrab-arch',
+      name: '১. মেহরাব আর্চ (Mihrab Sanctuary Arch)',
+      desc: 'মসজিদের মেহরাব ও খিলান অনুপ্রাণিত স্থাপত্য ফ্রেম'
+    },
+    'royal-minimal': {
+      key: 'royal-minimal',
+      name: '২. রাজকীয় মিনিমালিজম (Royal Modern Luxury)',
+      desc: 'আধুনিক সূক্ষ্ম গোল্ডেন লাইন ও মিনিমাল আর্কিটেকচার'
+    },
+    'geometric-mandala': {
+      key: 'geometric-mandala',
+      name: '৩. ইসলামিক রজেট ও মান্ডালা (Sacred Rosette)',
+      desc: 'কেন্দ্রীয় ১৬-কোণা ইসলামিক জ্যামিতিক রজেট ও নক্ষত্র'
+    },
+    'illuminated-manuscript': {
+      key: 'illuminated-manuscript',
+      name: '৪. মদিনা পাণ্ডুলিপি ফ্রেম (Illuminated Manuscript)',
+      desc: 'পবিত্র কোরআনের প্রাচীন পাণ্ডুলিপি ও স্বর্ণালী কারতুশ'
+    },
+    'iznik-tiles': {
+      key: 'iznik-tiles',
+      name: '৫. অটোমান ইজনিক টাইলস (Ottoman Iznik Border)',
+      desc: 'অটোমান প্রাসাদ ও মসজিদের জ্যামিতিক টাইলস সীমানা'
+    },
+    'architectural-pillars': {
+      key: 'architectural-pillars',
+      name: '৬. রাজকীয় স্তম্ভ ও তোরণ (Royal Twin Pillars)',
+      desc: 'দুই পাশের মহিমান্বিত স্বর্ণস্তম্ভ ও উপরের রাজতোরণ'
+    },
+    'celestial-crescent': {
+      key: 'celestial-crescent',
+      name: '৭. হিলাল ও সেলিস্টিয়াল গ্যালাক্সি (Celestial Crescent)',
+      desc: 'উজ্জ্বল স্বর্ণালী অর্ধচন্দ্র ও তারকাময় স্বর্গীয় আবহ'
+    },
+    'alhambra-palace': {
+      key: 'alhambra-palace',
+      name: '৮. আন্দালুসীয় আলহামব্রা (Alhambra Arabesque)',
+      desc: 'আলহামব্রা প্রাসাদের বহু-খাঁজযুক্ত খিলান ও লতাপাতা'
+    },
+    'octagram-medallion': {
+      key: 'octagram-medallion',
+      name: '৯. আটকোণা মেডেলিয়ন (Rub el Hizb Seal)',
+      desc: 'আটকোণা চ্যাম্ফার্ড বর্ডার ও পবিত্র রুব-এল-হিজব সিল'
+    },
+    'kiswah-gold-ribbon': {
+      key: 'kiswah-gold-ribbon',
+      name: '১০. কাবার গিলাফ স্বর্ণসূত্র ফিতা (Kiswah Silk Ribbon)',
+      desc: 'কাবার গিলাফের অনুকরণে প্রশস্ত স্বর্ণলতা ফিতা ফ্রেম'
+    }
+  };
+
+  const LAYOUT_KEYS = Object.keys(LAYOUTS);
+
+  // ═════════════════════════════════════════════════════════════════
+  // 3. VECTOR GEOMETRY PRIMITIVES (জিরো গ্লিফ / পিওর ক্যানভাস)
+  // ═════════════════════════════════════════════════════════════════
+
   function wrapText(ctx, text, maxWidth) {
     if (!text) return [];
     const words = text.trim().split(/\s+/);
@@ -264,15 +284,10 @@
         currentLine = testLine;
       }
     }
-    if (currentLine) {
-      lines.push(currentLine);
-    }
+    if (currentLine) lines.push(currentLine);
     return lines;
   }
 
-  /**
-   * Draw rounded rectangle
-   */
   function drawRoundRect(ctx, x, y, w, h, r) {
     r = Math.min(r || 10, w / 2, h / 2);
     ctx.beginPath();
@@ -284,9 +299,6 @@
     ctx.closePath();
   }
 
-  /**
-   * Draw Islamic 8-Point Star at (cx, cy)
-   */
   function drawIslamicStar(ctx, cx, cy, outerRadius, innerRadius, color) {
     ctx.save();
     ctx.fillStyle = color;
@@ -305,9 +317,6 @@
     ctx.restore();
   }
 
-  /**
-   * Draw Vector Crescent Moon
-   */
   function drawCrescentMoon(ctx, cx, cy, r, color) {
     ctx.save();
     ctx.fillStyle = color;
@@ -319,9 +328,6 @@
     ctx.restore();
   }
 
-  /**
-   * Draw Vector Quotation Marks (Double Teardrop)
-   */
   function drawVectorQuote(ctx, cx, cy, size, color, isClosing) {
     ctx.save();
     ctx.fillStyle = color;
@@ -350,136 +356,19 @@
     ctx.restore();
   }
 
-  /**
-   * Draw Ornamental Islamic Corner Brackets
-   * Kept strictly inside the corner area so it never overlaps text
-   */
-  function drawCornerOrnaments(ctx, x, y, w, h, size, color) {
-    ctx.save();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 2.5;
-    ctx.lineCap = 'square';
+  // ═════════════════════════════════════════════════════════════════
+  // 4. COMMON BASE RENDERER & TYPOGRAPHY
+  // ═════════════════════════════════════════════════════════════════
 
-    const corners = [
-      { cx: x, cy: y, dx: 1, dy: 1 },                 // Top-Left
-      { cx: x + w, cy: y, dx: -1, dy: 1 },            // Top-Right
-      { cx: x, cy: y + h, dx: 1, dy: -1 },           // Bottom-Left
-      { cx: x + w, cy: y + h, dx: -1, dy: -1 }       // Bottom-Right
-    ];
-
-    corners.forEach(c => {
-      // Outer L-bracket
-      ctx.beginPath();
-      ctx.moveTo(c.cx, c.cy + c.dy * size);
-      ctx.lineTo(c.cx, c.cy);
-      ctx.lineTo(c.cx + c.dx * size, c.cy);
-      ctx.stroke();
-
-      // Inner flourish
-      ctx.beginPath();
-      ctx.moveTo(c.cx + c.dx * 8, c.cy + c.dy * (size - 6));
-      ctx.lineTo(c.cx + c.dx * 8, c.cy + c.dy * 8);
-      ctx.lineTo(c.cx + c.dx * (size - 6), c.cy + c.dy * 8);
-      ctx.stroke();
-
-      // Corner diamond star safely inside bracket
-      const dX = c.cx + c.dx * 13;
-      const dY = c.cy + c.dy * 13;
-      drawIslamicStar(ctx, dX, dY, 4, 2, color);
-    });
-
-    ctx.restore();
-  }
-
-  /**
-   * Draw Background Patterns according to theme
-   */
-  function drawPattern(ctx, x, y, w, h, theme) {
-    ctx.save();
-    ctx.strokeStyle = theme.patternColor;
-    ctx.fillStyle = theme.patternColor;
-    ctx.lineWidth = 1;
-
-    const pType = theme.patternType || 'lattice';
-
-    if (pType === 'stars') {
-      const step = 90;
-      for (let px = x + 30; px <= x + w - 30; px += step) {
-        for (let py = y + 30; py <= y + h - 30; py += step) {
-          drawIslamicStar(ctx, px, py, 4, 2, theme.patternColor);
-        }
-      }
-    } else if (pType === 'diamonds') {
-      const step = 70;
-      ctx.beginPath();
-      for (let px = x; px <= x + w; px += step) {
-        for (let py = y + 30; py <= y + h - 30; py += step) {
-          ctx.moveTo(px, py - 10);
-          ctx.lineTo(px + 10, py);
-          ctx.lineTo(px, py + 10);
-          ctx.lineTo(px - 10, py);
-          ctx.closePath();
-        }
-      }
-      ctx.stroke();
-    } else if (pType === 'manuscript') {
-      ctx.beginPath();
-      drawRoundRect(ctx, x + 10, y + 10, w - 20, h - 20, 8);
-      ctx.stroke();
-    } else {
-      const step = 80;
-      ctx.beginPath();
-      for (let px = x; px <= x + w; px += step) {
-        for (let py = y + 30; py <= y + h - 30; py += step) {
-          ctx.moveTo(px, py - 12);
-          ctx.lineTo(px + 12, py);
-          ctx.lineTo(px, py + 12);
-          ctx.lineTo(px - 12, py);
-          ctx.closePath();
-        }
-      }
-      ctx.stroke();
-    }
-
-    ctx.restore();
-  }
-
-  /**
-   * Draw Andalusian Mihrab Arch (Theme 9 Special Feature)
-   */
-  function drawMihrabArch(ctx, cardX, cardY, cardW, theme) {
-    ctx.save();
-    ctx.strokeStyle = theme.borderColor;
-    ctx.lineWidth = 1.8;
-
-    const archLeft = cardX + 90;
-    const archRight = cardX + cardW - 90;
-    const archBottom = cardY + 280;
-    const archSpring = cardY + 160;
-    const archApex = cardY + 45;
-
-    ctx.beginPath();
-    ctx.moveTo(archLeft, archBottom);
-    ctx.lineTo(archLeft, archSpring);
-    ctx.bezierCurveTo(archLeft - 10, archApex + 20, W / 2 - 60, archApex - 12, W / 2, archApex - 12);
-    ctx.bezierCurveTo(W / 2 + 60, archApex - 12, archRight + 10, archApex + 20, archRight, archSpring);
-    ctx.lineTo(archRight, archBottom);
-    ctx.stroke();
-
-    drawIslamicStar(ctx, W / 2, archApex - 12, 7, 3.5, theme.primaryGold);
-    ctx.restore();
-  }
-
-  /**
-   * Main Render Function
-   */
-  function render(canvas, item, options) {
+  function renderCard(canvas, item, options) {
     options = options || {};
+    const layoutKey = options.layout || item.layout || 'mihrab-arch';
     const themeKey = options.theme || item.theme || 'royal-emerald';
+
     const theme = THEMES[themeKey] || THEMES['royal-emerald'];
     const ctx = canvas.getContext('2d');
 
-    // 1. Outer Background Gradient
+    // 1. Canvas Dimensions & Outer Gradient
     ctx.clearRect(0, 0, W, H);
     const bgGrad = ctx.createLinearGradient(0, 0, W, H);
     bgGrad.addColorStop(0, theme.bgGrad[0]);
@@ -488,52 +377,44 @@
     ctx.fillStyle = bgGrad;
     ctx.fillRect(0, 0, W, H);
 
-    // 2. Main Card Body
+    // 2. Main Card Bounds
     const cardX = 48;
     const cardY = 48;
     const cardW = W - 96;
     const cardH = H - 96;
 
-    // Outer card drop shadow
+    // Card Drop Shadow
     ctx.save();
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.55)';
     ctx.shadowBlur = 32;
-    ctx.shadowOffsetX = 0;
-    ctx.shadowOffsetY = 12;
+    ctx.shadowOffsetY = 14;
 
-    drawRoundRect(ctx, cardX, cardY, cardW, cardH, 24);
+    // Card Background Shape
+    if (layoutKey === 'octagram-medallion') {
+      // 45-degree chamfered corners for layout 9
+      const ch = 28;
+      ctx.beginPath();
+      ctx.moveTo(cardX + ch, cardY);
+      ctx.lineTo(cardX + cardW - ch, cardY);
+      ctx.lineTo(cardX + cardW, cardY + ch);
+      ctx.lineTo(cardX + cardW, cardY + cardH - ch);
+      ctx.lineTo(cardX + cardW - ch, cardY + cardH);
+      ctx.lineTo(cardX + ch, cardY + cardH);
+      ctx.lineTo(cardX, cardY + cardH - ch);
+      ctx.lineTo(cardX, cardY + ch);
+      ctx.closePath();
+    } else {
+      drawRoundRect(ctx, cardX, cardY, cardW, cardH, 24);
+    }
     ctx.fillStyle = theme.cardBg;
     ctx.fill();
     ctx.restore();
 
-    // Background Pattern inside card
-    drawPattern(ctx, cardX + 24, cardY + 24, cardW - 48, cardH - 48, theme);
+    // 3. Render Distinct Architectural Layout Framing (Designs 1 to 10)
+    renderLayoutFrame(ctx, layoutKey, theme, cardX, cardY, cardW, cardH);
 
-    // Special Mihrab Arch for Theme 9
-    if (theme.patternType === 'mihrab') {
-      drawMihrabArch(ctx, cardX, cardY, cardW, theme);
-    }
-
-    // Card Borders (Double Royal Frame)
-    ctx.save();
-    ctx.strokeStyle = theme.borderColor;
-    ctx.lineWidth = 2;
-    drawRoundRect(ctx, cardX + 16, cardY + 16, cardW - 32, cardH - 32, 16);
-    ctx.stroke();
-
-    ctx.strokeStyle = theme.isDark ? 'rgba(230, 200, 140, 0.2)' : 'rgba(148, 110, 38, 0.2)';
-    ctx.lineWidth = 1;
-    drawRoundRect(ctx, cardX + 26, cardY + 26, cardW - 52, cardH - 52, 12);
-    ctx.stroke();
-    ctx.restore();
-
-    // Corner Ornaments (Size 40px)
-    drawCornerOrnaments(ctx, cardX + 32, cardY + 32, cardW - 64, cardH - 64, 40, theme.cornerColor);
-
-    // 3. Header Section (Bismillah, Brand & Badge)
-    let currentY = cardY + 68;
-
-    // Bismillah Calligraphy (Large and Prominent)
+    // 4. Header Bismillah Calligraphy
+    let currentY = cardY + 70;
     ctx.save();
     ctx.fillStyle = theme.accentGold;
     ctx.font = 'bold 34px "Amiri", "Traditional Arabic", serif';
@@ -541,16 +422,16 @@
     ctx.fillText('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', W / 2, currentY);
     ctx.restore();
 
-    currentY += 48;
+    currentY += 46;
 
-    // Brand Name: ROYAL NOOR [Vector Star] আলোর পথে প্রতিদিন
+    // 5. Brand Header: ROYAL NOOR [Vector Star] আলোর পথে প্রতিদিন
     ctx.save();
-    ctx.font = 'bold 19px "Hind Siliguri", sans-serif';
+    ctx.font = 'bold 18px "Hind Siliguri", sans-serif';
     const leftText = 'ROYAL NOOR';
     const rightText = 'আলোর পথে প্রতিদিন';
     const wLeft = ctx.measureText(leftText).width;
     const wRight = ctx.measureText(rightText).width;
-    const starGap = 20;
+    const starGap = 18;
     const totalBrandW = wLeft + starGap * 2 + wRight;
     const startBrandX = (W - totalBrandW) / 2;
 
@@ -567,7 +448,7 @@
 
     currentY += 30;
 
-    // Badge Pill
+    // 6. Category / Event Badge Pill
     let badgeText = item.type === 'quran' ? 'পবিত্র কোরআন' : 'সহীহ হাদিস';
     let badgeIcon = 'star';
 
@@ -586,35 +467,35 @@
     }
 
     ctx.save();
-    ctx.font = '600 16px "Hind Siliguri", sans-serif';
+    ctx.font = '600 15px "Hind Siliguri", sans-serif';
     const badgeTextWidth = ctx.measureText(badgeText).width;
-    const iconOffset = 22;
-    const badgeW = badgeTextWidth + 48 + iconOffset;
-    const badgeH = 34;
+    const iconOffset = 20;
+    const badgeW = badgeTextWidth + 46 + iconOffset;
+    const badgeH = 32;
     const badgeX = (W - badgeW) / 2;
 
-    drawRoundRect(ctx, badgeX, currentY, badgeW, badgeH, 17);
+    drawRoundRect(ctx, badgeX, currentY, badgeW, badgeH, 16);
     ctx.fillStyle = theme.badgeBg;
     ctx.fill();
     ctx.strokeStyle = theme.badgeBorder;
     ctx.lineWidth = 1;
     ctx.stroke();
 
-    const iconCenterX = badgeX + 24;
-    const iconCenterY = currentY + 17;
+    const iconCenterX = badgeX + 22;
+    const iconCenterY = currentY + 16;
     if (badgeIcon === 'moon') {
-      drawCrescentMoon(ctx, iconCenterX, iconCenterY, 6.5, theme.badgeText);
+      drawCrescentMoon(ctx, iconCenterX, iconCenterY, 6, theme.badgeText);
     } else {
-      drawIslamicStar(ctx, iconCenterX, iconCenterY, 5.5, 2.8, theme.badgeText);
+      drawIslamicStar(ctx, iconCenterX, iconCenterY, 5, 2.5, theme.badgeText);
     }
 
     ctx.fillStyle = theme.badgeText;
     ctx.textAlign = 'left';
     ctx.textBaseline = 'middle';
-    ctx.fillText(badgeText, badgeX + 38, currentY + 17);
+    ctx.fillText(badgeText, badgeX + 36, currentY + 16);
     ctx.restore();
 
-    // 4. Large, Readable Typography Auto-Fitting
+    // 7. Dynamic Typography & Layout Calculations
     const contentMaxW = cardW - 130; // 854px text width
     const contentCenterY = 535;
 
@@ -654,7 +535,7 @@
       textStartY = currentY + 70;
     }
 
-    // 5. Render Arabic Text
+    // 8. Render Arabic Text
     ctx.save();
     ctx.font = `bold ${arFontSize}px "Amiri", "Traditional Arabic", serif`;
     ctx.fillStyle = theme.arabicColor;
@@ -662,7 +543,7 @@
     ctx.textBaseline = 'middle';
 
     if (theme.isDark) {
-      ctx.shadowColor = 'rgba(230, 200, 140, 0.3)';
+      ctx.shadowColor = 'rgba(230, 200, 140, 0.28)';
       ctx.shadowBlur = 10;
     }
 
@@ -673,31 +554,11 @@
     }
     ctx.restore();
 
-    // 6. Islamic Ornamental Divider
+    // 9. Render Distinct Islamic Divider Based on Layout
     const sepY = arY + 12;
-    ctx.save();
-    ctx.strokeStyle = theme.borderColor;
-    ctx.lineWidth = 1.2;
+    renderLayoutDivider(ctx, layoutKey, theme, sepY);
 
-    // Left line
-    ctx.beginPath();
-    ctx.moveTo(W / 2 - 190, sepY);
-    ctx.lineTo(W / 2 - 42, sepY);
-    ctx.stroke();
-
-    // Center star ornaments
-    drawIslamicStar(ctx, W / 2, sepY, 9.5, 4.8, theme.primaryGold);
-    drawIslamicStar(ctx, W / 2 - 26, sepY, 4.5, 2.2, theme.secondaryGold);
-    drawIslamicStar(ctx, W / 2 + 26, sepY, 4.5, 2.2, theme.secondaryGold);
-
-    // Right line
-    ctx.beginPath();
-    ctx.moveTo(W / 2 + 42, sepY);
-    ctx.lineTo(W / 2 + 190, sepY);
-    ctx.stroke();
-    ctx.restore();
-
-    // 7. Render Bangla Translation with Integrated Vector Quotes
+    // 10. Render Bangla Translation with Integrated Quotes
     let bnY = sepY + 46;
     ctx.save();
     ctx.font = `600 ${bnFontSize}px "Hind Siliguri", sans-serif`;
@@ -705,21 +566,19 @@
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
 
-    // Measure maximum line width to place quotes gracefully around the text
     let maxBnLineWidth = 0;
     for (let i = 0; i < bnLines.length; i++) {
       const w = ctx.measureText(bnLines[i]).width;
       if (w > maxBnLineWidth) maxBnLineWidth = w;
     }
 
-    // Render Bangla text lines
     for (let i = 0; i < bnLines.length; i++) {
       ctx.fillText(bnLines[i], W / 2, bnY);
       bnY += bnLineHeight;
     }
     ctx.restore();
 
-    // Place quotes hugging the text block naturally (not stuck in margins)
+    // Quotes placement
     const quoteSize = 13;
     const quoteMargin = 24;
     const quoteLeftX = Math.max(cardX + 70, (W - maxBnLineWidth) / 2 - quoteMargin);
@@ -730,7 +589,7 @@
     drawVectorQuote(ctx, quoteLeftX, firstLineY - 4, quoteSize, theme.primaryGold, false);
     drawVectorQuote(ctx, quoteRightX, lastLineY + 4, quoteSize, theme.primaryGold, true);
 
-    // 8. Reference Box (e.g. — [ সূরা আল-বাকারা : ২০১ ])
+    // 11. Reference Box (— [ সূরা আল-বাকারা : ২০১ ])
     const refY = Math.max(bnY + 36, cardY + cardH - 122);
     const refText = `— [ ${item.reference || item.title} ]`;
 
@@ -742,7 +601,7 @@
     ctx.fillText(refText, W / 2, refY);
     ctx.restore();
 
-    // 9. Footer Section (Safely placed with zero overlap from corner stars!)
+    // 12. Footer Section (Safe distance from corner ornaments, ZERO overlap!)
     const footerY = cardY + cardH - 52;
 
     ctx.save();
@@ -753,7 +612,7 @@
     ctx.lineTo(cardX + cardW - 90, footerY - 18);
     ctx.stroke();
 
-    // Left: ROYAL TECHNOLOGIES (Starts safely at cardX + 90, clear of corner brackets!)
+    // Left: ROYAL TECHNOLOGIES
     ctx.font = 'bold 15px "Hind Siliguri", sans-serif';
     ctx.fillStyle = theme.metaColor;
     ctx.textAlign = 'left';
@@ -765,7 +624,7 @@
     ctx.textAlign = 'center';
     ctx.fillText('কোরআন ও সহীহ সুন্নাহর আলো', W / 2, footerY);
 
-    // Right: www.royaltechbd.com (Ends safely at cardX + cardW - 90, clear of corner brackets!)
+    // Right: www.royaltechbd.com
     ctx.font = 'bold 15px "Hind Siliguri", sans-serif';
     ctx.textAlign = 'right';
     ctx.fillText('www.royaltechbd.com', cardX + cardW - 90, footerY);
@@ -774,10 +633,410 @@
     return canvas;
   }
 
+  // ═════════════════════════════════════════════════════════════════
+  // 5. TEN DISTINCT LAYOUT FRAMES (১০টি স্বতন্ত্র ডিজাইন ফ্রেম)
+  // ═════════════════════════════════════════════════════════════════
+
+  function renderLayoutFrame(ctx, layoutKey, theme, cardX, cardY, cardW, cardH) {
+    ctx.save();
+
+    switch (layoutKey) {
+      // ── Layout 1: মেহরাব আর্চ (Mihrab Sanctuary Arch) ──
+      case 'mihrab-arch': {
+        // Double outer frame
+        ctx.strokeStyle = theme.borderColor;
+        ctx.lineWidth = 2;
+        drawRoundRect(ctx, cardX + 16, cardY + 16, cardW - 32, cardH - 32, 16);
+        ctx.stroke();
+
+        // Architectural Moorish Arch
+        const archL = cardX + 85;
+        const archR = cardX + cardW - 85;
+        const archBase = cardY + 280;
+        const archApex = cardY + 45;
+        ctx.beginPath();
+        ctx.moveTo(archL, archBase);
+        ctx.lineTo(archL, cardY + 150);
+        ctx.bezierCurveTo(archL - 10, archApex + 20, W / 2 - 60, archApex - 12, W / 2, archApex - 12);
+        ctx.bezierCurveTo(W / 2 + 60, archApex - 12, archR + 10, archApex + 20, archR, cardY + 150);
+        ctx.lineTo(archR, archBase);
+        ctx.stroke();
+
+        drawIslamicStar(ctx, W / 2, archApex - 12, 7, 3.5, theme.primaryGold);
+        drawCornerBrackets(ctx, cardX + 30, cardY + 30, cardW - 60, cardH - 60, 36, theme.primaryGold);
+        break;
+      }
+
+      // ── Layout 2: রাজকীয় মিনিমালিজম (Royal Modern Luxury) ──
+      case 'royal-minimal': {
+        // Clean double borders with fine line offset
+        ctx.strokeStyle = theme.borderColor;
+        ctx.lineWidth = 1.8;
+        ctx.strokeRect(cardX + 20, cardY + 20, cardW - 40, cardH - 40);
+
+        ctx.strokeStyle = theme.subtleLine;
+        ctx.lineWidth = 1;
+        ctx.strokeRect(cardX + 28, cardY + 28, cardW - 56, cardH - 56);
+
+        // Modern geometric square seals in corners
+        const corners = [
+          [cardX + 24, cardY + 24],
+          [cardX + cardW - 24, cardY + 24],
+          [cardX + 24, cardY + cardH - 24],
+          [cardX + cardW - 24, cardY + cardH - 24]
+        ];
+        corners.forEach(([cx, cy]) => {
+          ctx.fillStyle = theme.primaryGold;
+          ctx.fillRect(cx - 3, cy - 3, 6, 6);
+        });
+
+        // Left and right vertical gold accent bars
+        ctx.fillStyle = theme.primaryGold;
+        ctx.fillRect(cardX + 20, cardY + cardH / 2 - 50, 3, 100);
+        ctx.fillRect(cardX + cardW - 23, cardY + cardH / 2 - 50, 3, 100);
+        break;
+      }
+
+      // ── Layout 3: ইসলামিক রজেট ও মান্ডালা (Sacred Rosette) ──
+      case 'geometric-mandala': {
+        // Outer frame
+        ctx.strokeStyle = theme.borderColor;
+        ctx.lineWidth = 2;
+        drawRoundRect(ctx, cardX + 16, cardY + 16, cardW - 32, cardH - 32, 16);
+        ctx.stroke();
+
+        // 16-point geometric rosette behind Bismillah
+        ctx.save();
+        ctx.strokeStyle = theme.subtleLine;
+        ctx.lineWidth = 1.2;
+        for (let angle = 0; angle < Math.PI; angle += Math.PI / 8) {
+          ctx.beginPath();
+          const r = 58;
+          ctx.ellipse(W / 2, cardY + 70, r, r / 3, angle, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        ctx.restore();
+
+        drawIslamicStar(ctx, W / 2, cardY + 70, 10, 5, theme.primaryGold);
+        drawCornerBrackets(ctx, cardX + 30, cardY + 30, cardW - 60, cardH - 60, 38, theme.primaryGold);
+        break;
+      }
+
+      // ── Layout 4: মদিনা পাণ্ডুলিপি ফ্রেম (Illuminated Manuscript) ──
+      case 'illuminated-manuscript': {
+        // Double classic manuscript border
+        ctx.strokeStyle = theme.borderColor;
+        ctx.lineWidth = 2.5;
+        drawRoundRect(ctx, cardX + 14, cardY + 14, cardW - 28, cardH - 28, 14);
+        ctx.stroke();
+
+        ctx.strokeStyle = theme.subtleLine;
+        ctx.lineWidth = 1;
+        drawRoundRect(ctx, cardX + 22, cardY + 22, cardW - 44, cardH - 44, 10);
+        ctx.stroke();
+
+        // Surah header style horizontal decorative cartouche band
+        ctx.fillStyle = theme.badgeBg;
+        ctx.strokeStyle = theme.borderColor;
+        ctx.lineWidth = 1.2;
+        drawRoundRect(ctx, cardX + 80, cardY + 38, cardW - 160, 64, 8);
+        ctx.fill();
+        ctx.stroke();
+
+        // Cartouche side palmettes
+        drawIslamicStar(ctx, cardX + 95, cardY + 70, 7, 3.5, theme.primaryGold);
+        drawIslamicStar(ctx, cardX + cardW - 95, cardY + 70, 7, 3.5, theme.primaryGold);
+        drawCornerBrackets(ctx, cardX + 30, cardY + 30, cardW - 60, cardH - 60, 42, theme.primaryGold);
+        break;
+      }
+
+      // ── Layout 5: অটোমান ইজনিক টাইলস (Ottoman Iznik Border) ──
+      case 'iznik-tiles': {
+        // Continuous decorative diamond border around the frame
+        ctx.strokeStyle = theme.borderColor;
+        ctx.lineWidth = 1.5;
+        drawRoundRect(ctx, cardX + 16, cardY + 16, cardW - 32, cardH - 32, 16);
+        ctx.stroke();
+
+        // Iznik diamond chain along borders
+        ctx.strokeStyle = theme.subtleLine;
+        ctx.lineWidth = 1;
+        const step = 60;
+        // Top & bottom lines
+        for (let x = cardX + 60; x <= cardX + cardW - 60; x += step) {
+          drawIslamicStar(ctx, x, cardY + 24, 3, 1.5, theme.primaryGold);
+          drawIslamicStar(ctx, x, cardY + cardH - 24, 3, 1.5, theme.primaryGold);
+        }
+        // Left & right lines
+        for (let y = cardY + 60; y <= cardY + cardH - 60; y += step) {
+          drawIslamicStar(ctx, cardX + 24, y, 3, 1.5, theme.primaryGold);
+          drawIslamicStar(ctx, cardX + cardW - 24, y, 3, 1.5, theme.primaryGold);
+        }
+        drawCornerBrackets(ctx, cardX + 30, cardY + 30, cardW - 60, cardH - 60, 36, theme.primaryGold);
+        break;
+      }
+
+      // ── Layout 6: রাজকীয় স্তম্ভ ও তোরণ (Royal Twin Pillars) ──
+      case 'architectural-pillars': {
+        // Fluted vertical architectural pillars on left & right
+        const pLeft = cardX + 45;
+        const pRight = cardX + cardW - 45;
+        const pTop = cardY + 35;
+        const pBottom = cardY + cardH - 35;
+
+        ctx.strokeStyle = theme.borderColor;
+        ctx.lineWidth = 2;
+
+        // Left pillar (pair of vertical lines + capital & base)
+        ctx.strokeRect(pLeft - 8, pTop, 16, pBottom - pTop);
+        ctx.strokeRect(pLeft - 14, pTop - 8, 28, 10);
+        ctx.strokeRect(pLeft - 14, pBottom - 2, 28, 10);
+
+        // Right pillar
+        ctx.strokeRect(pRight - 8, pTop, 16, pBottom - pTop);
+        ctx.strokeRect(pRight - 14, pTop - 8, 28, 10);
+        ctx.strokeRect(pRight - 14, pBottom - 2, 28, 10);
+
+        // Arch connecting the two capitals across top
+        ctx.beginPath();
+        ctx.moveTo(pLeft + 14, pTop - 3);
+        ctx.bezierCurveTo(pLeft + 100, pTop - 25, pRight - 100, pTop - 25, pRight - 14, pTop - 3);
+        ctx.stroke();
+
+        drawIslamicStar(ctx, W / 2, pTop - 18, 7, 3.5, theme.primaryGold);
+        break;
+      }
+
+      // ── Layout 7: হিলাল ও সেলিস্টিয়াল গ্যালাক্সি (Celestial Crescent) ──
+      case 'celestial-crescent': {
+        // Inner rounded frame
+        ctx.strokeStyle = theme.borderColor;
+        ctx.lineWidth = 2;
+        drawRoundRect(ctx, cardX + 16, cardY + 16, cardW - 32, cardH - 32, 16);
+        ctx.stroke();
+
+        // Starlight dots sprinkled along border
+        ctx.fillStyle = theme.primaryGold;
+        for (let i = 0; i < 24; i++) {
+          const angle = (i * Math.PI) / 12;
+          const sx = W / 2 + (cardW / 2 - 35) * Math.cos(angle);
+          const sy = H / 2 + (cardH / 2 - 35) * Math.sin(angle);
+          drawIslamicStar(ctx, sx, sy, (i % 2 === 0 ? 3.5 : 2), 1, theme.primaryGold);
+        }
+
+        // Prominent Golden Crescent Moon at top header
+        drawCrescentMoon(ctx, W / 2 - 130, cardY + 68, 12, theme.primaryGold);
+        drawIslamicStar(ctx, W / 2 - 118, cardY + 68, 5, 2.5, theme.accentGold);
+        drawCornerBrackets(ctx, cardX + 30, cardY + 30, cardW - 60, cardH - 60, 34, theme.primaryGold);
+        break;
+      }
+
+      // ── Layout 8: আন্দালুসীয় আলহামব্রা (Alhambra Arabesque) ──
+      case 'alhambra-palace': {
+        ctx.strokeStyle = theme.borderColor;
+        ctx.lineWidth = 2;
+        drawRoundRect(ctx, cardX + 16, cardY + 16, cardW - 32, cardH - 32, 16);
+        ctx.stroke();
+
+        // Multi-foil scalloped archway at top (5 lobes)
+        const lobeY = cardY + 120;
+        ctx.beginPath();
+        ctx.moveTo(cardX + 70, lobeY);
+        // 5 arcs forming Moorish polylobed arch
+        const lobeStep = (cardW - 140) / 5;
+        for (let i = 0; i < 5; i++) {
+          const lx = cardX + 70 + i * lobeStep;
+          ctx.bezierCurveTo(lx + lobeStep * 0.2, lobeY - 35, lx + lobeStep * 0.8, lobeY - 35, lx + lobeStep, lobeY);
+        }
+        ctx.stroke();
+
+        drawCornerBrackets(ctx, cardX + 30, cardY + 30, cardW - 60, cardH - 60, 40, theme.primaryGold);
+        break;
+      }
+
+      // ── Layout 9: আটকোণা মেডেলিয়ন (Rub el Hizb Seal) ──
+      case 'octagram-medallion': {
+        // Chamfered 45-degree outer border
+        const ch = 24;
+        ctx.strokeStyle = theme.borderColor;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(cardX + 16 + ch, cardY + 16);
+        ctx.lineTo(cardX + cardW - 16 - ch, cardY + 16);
+        ctx.lineTo(cardX + cardW - 16, cardY + 16 + ch);
+        ctx.lineTo(cardX + cardW - 16, cardY + cardH - 16 - ch);
+        ctx.lineTo(cardX + cardW - 16 - ch, cardY + cardH - 16);
+        ctx.lineTo(cardX + 16 + ch, cardY + cardH - 16);
+        ctx.lineTo(cardX + 16, cardY + cardH - 16 - ch);
+        ctx.lineTo(cardX + 16, cardY + 16 + ch);
+        ctx.closePath();
+        ctx.stroke();
+
+        // Rub el Hizb corner diamond seals
+        const cornerSeals = [
+          [cardX + 30, cardY + 30],
+          [cardX + cardW - 30, cardY + 30],
+          [cardX + 30, cardY + cardH - 30],
+          [cardX + cardW - 30, cardY + cardH - 30]
+        ];
+        cornerSeals.forEach(([cx, cy]) => {
+          drawIslamicStar(ctx, cx, cy, 6, 3, theme.primaryGold);
+        });
+        break;
+      }
+
+      // ── Layout 10: কাবার গিলাফ স্বর্ণসূত্র ফিতা (Kiswah Silk Ribbon) ──
+      case 'kiswah-gold-ribbon':
+      default: {
+        // Double gold frame
+        ctx.strokeStyle = theme.borderColor;
+        ctx.lineWidth = 2;
+        drawRoundRect(ctx, cardX + 16, cardY + 16, cardW - 32, cardH - 32, 16);
+        ctx.stroke();
+
+        // Upper embroidered gold Kiswah banner band
+        ctx.save();
+        ctx.fillStyle = theme.badgeBg;
+        ctx.strokeStyle = theme.borderColor;
+        ctx.lineWidth = 1;
+        ctx.fillRect(cardX + 40, cardY + 40, cardW - 80, 56);
+        ctx.strokeRect(cardX + 40, cardY + 40, cardW - 80, 56);
+
+        // Lower Kiswah banner band above footer
+        ctx.fillRect(cardX + 40, cardY + cardH - 110, cardW - 80, 36);
+        ctx.strokeRect(cardX + 40, cardY + cardH - 110, cardW - 80, 36);
+        ctx.restore();
+
+        drawCornerBrackets(ctx, cardX + 30, cardY + 30, cardW - 60, cardH - 60, 42, theme.primaryGold);
+        break;
+      }
+    }
+
+    ctx.restore();
+  }
+
+  // Corner Bracket Ornaments Helper (Kept strictly inside bracket, 0 text overlap!)
+  function drawCornerBrackets(ctx, x, y, w, h, size, color) {
+    ctx.save();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2.2;
+    ctx.lineCap = 'square';
+
+    const corners = [
+      { cx: x, cy: y, dx: 1, dy: 1 },
+      { cx: x + w, cy: y, dx: -1, dy: 1 },
+      { cx: x, cy: y + h, dx: 1, dy: -1 },
+      { cx: x + w, cy: y + h, dx: -1, dy: -1 }
+    ];
+
+    corners.forEach(c => {
+      ctx.beginPath();
+      ctx.moveTo(c.cx, c.cy + c.dy * size);
+      ctx.lineTo(c.cx, c.cy);
+      ctx.lineTo(c.cx + c.dx * size, c.cy);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(c.cx + c.dx * 8, c.cy + c.dy * (size - 6));
+      ctx.lineTo(c.cx + c.dx * 8, c.cy + c.dy * 8);
+      ctx.lineTo(c.cx + c.dx * (size - 6), c.cy + c.dy * 8);
+      ctx.stroke();
+
+      const dX = c.cx + c.dx * 13;
+      const dY = c.cy + c.dy * 13;
+      drawIslamicStar(ctx, dX, dY, 4, 2, color);
+    });
+
+    ctx.restore();
+  }
+
+  // ═════════════════════════════════════════════════════════════════
+  // 6. DISTINCT DIVIDERS PER LAYOUT (১০টি আর্কিটেকচারাল ডিভাইডার)
+  // ═════════════════════════════════════════════════════════════════
+
+  function renderLayoutDivider(ctx, layoutKey, theme, sepY) {
+    ctx.save();
+    ctx.strokeStyle = theme.borderColor;
+    ctx.lineWidth = 1.2;
+
+    switch (layoutKey) {
+      case 'royal-minimal': {
+        // Ultra-minimal single star line
+        ctx.beginPath();
+        ctx.moveTo(W / 2 - 120, sepY);
+        ctx.lineTo(W / 2 - 25, sepY);
+        ctx.moveTo(W / 2 + 25, sepY);
+        ctx.lineTo(W / 2 + 120, sepY);
+        ctx.stroke();
+        drawIslamicStar(ctx, W / 2, sepY, 6, 3, theme.primaryGold);
+        break;
+      }
+      case 'geometric-mandala': {
+        // Triple star rosette cluster
+        ctx.beginPath();
+        ctx.moveTo(W / 2 - 200, sepY);
+        ctx.lineTo(W / 2 - 45, sepY);
+        ctx.moveTo(W / 2 + 45, sepY);
+        ctx.lineTo(W / 2 + 200, sepY);
+        ctx.stroke();
+        drawIslamicStar(ctx, W / 2, sepY, 11, 5.5, theme.primaryGold);
+        drawIslamicStar(ctx, W / 2 - 28, sepY, 5, 2.5, theme.secondaryGold);
+        drawIslamicStar(ctx, W / 2 + 28, sepY, 5, 2.5, theme.secondaryGold);
+        break;
+      }
+      case 'celestial-crescent': {
+        // Twin crescent & star divider
+        ctx.beginPath();
+        ctx.moveTo(W / 2 - 180, sepY);
+        ctx.lineTo(W / 2 - 35, sepY);
+        ctx.moveTo(W / 2 + 35, sepY);
+        ctx.lineTo(W / 2 + 180, sepY);
+        ctx.stroke();
+        drawCrescentMoon(ctx, W / 2 - 14, sepY, 7, theme.primaryGold);
+        drawIslamicStar(ctx, W / 2 + 14, sepY, 6, 3, theme.accentGold);
+        break;
+      }
+      case 'octagram-medallion': {
+        // Diamond chain divider
+        ctx.beginPath();
+        ctx.moveTo(W / 2 - 160, sepY);
+        ctx.lineTo(W / 2 - 40, sepY);
+        ctx.moveTo(W / 2 + 40, sepY);
+        ctx.lineTo(W / 2 + 160, sepY);
+        ctx.stroke();
+        drawIslamicStar(ctx, W / 2, sepY, 9, 4.5, theme.primaryGold);
+        drawIslamicStar(ctx, W / 2 - 22, sepY, 4, 2, theme.secondaryGold);
+        drawIslamicStar(ctx, W / 2 + 22, sepY, 4, 2, theme.secondaryGold);
+        break;
+      }
+      default: {
+        // Classical Islamic star divider
+        ctx.beginPath();
+        ctx.moveTo(W / 2 - 190, sepY);
+        ctx.lineTo(W / 2 - 42, sepY);
+        ctx.stroke();
+
+        drawIslamicStar(ctx, W / 2, sepY, 9.5, 4.8, theme.primaryGold);
+        drawIslamicStar(ctx, W / 2 - 26, sepY, 4.5, 2.2, theme.secondaryGold);
+        drawIslamicStar(ctx, W / 2 + 26, sepY, 4.5, 2.2, theme.secondaryGold);
+
+        ctx.beginPath();
+        ctx.moveTo(W / 2 + 42, sepY);
+        ctx.lineTo(W / 2 + 190, sepY);
+        ctx.stroke();
+        break;
+      }
+    }
+
+    ctx.restore();
+  }
+
   return {
+    LAYOUTS,
+    LAYOUT_KEYS,
     THEMES,
-    THEME_ORDER,
-    render,
+    THEME_KEYS,
+    render: renderCard,
     wrapText,
     drawIslamicStar,
     drawCrescentMoon,

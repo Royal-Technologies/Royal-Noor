@@ -47,6 +47,7 @@ const isPreview = args.includes('--preview');
 const forcedTag = getArg('force-tag', process.env.NOOR_TAG || null);
 const forcedType = getArg('force-type', process.env.NOOR_TYPE || null);
 const forcedTheme = getArg('theme', process.env.NOOR_THEME || null);
+const forcedLayout = getArg('layout', process.env.NOOR_LAYOUT || null);
 const forcedUid = getArg('uid', null);
 
 // ── 3. Date & Islamic Calendar Intelligence ──
@@ -128,30 +129,25 @@ if (!item) {
 console.log(`📖 [Selected Item] [${item.uid}] ${item.title} (${item.reference})`);
 console.log(`   Type: ${item.type} | Category: ${item.category} | Event: ${item.event_tag} | Used: ${item.used_count} times`);
 
-// ── 5. Select Theme (Serial Rotation across 10 Distinct Royal Designs) ──
+// ── 5. Select Layout & Theme (10 Layouts × 10 Themes = 100 Variations) ──
 const totalGenerations = db.getGenerationCount();
-const themeOrder = RoyalCardTemplate.THEME_ORDER || [
-  'royal-emerald',
-  'midnight-navy',
-  'imperial-black',
-  'warm-parchment',
-  'royal-maroon',
-  'ottoman-turquoise',
-  'desert-amber',
-  'amethyst-violet',
-  'andalusian-mihrab',
-  'classic-ivory'
-];
+const layoutList = RoyalCardTemplate.LAYOUT_KEYS || Object.keys(RoyalCardTemplate.LAYOUTS);
+const themeList = RoyalCardTemplate.THEME_KEYS || Object.keys(RoyalCardTemplate.THEMES);
 
-const serialIndex = totalGenerations % themeOrder.length;
-const selectedTheme = forcedTheme || themeOrder[serialIndex];
+// Serial rotation ensures each run picks a unique (Layout, Theme) pair
+const layoutIndex = totalGenerations % layoutList.length;
+const themeIndex = (totalGenerations * 3 + Math.floor(totalGenerations / 10)) % themeList.length;
 
-console.log(`🎨 [Theme] Serial Rotation Step #${totalGenerations + 1}:`);
-console.log(`   ► Theme: "${selectedTheme}" (Design ${serialIndex + 1} of ${themeOrder.length})`);
+const selectedLayout = forcedLayout || layoutList[layoutIndex];
+const selectedTheme = forcedTheme || themeList[themeIndex];
+
+console.log(`🎨 [Design] Serial Rotation Step #${totalGenerations + 1}:`);
+console.log(`   ► Layout: "${selectedLayout}" (${layoutIndex + 1}/${layoutList.length})`);
+console.log(`   ► Theme:  "${selectedTheme}" (${themeIndex + 1}/${themeList.length})`);
 
 // ── 6. Render 1080x1080 Canvas ──
 const canvas = createCanvas(1080, 1080);
-RoyalCardTemplate.render(canvas, item, { theme: selectedTheme });
+RoyalCardTemplate.render(canvas, item, { layout: selectedLayout, theme: selectedTheme });
 
 // ── 7. Generate File Paths & Unique ID ──
 const randomHex = Math.random().toString(36).substring(2, 6).toUpperCase();
@@ -192,6 +188,7 @@ const todayJson = {
   eventTag: item.event_tag,
   arabicText: item.arabic_text,
   banglaTranslation: item.bangla_translation,
+  layout: selectedLayout,
   theme: selectedTheme,
   caption: caption,
   imageUrl: `${repoBaseUrl}/cards/today.png`,

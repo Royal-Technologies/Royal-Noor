@@ -46,9 +46,8 @@ if ($GitHubPAT -and -not (Test-Path $PAT_FILE)) {
 }
 
 $triggers = @(
-    @{ Time = "05:30"; Desc = "ফজর ও সকালের নূর" },
-    @{ Time = "12:20"; Desc = "দুপুরের নূর" },
-    @{ Time = "17:45"; Desc = "মাগরিব ও সন্ধ্যার নূর" }
+    @{ Time = "06:00"; Desc = "সকালের নূর (সকাল ০৬:০০ টা BST / 00:00 GMT)" },
+    @{ Time = "18:00"; Desc = "সন্ধ্যার নূর (সন্ধ্যা ০৬:০০ টা BST / 12:00 GMT)" }
 )
 
 foreach ($t in $triggers) {
