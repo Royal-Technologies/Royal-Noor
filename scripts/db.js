@@ -194,6 +194,19 @@ function recordUsage(itemId, details) {
 }
 
 /**
+ * Get total number of generated cards from history
+ */
+function getGenerationCount() {
+  const db = getDb();
+  try {
+    const row = db.prepare('SELECT COUNT(*) as count FROM generation_history').get();
+    return Number(row?.count || 0);
+  } catch (err) {
+    return 0;
+  }
+}
+
+/**
  * Get all items from database
  */
 function getAllItems() {
@@ -221,6 +234,7 @@ module.exports = {
   bulkInsertItems,
   pickTodayItem,
   recordUsage,
+  getGenerationCount,
   getAllItems,
   exportToJson
 };

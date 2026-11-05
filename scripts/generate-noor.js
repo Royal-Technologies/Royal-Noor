@@ -128,10 +128,26 @@ if (!item) {
 console.log(`📖 [Selected Item] [${item.uid}] ${item.title} (${item.reference})`);
 console.log(`   Type: ${item.type} | Category: ${item.category} | Event: ${item.event_tag} | Used: ${item.used_count} times`);
 
-// ── 5. Select Theme ──
-// Themes cycle through or stick to royal-emerald
-const themeCycle = ['royal-emerald', 'midnight-navy', 'imperial-black', 'warm-parchment'];
-const selectedTheme = forcedTheme || (item.event_tag === 'ramadan' ? 'royal-emerald' : themeCycle[item.used_count % themeCycle.length]);
+// ── 5. Select Theme (Serial Rotation across 10 Distinct Royal Designs) ──
+const totalGenerations = db.getGenerationCount();
+const themeOrder = RoyalCardTemplate.THEME_ORDER || [
+  'royal-emerald',
+  'midnight-navy',
+  'imperial-black',
+  'warm-parchment',
+  'royal-maroon',
+  'ottoman-turquoise',
+  'desert-amber',
+  'amethyst-violet',
+  'andalusian-mihrab',
+  'classic-ivory'
+];
+
+const serialIndex = totalGenerations % themeOrder.length;
+const selectedTheme = forcedTheme || themeOrder[serialIndex];
+
+console.log(`🎨 [Theme] Serial Rotation Step #${totalGenerations + 1}:`);
+console.log(`   ► Theme: "${selectedTheme}" (Design ${serialIndex + 1} of ${themeOrder.length})`);
 
 // ── 6. Render 1080x1080 Canvas ──
 const canvas = createCanvas(1080, 1080);
