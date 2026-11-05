@@ -370,9 +370,13 @@ function renderCards(items) {
             <div class="card-meta-left">
               <span class="card-num">#${index + 1}</span>
               <span class="badge ${isQuran ? 'badge-teal' : 'badge-gold'}">${typeLabel}</span>
-              ${occLabel}
             </div>
-            <span class="badge" style="background:var(--soft-bg); font-size:11px;">${escapeHtml(catLabel)}</span>
+            <div class="card-meta-right">
+              ${Array.isArray(item.occasions) && item.occasions.length > 0
+                ? `<span class="badge badge-gold" style="font-size:11.5px;">🌙 ${escapeHtml(item.occasions[0])}</span>`
+                : `<span class="badge" style="background:var(--soft-bg); font-size:11.5px; border:1px solid var(--card-border);">${escapeHtml(catLabel)}</span>`
+              }
+            </div>
           </div>
 
           <div class="card-arabic-box">${escapeHtml(item.arabic_text)}</div>

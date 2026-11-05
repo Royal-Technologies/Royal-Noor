@@ -258,6 +258,59 @@
       key: 'kiswah-gold-ribbon',
       name: '১০. কাবার গিলাফ স্বর্ণসূত্র ফিতা (Kiswah Silk Ribbon)',
       desc: 'কাবার গিলাফের অনুকরণে প্রশস্ত স্বর্ণলতা ফিতা ফ্রেম'
+    },
+    // ═════════════════════════════════════════════════════════════════
+    // 🌄 TEN MUSLIMPRO-STYLE SCENIC BACKGROUNDS (১০টি সিনিক ব্যাকগ্রাউন্ড)
+    // ═════════════════════════════════════════════════════════════════
+    'scenic-mountain-twilight': {
+      key: 'scenic-mountain-twilight',
+      name: '১১. গোধূলি বেলার পাহাড় (Mountain Twilight)',
+      desc: 'গোলাপী ও বেগুনি গোধূলি আকাশের নিচে দূর পাহাড়ের স্তরীভূত ছায়া'
+    },
+    'scenic-kaaba-parchment': {
+      key: 'scenic-kaaba-parchment',
+      name: '১২. ভিন্টেজ কাবা পাণ্ডুলিপি (Kaaba Vintage Sketch)',
+      desc: 'প্রাচীন পাণ্ডুলিপির ওপর পবিত্র কাবা শরীফ ও মিনারের শৈল্পিক স্কেচ'
+    },
+    'scenic-rehal-quran': {
+      key: 'scenic-rehal-quran',
+      name: '১৩. কাঠের রেহাল ও কোরআন (Rehal & Quran Studio)',
+      desc: 'কাঠের রেহালে উন্মুক্ত পবিত্র কোরআন ও আধুনিক মিনিমালিস্ট ফ্রেম'
+    },
+    'scenic-desert-stars': {
+      key: 'scenic-desert-stars',
+      name: '১৪. তারকাময় মরুভূমি (Desert Dunes & Stars)',
+      desc: 'গভীর রাতের তারকাময় আকাশ ও আলোকিত মরু বালিয়াড়ি'
+    },
+    'scenic-golden-clouds': {
+      key: 'scenic-golden-clouds',
+      name: '১৫. সোনালী সূর্যাস্ত মেঘমালা (Golden Sunset Clouds)',
+      desc: 'গোধূলির সোনালী সূর্যরশ্মি ও মোহময় মেঘমালার আবহ'
+    },
+    'scenic-mosque-dusk': {
+      key: 'scenic-mosque-dusk',
+      name: '১৬. গোধূলি মসজিদ গম্বুজ (Mosque Dome at Dusk)',
+      desc: 'গভীর নীল গোধূলি আকাশে মহিমান্বিত মসজিদ গম্বুজ ও মিনারের অবয়ব'
+    },
+    'scenic-medina-sanctuary': {
+      key: 'scenic-medina-sanctuary',
+      name: '১৭. মদিনার শ্যামলিম প্রাঙ্গণ (Medina Emerald Sanctuary)',
+      desc: 'মদিনার শ্যামলিম আবহ, সোনালী নূর ও পবিত্র জ্যামিতিক আভা'
+    },
+    'scenic-alabaster-gold': {
+      key: 'scenic-alabaster-gold',
+      name: '১৮. শুভ্র আইভরি ও সোনা (Alabaster Minimal Gold)',
+      desc: 'শুভ্র শ্বেতশুভ্র ব্যাকগ্রাউন্ড ও সূক্ষ্ম ২৪ ক্যারেট স্বর্ণালী কারুকাজ'
+    },
+    'scenic-crimson-horizon': {
+      key: 'scenic-crimson-horizon',
+      name: '১৯. রক্তিম দামেস্ক দিগন্ত (Crimson Dusk Horizon)',
+      desc: 'গোধূলির রক্তিম দিগন্ত ও দূর খেজুরবাগানের ছায়াময় দৃশ্য'
+    },
+    'scenic-kiswah-night': {
+      key: 'scenic-kiswah-night',
+      name: '২০. কাবার কালো রেশম (Kiswah Midnight Silk)',
+      desc: 'কাবার গিলাফের খাঁটি কালো রেশম ও সোনালী হরফের এমব্রয়ডারি'
     }
   };
 
@@ -365,7 +418,44 @@
     const layoutKey = options.layout || item.layout || 'mihrab-arch';
     const themeKey = options.theme || item.theme || 'royal-emerald';
 
-    const theme = THEMES[themeKey] || THEMES['royal-emerald'];
+    let theme = THEMES[themeKey] || THEMES['royal-emerald'];
+    if (layoutKey === 'scenic-kaaba-parchment') {
+      theme = Object.assign({}, theme, {
+        arabicColor: '#2B1A0E',
+        banglaColor: '#3D2817',
+        accentGold: '#6D4C27',
+        primaryGold: '#8B6538',
+        metaColor: '#6D4C27',
+        badgeBg: 'rgba(109, 76, 39, 0.12)',
+        badgeBorder: 'rgba(109, 76, 39, 0.35)',
+        badgeText: '#4A3219',
+        isDark: false
+      });
+    } else if (layoutKey === 'scenic-alabaster-gold') {
+      theme = Object.assign({}, theme, {
+        arabicColor: '#064E3B',
+        banglaColor: '#0F172A',
+        accentGold: '#B45309',
+        primaryGold: '#D97706',
+        metaColor: '#047857',
+        badgeBg: 'rgba(217, 119, 6, 0.12)',
+        badgeBorder: 'rgba(217, 119, 6, 0.35)',
+        badgeText: '#92400E',
+        isDark: false
+      });
+    } else if (layoutKey.startsWith('scenic-')) {
+      theme = Object.assign({}, theme, {
+        arabicColor: '#FFF8E7',
+        banglaColor: '#FFFFFF',
+        accentGold: '#FDE68A',
+        primaryGold: '#F59E0B',
+        metaColor: '#FBBF24',
+        badgeBg: 'rgba(255, 255, 255, 0.16)',
+        badgeBorder: 'rgba(255, 255, 255, 0.35)',
+        badgeText: '#FFFBEB',
+        isDark: true
+      });
+    }
     const ctx = canvas.getContext('2d');
 
     // 1. Canvas Dimensions & Outer Gradient
@@ -406,8 +496,12 @@
     } else {
       drawRoundRect(ctx, cardX, cardY, cardW, cardH, 24);
     }
-    ctx.fillStyle = theme.cardBg;
-    ctx.fill();
+    if (layoutKey.startsWith('scenic-')) {
+      renderScenicBackground(ctx, layoutKey, cardX, cardY, cardW, cardH);
+    } else {
+      ctx.fillStyle = theme.cardBg;
+      ctx.fill();
+    }
     ctx.restore();
 
     // 3. Render Distinct Architectural Layout Framing (Designs 1 to 10)
@@ -637,8 +731,481 @@
   // 5. TEN DISTINCT LAYOUT FRAMES (১০টি স্বতন্ত্র ডিজাইন ফ্রেম)
   // ═════════════════════════════════════════════════════════════════
 
+  
+  // ═════════════════════════════════════════════════════════════════
+  // 🌄 DRAW MUSLIMPRO-STYLE SCENIC BACKGROUNDS & ARTWORK
+  // ═════════════════════════════════════════════════════════════════
+
+  function renderScenicBackground(ctx, layoutKey, cardX, cardY, cardW, cardH) {
+    ctx.save();
+    // Clip inside rounded card
+    drawRoundRect(ctx, cardX, cardY, cardW, cardH, 24);
+    ctx.clip();
+
+    switch (layoutKey) {
+      // 11. Mountain Twilight
+      case 'scenic-mountain-twilight': {
+        const sky = ctx.createLinearGradient(0, cardY, 0, cardY + cardH);
+        sky.addColorStop(0, '#E76F51');   // Rose peach
+        sky.addColorStop(0.25, '#C7517E'); // Magenta twilight
+        sky.addColorStop(0.55, '#56357A'); // Violet dusk
+        sky.addColorStop(0.85, '#1B1A47'); // Deep navy
+        sky.addColorStop(1, '#0C0C24');    // Dark indigo
+        ctx.fillStyle = sky;
+        ctx.fillRect(cardX, cardY, cardW, cardH);
+
+        // Distant Mountain Ridge
+        ctx.fillStyle = 'rgba(40, 24, 75, 0.6)';
+        ctx.beginPath();
+        ctx.moveTo(cardX, cardY + cardH - 140);
+        ctx.bezierCurveTo(cardX + 200, cardY + cardH - 260, cardX + 450, cardY + cardH - 160, cardX + 650, cardY + cardH - 240);
+        ctx.bezierCurveTo(cardX + 800, cardY + cardH - 290, cardX + 900, cardY + cardH - 180, cardX + cardW, cardY + cardH - 210);
+        ctx.lineTo(cardX + cardW, cardY + cardH);
+        ctx.lineTo(cardX, cardY + cardH);
+        ctx.fill();
+
+        // Mid Mountain Ridge
+        ctx.fillStyle = 'rgba(24, 15, 48, 0.85)';
+        ctx.beginPath();
+        ctx.moveTo(cardX, cardY + cardH - 80);
+        ctx.bezierCurveTo(cardX + 280, cardY + cardH - 170, cardX + 500, cardY + cardH - 100, cardX + 750, cardY + cardH - 180);
+        ctx.bezierCurveTo(cardX + 880, cardY + cardH - 220, cardX + 940, cardY + cardH - 130, cardX + cardW, cardY + cardH - 140);
+        ctx.lineTo(cardX + cardW, cardY + cardH);
+        ctx.lineTo(cardX, cardY + cardH);
+        ctx.fill();
+
+        // Foreground Mountain Ridge
+        ctx.fillStyle = '#0B0818';
+        ctx.beginPath();
+        ctx.moveTo(cardX, cardY + cardH);
+        ctx.lineTo(cardX, cardY + cardH - 40);
+        ctx.bezierCurveTo(cardX + 300, cardY + cardH - 90, cardX + 600, cardY + cardH - 50, cardX + cardW, cardY + cardH - 85);
+        ctx.lineTo(cardX + cardW, cardY + cardH);
+        ctx.fill();
+
+        // Center reading vignette
+        const vig = ctx.createRadialGradient(W/2, H/2 + 20, 100, W/2, H/2 + 20, 480);
+        vig.addColorStop(0, 'rgba(10, 8, 26, 0.2)');
+        vig.addColorStop(1, 'rgba(10, 8, 26, 0.65)');
+        ctx.fillStyle = vig;
+        ctx.fillRect(cardX, cardY, cardW, cardH);
+        break;
+      }
+
+      // 12. Kaaba Vintage Parchment
+      case 'scenic-kaaba-parchment': {
+        const bg = ctx.createRadialGradient(W/2, H/2, 120, W/2, H/2, 540);
+        bg.addColorStop(0, '#FAF5EC');
+        bg.addColorStop(0.6, '#F2E8D7');
+        bg.addColorStop(1, '#E2D1B8');
+        ctx.fillStyle = bg;
+        ctx.fillRect(cardX, cardY, cardW, cardH);
+
+        // Delicate Kaaba Vector Sketch at Top
+        ctx.save();
+        ctx.strokeStyle = 'rgba(109, 76, 39, 0.55)';
+        ctx.fillStyle = 'rgba(109, 76, 39, 0.12)';
+        ctx.lineWidth = 1.6;
+
+        // Kaaba Cube (Isometric)
+        const kX = W / 2;
+        const kY = cardY + 115;
+        // Front face
+        ctx.beginPath();
+        ctx.moveTo(kX, kY + 36);
+        ctx.lineTo(kX - 38, kY + 16);
+        ctx.lineTo(kX - 38, kY - 26);
+        ctx.lineTo(kX, kY - 8);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Side face
+        ctx.beginPath();
+        ctx.moveTo(kX, kY + 36);
+        ctx.lineTo(kX + 38, kY + 16);
+        ctx.lineTo(kX + 38, kY - 26);
+        ctx.lineTo(kX, kY - 8);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Top face
+        ctx.beginPath();
+        ctx.moveTo(kX, kY - 8);
+        ctx.lineTo(kX - 38, kY - 26);
+        ctx.lineTo(kX, kY - 44);
+        ctx.lineTo(kX + 38, kY - 26);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Golden Hizam band on Kaaba
+        ctx.strokeStyle = '#D4AF37';
+        ctx.lineWidth = 2.2;
+        ctx.beginPath();
+        ctx.moveTo(kX - 38, kY - 14);
+        ctx.lineTo(kX, kY + 4);
+        ctx.lineTo(kX + 38, kY - 14);
+        ctx.stroke();
+
+        // Minarets
+        ctx.strokeStyle = 'rgba(109, 76, 39, 0.45)';
+        ctx.lineWidth = 1.4;
+        // Left minaret
+        ctx.strokeRect(kX - 85, kY - 55, 8, 85);
+        ctx.beginPath();
+        ctx.moveTo(kX - 85, kY - 55); ctx.lineTo(kX - 81, kY - 72); ctx.lineTo(kX - 77, kY - 55);
+        ctx.stroke();
+        // Right minaret
+        ctx.strokeRect(kX + 77, kY - 55, 8, 85);
+        ctx.beginPath();
+        ctx.moveTo(kX + 77, kY - 55); ctx.lineTo(kX + 81, kY - 72); ctx.lineTo(kX + 85, kY - 55);
+        ctx.stroke();
+
+        // Colonnade arches
+        for (let i = -6; i <= 6; i++) {
+          if (Math.abs(i) < 3) continue;
+          const aX = kX + i * 24;
+          ctx.beginPath();
+          ctx.arc(aX, kY + 28, 9, Math.PI, 0);
+          ctx.stroke();
+        }
+        ctx.restore();
+        break;
+      }
+
+      // 13. Rehal & Quran Studio
+      case 'scenic-rehal-quran': {
+        const bg = ctx.createLinearGradient(0, cardY, 0, cardY + cardH);
+        bg.addColorStop(0, '#383236');
+        bg.addColorStop(0.5, '#252023');
+        bg.addColorStop(1, '#151214');
+        ctx.fillStyle = bg;
+        ctx.fillRect(cardX, cardY, cardW, cardH);
+
+        // Open Quran & Rehal Vector Art at Top
+        ctx.save();
+        const rX = W / 2;
+        const rY = cardY + 115;
+        ctx.strokeStyle = '#D4AF37';
+        ctx.fillStyle = 'rgba(212, 175, 55, 0.15)';
+        ctx.lineWidth = 2;
+
+        // Open Quran Pages
+        // Left page
+        ctx.beginPath();
+        ctx.moveTo(rX, rY + 8);
+        ctx.bezierCurveTo(rX - 30, rY - 14, rX - 60, rY - 8, rX - 68, rY - 26);
+        ctx.lineTo(rX - 68, rY - 48);
+        ctx.bezierCurveTo(rX - 60, rY - 32, rX - 30, rY - 36, rX, rY - 16);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Right page
+        ctx.beginPath();
+        ctx.moveTo(rX, rY + 8);
+        ctx.bezierCurveTo(rX + 30, rY - 14, rX + 60, rY - 8, rX + 68, rY - 26);
+        ctx.lineTo(rX + 68, rY - 48);
+        ctx.bezierCurveTo(rX + 60, rY - 32, rX + 30, rY - 36, rX, rY - 16);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Wooden Rehal Cross Stand
+        ctx.strokeStyle = 'rgba(212, 175, 55, 0.6)';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(rX - 45, rY + 36); ctx.lineTo(rX + 45, rY + 2);
+        ctx.moveTo(rX + 45, rY + 36); ctx.lineTo(rX - 45, rY + 2);
+        ctx.stroke();
+
+        ctx.restore();
+        break;
+      }
+
+      // 14. Desert Dunes & Starfield
+      case 'scenic-desert-stars': {
+        const sky = ctx.createLinearGradient(0, cardY, 0, cardY + cardH);
+        sky.addColorStop(0, '#060A18');
+        sky.addColorStop(0.4, '#0F1838');
+        sky.addColorStop(0.7, '#1E234D');
+        sky.addColorStop(1, '#0C0A14');
+        ctx.fillStyle = sky;
+        ctx.fillRect(cardX, cardY, cardW, cardH);
+
+        // Starfield dots
+        ctx.save();
+        ctx.fillStyle = '#FFFFFF';
+        const stars = [
+          [120, 100, 1.8], [240, 140, 1.2], [380, 80, 2.2], [520, 130, 1.4], [700, 95, 2.0], [850, 120, 1.5],
+          [180, 220, 1.4], [310, 280, 1.8], [490, 240, 1.2], [660, 270, 2.4], [820, 230, 1.3], [930, 260, 1.9],
+          [150, 360, 1.5], [400, 390, 1.2], [760, 380, 1.6], [880, 350, 2.0], [250, 480, 1.1], [810, 470, 1.3]
+        ];
+        stars.forEach(([sx, sy, sr]) => {
+          ctx.beginPath();
+          ctx.arc(cardX + sx * (cardW / 1000), cardY + sy * (cardH / 1000), sr, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // Golden Crescent Moon
+        drawCrescentMoon(ctx, cardX + cardW - 120, cardY + 110, 22, '#F5D77F');
+        ctx.restore();
+
+        // Sand Dunes
+        ctx.fillStyle = 'rgba(38, 24, 16, 0.9)';
+        ctx.beginPath();
+        ctx.moveTo(cardX, cardY + cardH - 120);
+        ctx.bezierCurveTo(cardX + 240, cardY + cardH - 190, cardX + 500, cardY + cardH - 130, cardX + 720, cardY + cardH - 180);
+        ctx.bezierCurveTo(cardX + 860, cardY + cardH - 210, cardX + 930, cardY + cardH - 150, cardX + cardW, cardY + cardH - 160);
+        ctx.lineTo(cardX + cardW, cardY + cardH);
+        ctx.lineTo(cardX, cardY + cardH);
+        ctx.fill();
+
+        ctx.fillStyle = '#140D09';
+        ctx.beginPath();
+        ctx.moveTo(cardX, cardY + cardH);
+        ctx.lineTo(cardX, cardY + cardH - 70);
+        ctx.bezierCurveTo(cardX + 320, cardY + cardH - 120, cardX + 640, cardY + cardH - 60, cardX + cardW, cardY + cardH - 110);
+        ctx.lineTo(cardX + cardW, cardY + cardH);
+        ctx.fill();
+        break;
+      }
+
+      // 15. Golden Sunset Clouds
+      case 'scenic-golden-clouds': {
+        const bg = ctx.createLinearGradient(0, cardY, 0, cardY + cardH);
+        bg.addColorStop(0, '#F59E0B');  // Amber
+        bg.addColorStop(0.35, '#EA580C'); // Orange
+        bg.addColorStop(0.65, '#991B1B'); // Crimson dusk
+        bg.addColorStop(0.9, '#450A0A');  // Deep maroon
+        bg.addColorStop(1, '#1C0608');    // Midnight horizon
+        ctx.fillStyle = bg;
+        ctx.fillRect(cardX, cardY, cardW, cardH);
+
+        // Radiant Sunburst Glow
+        const sun = ctx.createRadialGradient(W / 2, cardY + cardH - 160, 20, W / 2, cardY + cardH - 160, 360);
+        sun.addColorStop(0, 'rgba(254, 243, 199, 0.55)');
+        sun.addColorStop(0.4, 'rgba(245, 158, 11, 0.35)');
+        sun.addColorStop(1, 'rgba(245, 158, 11, 0)');
+        ctx.fillStyle = sun;
+        ctx.fillRect(cardX, cardY, cardW, cardH);
+
+        // Soft cloud silhouettes
+        ctx.fillStyle = 'rgba(30, 10, 14, 0.65)';
+        ctx.beginPath();
+        ctx.arc(cardX + 200, cardY + cardH - 90, 90, 0, Math.PI * 2);
+        ctx.arc(cardX + 320, cardY + cardH - 110, 120, 0, Math.PI * 2);
+        ctx.arc(cardX + 500, cardY + cardH - 95, 110, 0, Math.PI * 2);
+        ctx.arc(cardX + 680, cardY + cardH - 120, 130, 0, Math.PI * 2);
+        ctx.arc(cardX + 840, cardY + cardH - 85, 100, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Dark Vignette for crisp text contrast
+        const vig = ctx.createRadialGradient(W/2, H/2 + 20, 80, W/2, H/2 + 20, 480);
+        vig.addColorStop(0, 'rgba(20, 8, 10, 0.25)');
+        vig.addColorStop(1, 'rgba(20, 8, 10, 0.7)');
+        ctx.fillStyle = vig;
+        ctx.fillRect(cardX, cardY, cardW, cardH);
+        break;
+      }
+
+      // 16. Mosque Dome at Dusk
+      case 'scenic-mosque-dusk': {
+        const sky = ctx.createLinearGradient(0, cardY, 0, cardY + cardH);
+        sky.addColorStop(0, '#0A1128');
+        sky.addColorStop(0.4, '#1C2541');
+        sky.addColorStop(0.7, '#3A506B');
+        sky.addColorStop(1, '#0B132B');
+        ctx.fillStyle = sky;
+        ctx.fillRect(cardX, cardY, cardW, cardH);
+
+        // Silhouette of Mosque Dome & Minarets
+        ctx.save();
+        ctx.fillStyle = '#060B18';
+        const mX = W / 2;
+        const mY = cardY + cardH;
+
+        // Central Dome
+        ctx.beginPath();
+        ctx.arc(mX, mY - 60, 130, Math.PI, 0);
+        ctx.lineTo(mX + 130, mY);
+        ctx.lineTo(mX - 130, mY);
+        ctx.fill();
+
+        // Dome Spire & Crescent
+        ctx.strokeStyle = '#F5D77F';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(mX, mY - 190); ctx.lineTo(mX, mY - 220);
+        ctx.stroke();
+        drawCrescentMoon(ctx, mX, mY - 228, 9, '#F5D77F');
+
+        // Left Minaret
+        ctx.fillStyle = '#060B18';
+        ctx.fillRect(mX - 280, mY - 260, 24, 260);
+        ctx.beginPath();
+        ctx.moveTo(mX - 280, mY - 260); ctx.lineTo(mX - 268, mY - 295); ctx.lineTo(mX - 256, mY - 260);
+        ctx.fill();
+
+        // Right Minaret
+        ctx.fillRect(mX + 256, mY - 260, 24, 260);
+        ctx.beginPath();
+        ctx.moveTo(mX + 256, mY - 260); ctx.lineTo(mX + 268, mY - 295); ctx.lineTo(mX + 280, mY - 260);
+        ctx.fill();
+
+        // Moon in sky
+        drawCrescentMoon(ctx, cardX + 130, cardY + 120, 20, '#F5D77F');
+        ctx.restore();
+        break;
+      }
+
+      // 17. Medina Emerald Sanctuary
+      case 'scenic-medina-sanctuary': {
+        const bg = ctx.createLinearGradient(0, cardY, 0, cardY + cardH);
+        bg.addColorStop(0, '#011F16');
+        bg.addColorStop(0.5, '#053E2C');
+        bg.addColorStop(1, '#021811');
+        ctx.fillStyle = bg;
+        ctx.fillRect(cardX, cardY, cardW, cardH);
+
+        // Radiant emerald halo
+        const halo = ctx.createRadialGradient(W / 2, H / 2, 80, W / 2, H / 2, 450);
+        halo.addColorStop(0, 'rgba(46, 213, 115, 0.12)');
+        halo.addColorStop(0.5, 'rgba(212, 175, 55, 0.08)');
+        halo.addColorStop(1, 'rgba(0, 0, 0, 0.45)');
+        ctx.fillStyle = halo;
+        ctx.fillRect(cardX, cardY, cardW, cardH);
+
+        // Central rosette watermark
+        ctx.save();
+        ctx.strokeStyle = 'rgba(212, 175, 55, 0.15)';
+        ctx.lineWidth = 1.5;
+        for (let i = 0; i < 8; i++) {
+          ctx.beginPath();
+          ctx.arc(W / 2, H / 2, 110 + i * 28, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        ctx.restore();
+        break;
+      }
+
+      // 18. Alabaster Minimal Gold
+      case 'scenic-alabaster-gold': {
+        const bg = ctx.createLinearGradient(0, cardY, 0, cardY + cardH);
+        bg.addColorStop(0, '#FFFFFF');
+        bg.addColorStop(0.5, '#F8FAFC');
+        bg.addColorStop(1, '#F1F5F9');
+        ctx.fillStyle = bg;
+        ctx.fillRect(cardX, cardY, cardW, cardH);
+        break;
+      }
+
+      // 19. Crimson Dusk Horizon
+      case 'scenic-crimson-horizon': {
+        const bg = ctx.createLinearGradient(0, cardY, 0, cardY + cardH);
+        bg.addColorStop(0, '#38060E');
+        bg.addColorStop(0.4, '#7F1D1D');
+        bg.addColorStop(0.7, '#991B1B');
+        bg.addColorStop(0.9, '#450A0A');
+        bg.addColorStop(1, '#1A0407');
+        ctx.fillStyle = bg;
+        ctx.fillRect(cardX, cardY, cardW, cardH);
+
+        // Distant Palm Silhouettes
+        ctx.save();
+        ctx.fillStyle = '#120204';
+        const pY = cardY + cardH;
+        // Ground line
+        ctx.fillRect(cardX, pY - 35, cardW, 35);
+        // Palms
+        const palmPositions = [cardX + 110, cardX + 160, cardX + cardW - 140];
+        palmPositions.forEach(px => {
+          ctx.fillRect(px, pY - 110, 6, 80);
+          ctx.beginPath();
+          ctx.arc(px + 3, pY - 110, 24, 0, Math.PI);
+          ctx.fill();
+        });
+        ctx.restore();
+        break;
+      }
+
+      // 20. Kiswah Midnight Silk
+      case 'scenic-kiswah-night': {
+        const bg = ctx.createLinearGradient(0, cardY, 0, cardY + cardH);
+        bg.addColorStop(0, '#07080A');
+        bg.addColorStop(0.5, '#12141A');
+        bg.addColorStop(1, '#08090C');
+        ctx.fillStyle = bg;
+        ctx.fillRect(cardX, cardY, cardW, cardH);
+
+        // Gold-Thread Kiswah Embroidery Band
+        ctx.save();
+        const bandY = cardY + 110;
+        const bandH = 46;
+        ctx.fillStyle = 'rgba(212, 175, 55, 0.16)';
+        ctx.fillRect(cardX + 24, bandY, cardW - 48, bandH);
+        ctx.strokeStyle = '#D4AF37';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(cardX + 24, bandY, cardW - 48, bandH);
+
+        // Decorative Chevron stitches inside band
+        ctx.strokeStyle = 'rgba(245, 215, 127, 0.6)';
+        ctx.lineWidth = 1.4;
+        const step = 28;
+        for (let x = cardX + 35; x < cardX + cardW - 40; x += step) {
+          ctx.beginPath();
+          ctx.moveTo(x, bandY + bandH / 2);
+          ctx.lineTo(x + step / 2, bandY + 8);
+          ctx.lineTo(x + step, bandY + bandH / 2);
+          ctx.lineTo(x + step / 2, bandY + bandH - 8);
+          ctx.closePath();
+          ctx.stroke();
+        }
+        ctx.restore();
+        break;
+      }
+    }
+
+    ctx.restore();
+  }
+
   function renderLayoutFrame(ctx, layoutKey, theme, cardX, cardY, cardW, cardH) {
     ctx.save();
+
+    // Scenic Photo Frames
+    if (layoutKey.startsWith('scenic-')) {
+      if (layoutKey === 'scenic-kaaba-parchment' || layoutKey === 'scenic-alabaster-gold') {
+        // Double hairline border for light parchment / alabaster
+        ctx.strokeStyle = layoutKey === 'scenic-alabaster-gold' ? 'rgba(212, 175, 55, 0.65)' : 'rgba(109, 76, 39, 0.45)';
+        ctx.lineWidth = 1.5;
+        drawRoundRect(ctx, cardX + 16, cardY + 16, cardW - 32, cardH - 32, 16);
+        ctx.stroke();
+        drawRoundRect(ctx, cardX + 22, cardY + 22, cardW - 44, cardH - 44, 12);
+        ctx.stroke();
+        drawCornerBrackets(ctx, cardX + 28, cardY + 28, cardW - 56, cardH - 56, 26, '#D4AF37');
+      } else {
+        // MuslimPro-style signature crisp white hairline photo frame
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.38)';
+        ctx.lineWidth = 1.4;
+        ctx.strokeRect(cardX + 20, cardY + 20, cardW - 40, cardH - 40);
+        // Corner tick accents
+        const cL = 22;
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.75)';
+        ctx.lineWidth = 2.4;
+        // Top-left
+        ctx.beginPath(); ctx.moveTo(cardX + 14, cardY + 20 + cL); ctx.lineTo(cardX + 20, cardY + 20); ctx.lineTo(cardX + 20 + cL, cardY + 14); ctx.stroke();
+        // Top-right
+        ctx.beginPath(); ctx.moveTo(cardX + cardW - 20 - cL, cardY + 14); ctx.lineTo(cardX + cardW - 20, cardY + 20); ctx.lineTo(cardX + cardW - 14, cardY + 20 + cL); ctx.stroke();
+        // Bottom-left
+        ctx.beginPath(); ctx.moveTo(cardX + 14, cardY + cardH - 20 - cL); ctx.lineTo(cardX + 20, cardY + cardH - 20); ctx.lineTo(cardX + 20 + cL, cardY + cardH - 14); ctx.stroke();
+        // Bottom-right
+        ctx.beginPath(); ctx.moveTo(cardX + cardW - 20 - cL, cardY + cardH - 14); ctx.lineTo(cardX + cardW - 20, cardY + cardH - 20); ctx.lineTo(cardX + cardW - 14, cardY + cardH - 20 - cL); ctx.stroke();
+      }
+      ctx.restore();
+      return;
+    }
 
     switch (layoutKey) {
       // ── Layout 1: মেহরাব আর্চ (Mihrab Sanctuary Arch) ──

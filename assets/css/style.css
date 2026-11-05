@@ -284,6 +284,7 @@ body {
   border-radius: 999px;
   font-size: 13px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .badge-gold {
@@ -351,8 +352,8 @@ body.light .tools-bar {
 /* ── Filter Grid: Search + Dropdowns Side by Side ── */
 .filter-grid-row {
   display: grid;
-  grid-template-columns: 1fr auto auto auto auto;
-  gap: 10px;
+  grid-template-columns: minmax(180px, 1.3fr) minmax(140px, 0.8fr) minmax(230px, 1.2fr) minmax(210px, 1.1fr) auto;
+  gap: 12px;
   align-items: end;
 }
 
@@ -365,6 +366,18 @@ body.light .tools-bar {
 
 .filter-col-search {
   flex: 1;
+}
+
+.filter-col-source {
+  min-width: 140px;
+}
+
+.filter-col-category {
+  min-width: 230px;
+}
+
+.filter-col-occasion {
+  min-width: 210px;
 }
 
 .filter-col-actions {
@@ -514,7 +527,10 @@ body.light .tools-bar {
   display: none;
   position: absolute;
   top: 100%;
-  left: 0; right: 0;
+  left: 0;
+  min-width: 260px;
+  width: 100%;
+  box-sizing: border-box;
   background: var(--card-bg);
   border: 1px solid var(--gold);
   border-top: none;
@@ -532,12 +548,13 @@ body.light .tools-bar {
 .multi-opt {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   padding: 9px 14px;
-  font-size: 13px;
+  font-size: 13.5px;
   cursor: pointer;
   transition: background 0.15s;
   color: var(--text);
+  white-space: nowrap;
 }
 
 .multi-opt:hover {

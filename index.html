@@ -108,7 +108,7 @@
         </div>
 
         <!-- উৎস (Source) -->
-        <div class="filter-col">
+        <div class="filter-col filter-col-source">
           <label class="filter-label">উৎস (Source)</label>
           <div class="custom-select-wrap">
             <select id="filterSource" class="custom-select">
@@ -120,7 +120,7 @@
         </div>
 
         <!-- বিষয় (Category) -->
-        <div class="filter-col">
+        <div class="filter-col filter-col-category">
           <label class="filter-label">বিষয় (Category)</label>
           <div class="custom-select-wrap">
             <div class="multi-select" id="categorySelect">
@@ -150,7 +150,7 @@
         </div>
 
         <!-- বিশেষ উপলক্ষ (Occasion) -->
-        <div class="filter-col">
+        <div class="filter-col filter-col-occasion">
           <label class="filter-label">বিশেষ উপলক্ষ (Occasion)</label>
           <div class="custom-select-wrap">
             <div class="multi-select" id="occasionSelect">
@@ -203,22 +203,36 @@
   <div class="modal-overlay" id="previewModal">
     <div class="modal-box" style="max-width:540px; padding:18px 22px; text-align:center;">
       <button class="modal-close" onclick="closePreviewModal()">✕</button>
-      <h3 style="color:var(--gold); margin-bottom:10px; font-size:18px;">🖼️ রয়েল কার্ড কাস্টমাইজার (১০ ডিজাইন × ১০ কালার = ১০০ রূপ)</h3>
+      <h3 style="color:var(--gold); margin-bottom:10px; font-size:18px;">🖼️ রয়েল কার্ড কাস্টমাইজার (২০ ডিজাইন × ১০ কালার = ২০০ রূপ)</h3>
 
       <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
         <div style="display:inline-flex; align-items:center; gap:6px;">
           <label style="font-size:12px; font-weight:600; color:var(--text-muted);">ডিজাইন:</label>
           <select id="previewLayoutSelect" class="form-control" style="width:auto; padding:5px 10px; font-size:12px;">
-            <option value="mihrab-arch">১. মেহরাব আর্চ (Mihrab)</option>
-            <option value="royal-minimal">২. রাজকীয় মিনিমাল (Minimal)</option>
-            <option value="geometric-mandala">৩. ইসলামিক রজেট (Rosette)</option>
-            <option value="illuminated-manuscript">৪. মদিনা পাণ্ডুলিপি (Manuscript)</option>
-            <option value="iznik-tiles">৫. অটোমান ইজনিক (Iznik)</option>
-            <option value="architectural-pillars">৬. রাজকীয় স্তম্ভ (Pillars)</option>
-            <option value="celestial-crescent">৭. হিলাল ও তারকা (Celestial)</option>
-            <option value="alhambra-palace">৮. আলহামব্রা প্যালেস (Alhambra)</option>
-            <option value="octagram-medallion">৯. আটকোণা সিল (Octagram)</option>
-            <option value="kiswah-gold-ribbon">১০. কাবার গিলাফ ফিতা (Kiswah)</option>
+            <optgroup label="🏛️ ইসলামিক আর্কিটেকচারাল ফ্রেম (১০টি)">
+              <option value="mihrab-arch">১. মেহরাব আর্চ (Mihrab)</option>
+              <option value="royal-minimal">২. রাজকীয় মিনিমাল (Minimal)</option>
+              <option value="geometric-mandala">৩. ইসলামিক রজেট (Rosette)</option>
+              <option value="illuminated-manuscript">৪. মদিনা পাণ্ডুলিপি (Manuscript)</option>
+              <option value="iznik-tiles">৫. অটোমান ইজনিক (Iznik)</option>
+              <option value="architectural-pillars">৬. রাজকীয় স্তম্ভ (Pillars)</option>
+              <option value="celestial-crescent">৭. হিলাল ও তারকা (Celestial)</option>
+              <option value="alhambra-palace">৮. আলহামব্রা প্যালেস (Alhambra)</option>
+              <option value="octagram-medallion">৯. আটকোণা সিল (Octagram)</option>
+              <option value="kiswah-gold-ribbon">১০. কাবার গিলাফ ফিতা (Kiswah)</option>
+            </optgroup>
+            <optgroup label="🌄 মুসলিমপ্রো স্টাইল সিনিক ব্যাকগ্রাউন্ড (১০টি)">
+              <option value="scenic-mountain-twilight">১১. গোধূলি বেলার পাহাড় (Mountain Twilight)</option>
+              <option value="scenic-kaaba-parchment">১২. ভিন্টেজ কাবা পাণ্ডুলিপি (Kaaba Vintage Sketch)</option>
+              <option value="scenic-rehal-quran">১৩. কাঠের রেহাল ও কোরআন (Rehal & Quran Studio)</option>
+              <option value="scenic-desert-stars">১৪. তারকাময় মরুভূমি (Desert Dunes & Stars)</option>
+              <option value="scenic-golden-clouds">১৫. সোনালী সূর্যাস্ত মেঘমালা (Golden Sunset Clouds)</option>
+              <option value="scenic-mosque-dusk">১৬. গোধূলি মসজিদ গম্বুজ (Mosque Dome at Dusk)</option>
+              <option value="scenic-medina-sanctuary">১৭. মদিনার শ্যামলিম প্রাঙ্গণ (Medina Emerald Sanctuary)</option>
+              <option value="scenic-alabaster-gold">১৮. শুভ্র আইভরি ও সোনা (Alabaster Minimal Gold)</option>
+              <option value="scenic-crimson-horizon">১৯. রক্তিম দামেস্ক দিগন্ত (Crimson Dusk Horizon)</option>
+              <option value="scenic-kiswah-night">২০. কাবার কালো রেশম (Kiswah Midnight Silk)</option>
+            </optgroup>
           </select>
         </div>
 
@@ -305,8 +319,7 @@
         পবিত্র কোরআন, সহীহ হাদিস ও ইসলামিক নসিহতের প্রতিদিনের আলো।
       </p>
       <p style="font-size:13px;">
-        কারিগরি সহায়তায়: <a href="https://www.royaltechbd.com/" target="_blank" rel="noopener">Royal Technologies</a> | 
-        ওয়েবসাইট: <a href="https://www.royaltechbd.com/" target="_blank" rel="noopener">www.royaltechbd.com</a>
+        কারিগরি সহায়তায়: <a href="https://www.royaltechbd.com/" target="_blank" rel="noopener">Royal Technologies</a>
       </p>
     </div>
   </footer>

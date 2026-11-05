@@ -215,55 +215,99 @@ for (const item of existingItems) {
   migratedCount++;
 
   // Map to 15 Categories (can belong to multiple)
-  const text = `${item.title} ${item.reference} ${item.bangla_translation} ${item.category || ''}`;
+  const origCat = item.category || '';
+  const text = (item.title + ' ' + item.reference + ' ' + item.bangla_translation + ' ' + origCat).toLowerCase();
   const matchedCategories = new Set();
 
-  if (text.includes('ঈমান') || text.includes('তাওহীদ') || text.includes('তাওয়াক্কুল') || text.includes('ভরসা') || text.includes('আল্লাহর সন্তুষ্টি')) {
+  // 1. faith-tawakkul (ঈমান ও আল্লাহর ওপর ভরসা)
+  if (/ঈমান|তাওহীদ|তাওয়াক্কুল|ভরসা|আল্লাহর সন্তুষ্টি|একত্ববাদ|মুমিন|মু'মিন|মু’মিন|হেদায়েত|হেদায়াত|আল্লাহর মহিমা|আল্লাহর হেফাজত/.test(origCat) ||
+      /আল্লাহর ওপর ভরসা|তাওয়াক্কুল|ঈমান এনেছে|তাওহীদ|হেদায়েত দান|আল্লাহর প্রতি ঈমান|মুমিনদের বৈশিষ্ট্য/.test(text)) {
     matchedCategories.add('faith-tawakkul');
   }
-  if (text.includes('সালাত') || text.includes('নামাজ') || text.includes('সিজদা') || text.includes('ইবাদত') || text.includes('মসজিদ')) {
+
+  // 2. prayer-worship (নামাজ ও ইবাদত)
+  if (/সালাত|নামাজ|সিজদা|ইবাদত|মসজিদ|রুকু|তাহাজ্জুদ|জুমুআ|তারাবীহ/.test(origCat) ||
+      /সালাত কায়েম|নামাজ আদায়|সিজদায়|ইবাদত কর|মসজিদে|সালাতের গুরুত্ব|নামাজের সময়/.test(text)) {
     matchedCategories.add('prayer-worship');
   }
-  if (text.includes('দোয়া') || text.includes('মুনাজাত') || text.includes('প্রার্থনা') || text.includes('ডাকো')) {
+
+  // 3. dua (দোয়া ও মুনাজাত)
+  if (/দোয়া|দো’আ|মুনাজাত|প্রার্থনা|রব্বানা|রাব্বানা/.test(origCat) ||
+      /দোয়া কর|দোয়া কবুল|প্রার্থনা কর|রব্বানা|রাব্বানা|হে আমাদের রব|আল্লাহুম্মা/.test(text)) {
     matchedCategories.add('dua');
   }
-  if (text.includes('জিকির') || text.includes('ইস্তিগফার') || text.includes('তাসবীহ') || text.includes('শুকরিয়া') || text.includes('হামদ')) {
+
+  // 4. dhikr-istighfar (জিকির ও ইস্তিগফার)
+  if (/জিকির|যিকির|ইস্তিগফার|তাসবীহ|হামদ|শুকরিয়া|সুবহানাল্লাহ|আলহামদুলিল্লাহ|লা ইলাহা/.test(origCat) ||
+      /জিকির|ইস্তিগফার|তাসবীহ পাঠ|সুবহানাল্লাহ|আলহামদুলিল্লাহ|আল্লাহু আকবার|লা হাওলা/.test(text)) {
     matchedCategories.add('dhikr-istighfar');
   }
-  if (text.includes('ধৈর্য') || text.includes('সবর') || text.includes('কৃতজ্ঞতা') || text.includes('শোকর') || text.includes('বিপদ')) {
+
+  // 5. patience-gratitude (ধৈর্য ও কৃতজ্ঞতা)
+  if (/ধৈর্য|সবর|কৃতজ্ঞতা|শোকর|শুকরিয়া/.test(origCat) ||
+      /ধৈর্য ধারণ|সবর কর|কৃতজ্ঞতা প্রকাশ|শোকর আদায়|ধৈর্যশীলদের|বিপদে সবর/.test(text)) {
     matchedCategories.add('patience-gratitude');
   }
-  if (text.includes('তওবা') || text.includes('ক্ষমা') || text.includes('অনুশোচনা') || text.includes('পাপ মোচন')) {
+
+  // 6. repentance-forgiveness (তওবা ও ক্ষমা)
+  if (/তওবা|ক্ষমা|অনুশোচনা|মাগফিরাত|পাপ মোচন/.test(origCat) ||
+      /তওবা কর|ক্ষমা প্রার্থনা|ক্ষমা করে দাও|পাপ ক্ষমা|ক্ষমাশীল ও দয়ালু/.test(text)) {
     matchedCategories.add('repentance-forgiveness');
   }
-  if (text.includes('চরিত্র') || text.includes('আদব') || text.includes('আখলাক') || text.includes('বিনয়') || text.includes('নম্রতা') || text.includes('মিষ্টি কথা') || text.includes('সদাচরণ')) {
+
+  // 7. good-character (উত্তম চরিত্র ও আদব)
+  if (/চরিত্র|আদব|আখলাক|বিনয়|নম্রতা|সদাচরণ|লজ্জাশীলতা|মিষ্টি কথা|হাসিমুখ|সৌন্দর্য/.test(origCat) ||
+      /উত্তম চরিত্র|সদাচরণ|নম্র ব্যবহার|বিনয়ী আচরণ|লজ্জাশীলতা|হাসিমুখে কথা/.test(text)) {
     matchedCategories.add('good-character');
   }
-  if (text.includes('রিজিক') || text.includes('হালাল') || text.includes('ব্যবসা') || text.includes('বরকত') || text.includes('সদকা') || text.includes('দান')) {
+
+  // 8. halal-rizq (হালাল রিজিক ও বরকত)
+  if (/রিজিক|হালাল|সদকা|দান|বরকত|ব্যবসা|উপার্জন|শ্রম/.test(origCat) ||
+      /হালাল রিজিক|সদকা কর|দান-সদকা|উপার্জন|বরকত দান|ব্যবসার সততা/.test(text)) {
     matchedCategories.add('halal-rizq');
   }
-  if (text.includes('পিতামাতা') || text.includes('মা') || text.includes('বাবা') || text.includes('পরিবার') || text.includes('সন্তান') || text.includes('স্ত্রী') || text.includes('আত্মীয়')) {
+
+  // 9. parents-family (বাবা-মা ও পরিবারের অধিকার)
+  if (/পিতামাতা|মাতা-পিতা|মা-বাবা|পিতা|মাতা|পরিবার|সন্তান|স্ত্রী|আত্মীয়|আত্মীয়/.test(origCat) ||
+      /পিতামাতা|পিতা-মাতা|মা-বাবা|মায়ের অধিকার|বাবার অধিকার|মায়ের সেবা|সন্তানের লালন|নেক সন্তান|স্ত্রী ও সন্তান|পরিবারের হক|আত্মীয়তার বন্ধন|পিতামাতার/.test(text)) {
     matchedCategories.add('parents-family');
   }
-  if (text.includes('হক') || text.includes('ইনসাফ') || text.includes('ন্যায়বিচার') || text.includes('আমানত') || text.includes('মানবতা') || text.includes('সমাজ') || text.includes('প্রতিবেশী') || text.includes('ভ্রাতৃত্ব') || text.includes('সালাম')) {
+
+  // 10. human-rights (মানুষের অধিকার ও সামাজিক জীবন)
+  if (/হক|ইনসাফ|ন্যায়বিচার|আমানত|মানবতা|সমাজ|প্রতিবেশী|ভ্রাতৃত্ব|সালাম|সহযোগিতা|এতিম|মিসকিন/.test(origCat) ||
+      /মানুষের অধিকার|প্রতিবেশীর হক|ন্যায়বিচার|ইনসাফ|ভ্রাতৃত্ববোধ|সালাম দাও|আমানত রক্ষা|এতিমের অধিকার/.test(text)) {
     matchedCategories.add('human-rights');
   }
-  if (text.includes('সুদ') || text.includes('ঘুষ') || text.includes('মিথ্যা') || text.includes('যুলুম') || text.includes('জুলুম') || text.includes('গুনাহ') || text.includes('পাপ') || text.includes('অহংকার') || text.includes('শিরক')) {
+
+  // 11. avoid-sins (গুনাহ থেকে বেঁচে থাকা)
+  if (/সুদ|ঘুষ|মিথ্যা|যুলুম|জুলুম|গুনাহ|পাপ|অহংকার|শিরক|ধোঁকা|গীবত|অপবাদ|হিংসা|রাগ/.test(origCat) ||
+      /সুদ খাওয়া|ঘুষ গ্রহণ|মিথ্যা বলা|জুলুম কর|গুনাহ থেকে|শিরক কর|অহংকার কর|গীবত কর|হিংসা কর|বর্জন কর/.test(text)) {
     matchedCategories.add('avoid-sins');
   }
-  if (text.includes('বিপদ') || text.includes('দুশ্চিন্তা') || text.includes('কষ্ট') || text.includes('অসুস্থতা') || text.includes('ঋণ') || text.includes('ভয়')) {
+
+  // 12. hardship-anxiety (বিপদ-আপদ ও দুশ্চিন্তা)
+  if (/বিপদ|দুশ্চিন্তা|কষ্ট|অসুস্থতা|রোগ|ঋণ|ভয়|আশ্রয়/.test(origCat) ||
+      /বিপদ-আপদ|দুশ্চিন্তা দূর|কষ্ট লাঘব|রোগমুক্তি|ঋণমুক্তি|ভয় থেকে মুক্তি|আশ্রয় প্রার্থনা/.test(text)) {
     matchedCategories.add('hardship-anxiety');
   }
-  if (text.includes('সুন্নাহ') || text.includes('আমল') || text.includes('ইলম') || text.includes('জ্ঞান') || text.includes('ঘুম') || text.includes('খাবার') || text.includes('পোশাক')) {
+
+  // 13. sunnah-daily-amal (সুন্নাহ ও দৈনন্দিন আমল)
+  if (/সুন্নাহ|সুন্নত|আমল|ইলম|জ্ঞান|ঘুম|খাবার|পোশাক|ওজু|মেসওয়াক|শিষ্টাচার/.test(origCat) ||
+      /সুন্নাত অনুসরণ|নেক আমল|ইলম অর্জন|দৈনন্দিন আমল|সুন্নাত ত্বরিকা/.test(text)) {
     matchedCategories.add('sunnah-daily-amal');
   }
-  if (text.includes('মৃত্যু') || text.includes('আখিরাত') || text.includes('কবর') || text.includes('হাশর') || text.includes('কিয়ামত')) {
+
+  // 14. death-afterlife (মৃত্যু ও আখিরাত)
+  if (/মৃত্যু|আখিরাত|কবর|হাশর|কিয়ামত|মউত|আখেরাত/.test(origCat) ||
+      /মৃত্যুর স্মরণ|আখিরাতের সম্বল|কবরের আজাব|কিয়ামতের দিন|হাশরের ময়দান/.test(text)) {
     matchedCategories.add('death-afterlife');
   }
-  if (text.includes('জান্নাত') || text.includes('জাহান্নাম') || text.includes('আগুন') || text.includes('হুর') || text.includes('শাস্তি')) {
+
+  // 15. jannah-jahannam (জান্নাত ও জাহান্নাম)
+  if (/জান্নাত|জাহান্নাম|দোজখ|হুর|আগুন|শাস্তি|নাজাত/.test(origCat) ||
+      /জান্নাত লাভ|জাহান্নাম থেকে|জান্নাতুল ফেরদাউস|জাহান্নামের আগুন|শাস্তি থেকে/.test(text)) {
     matchedCategories.add('jannah-jahannam');
   }
-
   // Fallback category if none matched
   if (matchedCategories.size === 0) {
     matchedCategories.add('good-character');

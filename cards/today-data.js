@@ -1,20 +1,20 @@
 /** Royal Noor — Today Offline Cache */
 window.ROYAL_NOOR_TODAY = {
-  "cardId": "RN-20261105-P4IH",
-  "uid": "RN-Q-013",
+  "cardId": "RN-20261105-9AH3",
+  "uid": "RN-Q-016",
   "type": "quran",
   "title": "সূরা আল-বাকারা",
-  "reference": "সূরা আল-বাকারা : ২০১",
-  "category": "কল্যাণের দোয়া",
+  "reference": "সূরা আল-বাকারা : ২৫৫ (আয়াতুল কুরসী)",
+  "category": "তাওহীদ ও মহিমা",
   "eventTag": "general",
-  "arabicText": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
-  "banglaTranslation": "হে আমাদের পালনকর্তা! আমাদের দুনিয়াতে কল্যাণ দিন এবং আখেরাতেও কল্যাণ দিন এবং আমাদের জাহান্নামের শাস্তি থেকে রক্ষা করুন।",
-  "layout": "geometric-mandala",
-  "theme": "desert-amber",
-  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nرَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ\n\n❝ হে আমাদের পালনকর্তা! আমাদের দুনিয়াতে কল্যাণ দিন এবং আখেরাতেও কল্যাণ দিন এবং আমাদের জাহান্নামের শাস্তি থেকে রক্ষা করুন। ❞\n— [ সূরা আল-বাকারা : ২০১ ]\n\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n🌐 ওয়েবসাইট: https://www.royaltechbd.com/\n🏷️ নিবেদনে: Royal Technologies\n\n#RoyalNoor #AlorPotheProtidin #QuranDaily #IslamicQuotes #DailyAyah #Hadith #RoyalTechnologies #Bangladesh #IslamicReminder",
+  "arabicText": "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ",
+  "banglaTranslation": "আল্লাহ, তিনি ছাড়া কোনো সত্য ইলাহ নেই; তিনি চিরঞ্জীব, সবকিছুর ধারক। তন্দ্রা ও নিদ্রা তাঁকে স্পর্শ করতে পারে না।",
+  "layout": "illuminated-manuscript",
+  "theme": "classic-ivory",
+  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nاللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ\n\n❝ আল্লাহ, তিনি ছাড়া কোনো সত্য ইলাহ নেই; তিনি চিরঞ্জীব, সবকিছুর ধারক। তন্দ্রা ও নিদ্রা তাঁকে স্পর্শ করতে পারে না। ❞\n— [ সূরা আল-বাকারা : ২৫৫ (আয়াতুল কুরসী) ]\n\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n🌐 ওয়েবসাইট: https://www.royaltechbd.com/\n🏷️ নিবেদনে: Royal Technologies\n\n#RoyalNoor #AlorPotheProtidin #QuranDaily #IslamicQuotes #DailyAyah #Hadith #RoyalTechnologies #Bangladesh #IslamicReminder",
   "imageUrl": "https://royal-technologies.github.io/Royal-Noor/cards/today.png",
-  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261105-P4IH.png",
+  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261105-9AH3.png",
   "website": "https://www.royaltechbd.com/",
   "author": "Royal Technologies",
-  "generatedAt": "2026-11-05T07:50:50.130Z"
+  "generatedAt": "2026-11-05T08:38:56.997Z"
 };
