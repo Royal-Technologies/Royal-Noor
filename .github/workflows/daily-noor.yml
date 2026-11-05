@@ -49,7 +49,7 @@ jobs:
           cache: 'npm'
 
       - name: Install Dependencies
-        run: npm ci
+        run: npm ci || npm install
 
       - name: Generate Daily Royal Noor Card (1080x1080 PNG)
         run: node scripts/generate-noor.js
