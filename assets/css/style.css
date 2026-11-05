@@ -379,10 +379,16 @@ body.light .tools-bar {
 
 .filter-pills {
   display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding-bottom: 4px;
-  scrollbar-width: thin;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  align-items: center;
+  overflow: visible;
+  padding: 4px 0;
+  scrollbar-width: none;
+}
+
+.filter-pills::-webkit-scrollbar {
+  display: none;
 }
 
 .filter-btn {
@@ -391,12 +397,13 @@ body.light .tools-bar {
   color: var(--text);
   border: 1px solid var(--card-border);
   border-radius: 999px;
-  padding: 7px 16px;
+  padding: 8px 16px;
   font-size: 13px;
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
   transition: var(--transition);
+  user-select: none;
 }
 
 .filter-btn:hover,
@@ -404,6 +411,19 @@ body.light .tools-bar {
   background: var(--primary);
   color: #ffffff;
   border-color: var(--primary);
+}
+
+@media (max-width: 600px) {
+  .tools-bar {
+    padding: 10px 0;
+  }
+  .filter-pills {
+    gap: 6px 8px;
+  }
+  .filter-btn {
+    padding: 6px 13px;
+    font-size: 12px;
+  }
 }
 
 /* ── Cards Grid ── */
