@@ -83,6 +83,9 @@
           <a id="btnDownloadToday" href="cards/today.png" download="RoyalNoor-Today.png" class="btn btn-gold">
             📥 ডাউনলোড ১০৮০×১০৮০ PNG
           </a>
+          <button id="btnShareToday" class="btn btn-emerald">
+            📤 কার্ড শেয়ার করুন
+          </button>
           <button id="btnCopyCaption" class="btn btn-glass" style="color:var(--text); border-color:var(--card-border);">
             📋 ক্যাপশন কপি করুন
           </button>
@@ -146,14 +149,51 @@
         <canvas id="previewCanvas" style="width:100%; height:auto; display:block;"></canvas>
       </div>
 
-      <div style="display:flex; justify-content:center; gap:10px;">
+      <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
         <button id="btnDownloadPreview" class="btn btn-gold">
           📥 ডাউনলোড ১০৮০×১০৮০ PNG
+        </button>
+        <button id="btnSharePreview" class="btn btn-emerald">
+          📤 কার্ড শেয়ার করুন
         </button>
         <button class="btn btn-glass" style="color:var(--text); border-color:var(--card-border);" onclick="closePreviewModal()">
           বন্ধ করুন
         </button>
       </div>
+    </div>
+  </div>
+
+  <!-- ── Share Card Modal (Desktop & App Share Sheet) ── -->
+  <div id="shareModal" class="modal-overlay">
+    <div class="modal-box" style="max-width:440px; text-align:center;">
+      <button class="modal-close" onclick="closeShareModal()">✕</button>
+      <div style="font-size:36px; margin-bottom:8px;">📤</div>
+      <h3 style="color:var(--gold); margin-bottom:6px;">কার্ড শেয়ার করুন</h3>
+      <p style="font-size:13px; color:var(--text-muted); margin-bottom:18px;">
+        সোশ্যাল মিডিয়ায় সহজে খাঁটি কার্ড প্রচার করুন
+      </p>
+
+      <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
+        <button id="btnShareCopyImage" class="btn btn-gold" style="width:100%; justify-content:center;">
+          📋 কার্ড ইমেজ সরাসরি কপি (ফেসবুক/হোয়াটসঅ্যাপে Ctrl+V দিন)
+        </button>
+        <button id="btnShareWhatsApp" class="btn btn-glass" style="width:100%; justify-content:center; border-color:#25D366; color:#25D366;">
+          💬 হোয়াটসঅ্যাপে শেয়ার
+        </button>
+        <button id="btnShareFacebook" class="btn btn-glass" style="width:100%; justify-content:center; border-color:#1877F2; color:#1877F2;">
+          📘 ফেসবুকে শেয়ার
+        </button>
+        <button id="btnShareTelegram" class="btn btn-glass" style="width:100%; justify-content:center; border-color:#229ED9; color:#229ED9;">
+          ✈️ টেলিগ্রামে শেয়ার
+        </button>
+        <button id="btnShareCopyLink" class="btn btn-glass" style="width:100%; justify-content:center; color:var(--text);">
+          🔗 কার্ডের সরাসরি ইমেজ লিংক কপি
+        </button>
+      </div>
+
+      <button class="btn btn-glass" style="color:var(--text-muted); border-color:var(--card-border); padding:6px 16px; font-size:13px;" onclick="closeShareModal()">
+        বন্ধ করুন
+      </button>
     </div>
   </div>
 
@@ -173,7 +213,9 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- Scripts: Offline Cache Scripts loaded first for file:/// compatibility -->
+  <script src="database/items-data.js"></script>
+  <script src="cards/today-data.js"></script>
   <script src="templates/royal-card.js"></script>
   <script src="assets/js/app.js"></script>
 </body>

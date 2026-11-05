@@ -30,12 +30,20 @@ const elements = {
   todayBadge: document.getElementById('todayBadge'),
   btnCopyCaption: document.getElementById('btnCopyCaption'),
   btnDownloadToday: document.getElementById('btnDownloadToday'),
+  btnShareToday: document.getElementById('btnShareToday'),
   themeToggle: document.getElementById('themeToggle'),
   addModal: document.getElementById('addModal'),
   previewModal: document.getElementById('previewModal'),
   previewCanvas: document.getElementById('previewCanvas'),
   previewThemeSelect: document.getElementById('previewThemeSelect'),
-  btnDownloadPreview: document.getElementById('btnDownloadPreview')
+  btnDownloadPreview: document.getElementById('btnDownloadPreview'),
+  btnSharePreview: document.getElementById('btnSharePreview'),
+  shareModal: document.getElementById('shareModal'),
+  btnShareCopyImage: document.getElementById('btnShareCopyImage'),
+  btnShareWhatsApp: document.getElementById('btnShareWhatsApp'),
+  btnShareFacebook: document.getElementById('btnShareFacebook'),
+  btnShareTelegram: document.getElementById('btnShareTelegram'),
+  btnShareCopyLink: document.getElementById('btnShareCopyLink')
 };
 
 // ── Initialize App ──
@@ -48,56 +56,75 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // ── Load Today's Featured Card ──
 async function loadTodayData() {
+  let data = null;
   try {
     const res = await fetch('cards/today.json?t=' + Date.now());
-    if (!res.ok) throw new Error('Today card not found');
-    const data = await res.json();
-
-    if (elements.todayImg) elements.todayImg.src = data.imageUrl || 'cards/today.png';
-    if (elements.todayTitle) elements.todayTitle.textContent = data.title || 'আজকের নূর';
-    if (elements.todayArabic) elements.todayArabic.textContent = data.arabicText || '';
-    if (elements.todayBangla) elements.todayBangla.textContent = `❝ ${data.banglaTranslation || ''} ❞`;
-    if (elements.todayRef) elements.todayRef.textContent = `— [ ${data.reference || ''} ]`;
-
-    if (elements.todayBadge) {
-      if (data.eventTag === 'ramadan') elements.todayBadge.textContent = '🌙 মাহে রমজান স্পেশাল';
-      else if (data.eventTag === 'friday') elements.todayBadge.textContent = '🕌 জুমু\'আ মুবারক স্পেশাল';
-      else elements.todayBadge.textContent = data.type === 'quran' ? '📖 পবিত্র কোরআন' : '✨ সহীহ হাদিস';
-    }
-
-    if (elements.btnCopyCaption) {
-      elements.btnCopyCaption.onclick = () => {
-        navigator.clipboard.writeText(data.caption);
-        showToast('📋 সোশ্যাল মিডিয়া ক্যাপশন কপি করা হয়েছে!');
-      };
-    }
-
-    if (elements.btnDownloadToday) {
-      elements.btnDownloadToday.href = data.imageUrl || 'cards/today.png';
-      elements.btnDownloadToday.download = `RoyalNoor-${data.cardId || 'Today'}.png`;
+    if (res.ok) {
+      data = await res.json();
     }
   } catch (err) {
-    console.warn('Today data fallback:', err);
+    // Handled by offline fallback below
+  }
+
+  // Fallback to offline cache (for file:/// browser compatibility)
+  if (!data && window.ROYAL_NOOR_TODAY) {
+    data = window.ROYAL_NOOR_TODAY;
+  }
+
+  if (!data) return;
+
+  if (elements.todayImg) elements.todayImg.src = data.imageUrl || 'cards/today.png';
+  if (elements.todayTitle) elements.todayTitle.textContent = data.title || 'আজকের নূর';
+  if (elements.todayArabic) elements.todayArabic.textContent = data.arabicText || '';
+  if (elements.todayBangla) elements.todayBangla.textContent = `❝ ${data.banglaTranslation || ''} ❞`;
+  if (elements.todayRef) elements.todayRef.textContent = `— [ ${data.reference || ''} ]`;
+
+  if (elements.todayBadge) {
+    if (data.eventTag === 'ramadan') elements.todayBadge.textContent = '🌙 মাহে রমজান স্পেশাল';
+    else if (data.eventTag === 'friday') elements.todayBadge.textContent = '🕌 জুমু\'আ মুবারক স্পেশাল';
+    else elements.todayBadge.textContent = data.type === 'quran' ? '📖 পবিত্র কোরআন' : '✨ সহীহ হাদিস';
+  }
+
+  if (elements.btnCopyCaption) {
+    elements.btnCopyCaption.onclick = () => {
+      navigator.clipboard.writeText(data.caption);
+      showToast('📋 সোশ্যাল মিডিয়া ক্যাপশন কপি করা হয়েছে!');
+    };
+  }
+
+  if (elements.btnDownloadToday) {
+    elements.btnDownloadToday.href = data.imageUrl || 'cards/today.png';
+    elements.btnDownloadToday.download = `RoyalNoor-${data.cardId || 'Today'}.png`;
+  }
+
+  if (elements.btnShareToday) {
+    elements.btnShareToday.onclick = () => {
+      shareCardImage('cards/today.png', `RoyalNoor-${data.cardId || 'Today'}.png`, data.imageUrl);
+    };
   }
 }
 
-// ── Load All Items from JSON ──
+// ── Load All Items from SQLite JSON / JS ──
 async function loadItemsData() {
-  try {
-    let res = await fetch('database/items.json?t=' + Date.now());
-    if (!res.ok) {
-      res = await fetch('database/seed-data.json?t=' + Date.now());
-    }
-    allItems = await res.json();
-
+  // 1. Instant load from offline cache (ensures 100% visibility even under file:/// protocol)
+  if (window.ROYAL_NOOR_DATA && Array.isArray(window.ROYAL_NOOR_DATA) && window.ROYAL_NOOR_DATA.length > 0) {
+    allItems = window.ROYAL_NOOR_DATA;
     updateStats();
     renderCards(allItems);
+  }
+
+  // 2. Fetch fresh JSON over HTTP if available
+  try {
+    let res = await fetch('database/items.json?t=' + Date.now());
+    if (res.ok) {
+      allItems = await res.json();
+      updateStats();
+      renderCards(allItems);
+    }
   } catch (err) {
-    console.error('Failed to load items:', err);
-    if (elements.cardsGrid) {
-      elements.cardsGrid.innerHTML = `
-        <div class="empty-state">
-          <span>⚠️</span>
+    // Already populated by window.ROYAL_NOOR_DATA
+  }
+}
           <h3>তথ্য লোড হতে সমস্যা হয়েছে</h3>
           <p>অনুগ্রহ করে সার্ভার রানিং রাখুন অথবা ফাইল চেক করুন।</p>
         </div>
@@ -253,6 +280,127 @@ function setupEventListeners() {
       }
     });
   }
+
+  // Share Modal Action Buttons
+  if (elements.btnShareCopyImage) {
+    elements.btnShareCopyImage.addEventListener('click', async () => {
+      if (activeShareBlob && navigator.clipboard && window.ClipboardItem) {
+        try {
+          await navigator.clipboard.write([
+            new ClipboardItem({ 'image/png': activeShareBlob })
+          ]);
+          showToast('📋 কার্ড ইমেজটি ক্লিপবোর্ডে কপি হয়েছে! ফেসবুক বা হোয়াটসঅ্যাপে সরাসরি Paste (Ctrl+V) করুন।');
+          closeShareModal();
+          return;
+        } catch (e) {
+          console.warn(e);
+        }
+      }
+      showToast('⚠️ ইমেজ কপি করা যায়নি। অনুগ্রহ করে ডাউনলোড বাটন ব্যবহার করুন।');
+    });
+  }
+
+  if (elements.btnShareWhatsApp) {
+    elements.btnShareWhatsApp.addEventListener('click', () => {
+      const shareUrl = activeShareUrl || window.location.href;
+      window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent('Royal Noor — আলোর পথে প্রতিদিন\n' + shareUrl), '_blank');
+      closeShareModal();
+    });
+  }
+
+  if (elements.btnShareFacebook) {
+    elements.btnShareFacebook.addEventListener('click', () => {
+      const shareUrl = activeShareUrl || window.location.href;
+      window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl), '_blank');
+      closeShareModal();
+    });
+  }
+
+  if (elements.btnShareTelegram) {
+    elements.btnShareTelegram.addEventListener('click', () => {
+      const shareUrl = activeShareUrl || window.location.href;
+      window.open('https://t.me/share/url?url=' + encodeURIComponent(shareUrl) + '&text=' + encodeURIComponent('Royal Noor — আলোর পথে প্রতিদিন'), '_blank');
+      closeShareModal();
+    });
+  }
+
+  if (elements.btnShareCopyLink) {
+    elements.btnShareCopyLink.addEventListener('click', () => {
+      const shareUrl = activeShareUrl || window.location.href;
+      navigator.clipboard.writeText(shareUrl);
+      showToast('🔗 কার্ডের সরাসরি ইমেজ লিংক কপি করা হয়েছে!');
+      closeShareModal();
+    });
+  }
+}
+
+// ── Share Engine (Shares ONLY the Card PNG Image) ──
+let activeShareBlob = null;
+let activeShareUrl = '';
+
+async function shareCardImage(source, filename = 'RoyalNoor-Card.png', publicUrl = '') {
+  try {
+    let blob = null;
+
+    if (source instanceof HTMLCanvasElement) {
+      blob = await new Promise(resolve => source.toBlob(resolve, 'image/png'));
+    } else if (typeof source === 'string') {
+      try {
+        const res = await fetch(source);
+        blob = await res.blob();
+      } catch (e) {
+        // Fallback for canvas or direct url
+      }
+    } else if (source instanceof Blob) {
+      blob = source;
+    }
+
+    activeShareBlob = blob;
+    activeShareUrl = publicUrl || (window.location.origin + window.location.pathname.replace('index.html', '') + 'cards/today.png');
+
+    // 1. Mobile & Modern Web Share API: Shares ONLY the image file
+    if (blob && navigator.canShare) {
+      const testFile = new File([blob], filename, { type: 'image/png' });
+      if (navigator.canShare({ files: [testFile] })) {
+        try {
+          await navigator.share({
+            files: [testFile]
+          });
+          showToast('✅ কার্ড শেয়ার সম্পন্ন হয়েছে!');
+          return;
+        } catch (shareErr) {
+          if (shareErr.name === 'AbortError') return;
+        }
+      }
+    }
+
+    // 2. Desktop Fallback: Copy image directly to Clipboard
+    if (blob && navigator.clipboard && window.ClipboardItem) {
+      try {
+        await navigator.clipboard.write([
+          new ClipboardItem({ 'image/png': blob })
+        ]);
+        showToast('📋 কার্ড ইমেজটি ক্লিপবোর্ডে কপি হয়েছে! ফেসবুক বা হোয়াটসঅ্যাপে সরাসরি Paste (Ctrl+V) করুন।');
+      } catch (clipErr) {
+        console.warn('Clipboard image write failed:', clipErr);
+      }
+    }
+
+    // 3. Open Share Modal for quick social buttons
+    openShareModal();
+
+  } catch (err) {
+    console.error('Share error:', err);
+    openShareModal();
+  }
+}
+
+function openShareModal() {
+  if (elements.shareModal) elements.shareModal.classList.add('active');
+}
+
+function closeShareModal() {
+  if (elements.shareModal) elements.shareModal.classList.remove('active');
 }
 
 // ── Canvas Preview Modal ──
@@ -282,6 +430,12 @@ function renderPreviewCanvas(item, theme) {
       a.download = `RoyalNoor-${item.uid || 'Card'}.png`;
       a.click();
       showToast('📥 কার্ড ডাউনলোড সম্পন্ন হয়েছে!');
+    };
+  }
+
+  if (elements.btnSharePreview) {
+    elements.btnSharePreview.onclick = () => {
+      shareCardImage(elements.previewCanvas, `RoyalNoor-${item.uid || 'Card'}.png`);
     };
   }
 }
@@ -390,6 +544,9 @@ function escapeAttr(str) {
 window.copyText = copyText;
 window.openPreviewModal = openPreviewModal;
 window.closePreviewModal = closePreviewModal;
+window.openShareModal = openShareModal;
+window.closeShareModal = closeShareModal;
+window.shareCardImage = shareCardImage;
 window.openAddModal = openAddModal;
 window.closeAddModal = closeAddModal;
 window.saveNewEntry = saveNewEntry;

@@ -158,6 +158,19 @@ body {
   box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45);
 }
 
+.btn-emerald {
+  background: linear-gradient(135deg, #0f766e, #0d5f59);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(15, 118, 110, 0.35);
+}
+
+.btn-emerald:hover {
+  background: linear-gradient(135deg, #14b8a6, #0f766e);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(20, 184, 166, 0.45);
+}
+
 .btn-glass {
   background: rgba(255, 255, 255, 0.12);
   color: #ffffff;

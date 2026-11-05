@@ -215,13 +215,19 @@ function getAllItems() {
 }
 
 /**
- * Export items to JSON for frontend browser usage
+ * Export items to JSON and JS for frontend browser usage
+ * (JS export ensures index.html works even when opened via file:/// without web server)
  */
 function exportToJson() {
   try {
     const db = getDb();
     const rows = db.prepare('SELECT * FROM royal_noor_items WHERE is_active = 1 ORDER BY id ASC').all();
     fs.writeFileSync(itemsJsonPath, JSON.stringify(rows, null, 2), 'utf8');
+
+    // Also export as JavaScript variable for offline/file:/// browser compatibility
+    const itemsJsPath = path.join(dbDir, 'items-data.js');
+    const jsContent = `/** Royal Noor — Offline Database Cache */\nwindow.ROYAL_NOOR_DATA = ${JSON.stringify(rows, null, 2)};\n`;
+    fs.writeFileSync(itemsJsPath, jsContent, 'utf8');
   } catch (err) {
     console.error('[Database] Export JSON error:', err.message);
   }

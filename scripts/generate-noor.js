@@ -203,6 +203,10 @@ const todayJson = {
 
 fs.writeFileSync(todayJsonPath, JSON.stringify(todayJson, null, 2), 'utf8');
 
+// Also write today-data.js for offline file:/// browser compatibility
+const todayJsPath = path.join(cardsDir, 'today-data.js');
+fs.writeFileSync(todayJsPath, `/** Royal Noor — Today Offline Cache */\nwindow.ROYAL_NOOR_TODAY = ${JSON.stringify(todayJson, null, 2)};\n`, 'utf8');
+
 // ── 10. Update SQLite Database ──
 if (!isPreview) {
   db.recordUsage(item.id, {

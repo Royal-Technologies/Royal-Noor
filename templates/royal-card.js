@@ -352,6 +352,7 @@
 
   /**
    * Draw Ornamental Islamic Corner Brackets
+   * Kept strictly inside the corner area so it never overlaps text
    */
   function drawCornerOrnaments(ctx, x, y, w, h, size, color) {
     ctx.save();
@@ -381,10 +382,10 @@
       ctx.lineTo(c.cx + c.dx * (size - 6), c.cy + c.dy * 8);
       ctx.stroke();
 
-      // Corner diamond star
-      const dX = c.cx + c.dx * 18;
-      const dY = c.cy + c.dy * 18;
-      drawIslamicStar(ctx, dX, dY, 5, 2.5, color);
+      // Corner diamond star safely inside bracket
+      const dX = c.cx + c.dx * 13;
+      const dY = c.cy + c.dy * 13;
+      drawIslamicStar(ctx, dX, dY, 4, 2, color);
     });
 
     ctx.restore();
@@ -412,7 +413,7 @@
       const step = 70;
       ctx.beginPath();
       for (let px = x; px <= x + w; px += step) {
-        for (let py = y; py <= y + h; py += step) {
+        for (let py = y + 30; py <= y + h - 30; py += step) {
           ctx.moveTo(px, py - 10);
           ctx.lineTo(px + 10, py);
           ctx.lineTo(px, py + 10);
@@ -422,16 +423,14 @@
       }
       ctx.stroke();
     } else if (pType === 'manuscript') {
-      // Double clean manuscript inner borders
       ctx.beginPath();
       drawRoundRect(ctx, x + 10, y + 10, w - 20, h - 20, 8);
       ctx.stroke();
     } else {
-      // Default geometric lattice
       const step = 80;
       ctx.beginPath();
       for (let px = x; px <= x + w; px += step) {
-        for (let py = y; py <= y + h; py += step) {
+        for (let py = y + 30; py <= y + h - 30; py += step) {
           ctx.moveTo(px, py - 12);
           ctx.lineTo(px + 12, py);
           ctx.lineTo(px, py + 12);
@@ -460,21 +459,14 @@
     const archApex = cardY + 45;
 
     ctx.beginPath();
-    // Left column
     ctx.moveTo(archLeft, archBottom);
     ctx.lineTo(archLeft, archSpring);
-
-    // Horseshoe curve to apex
     ctx.bezierCurveTo(archLeft - 10, archApex + 20, W / 2 - 60, archApex - 12, W / 2, archApex - 12);
     ctx.bezierCurveTo(W / 2 + 60, archApex - 12, archRight + 10, archApex + 20, archRight, archSpring);
-
-    // Right column
     ctx.lineTo(archRight, archBottom);
     ctx.stroke();
 
-    // Mihrab keystone ornament
     drawIslamicStar(ctx, W / 2, archApex - 12, 7, 3.5, theme.primaryGold);
-
     ctx.restore();
   }
 
@@ -535,25 +527,25 @@
     ctx.stroke();
     ctx.restore();
 
-    // Corner Ornaments
-    drawCornerOrnaments(ctx, cardX + 32, cardY + 32, cardW - 64, cardH - 64, 45, theme.cornerColor);
+    // Corner Ornaments (Size 40px)
+    drawCornerOrnaments(ctx, cardX + 32, cardY + 32, cardW - 64, cardH - 64, 40, theme.cornerColor);
 
     // 3. Header Section (Bismillah, Brand & Badge)
-    let currentY = cardY + 66;
+    let currentY = cardY + 68;
 
-    // Bismillah Calligraphy (Using authentic Arabic font)
+    // Bismillah Calligraphy (Large and Prominent)
     ctx.save();
     ctx.fillStyle = theme.accentGold;
-    ctx.font = 'bold 30px "Amiri", "Traditional Arabic", serif';
+    ctx.font = 'bold 34px "Amiri", "Traditional Arabic", serif';
     ctx.textAlign = 'center';
     ctx.fillText('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', W / 2, currentY);
     ctx.restore();
 
-    currentY += 46;
+    currentY += 48;
 
     // Brand Name: ROYAL NOOR [Vector Star] আলোর পথে প্রতিদিন
     ctx.save();
-    ctx.font = 'bold 18px "Hind Siliguri", sans-serif';
+    ctx.font = 'bold 19px "Hind Siliguri", sans-serif';
     const leftText = 'ROYAL NOOR';
     const rightText = 'আলোর পথে প্রতিদিন';
     const wLeft = ctx.measureText(leftText).width;
@@ -573,9 +565,9 @@
     ctx.fillText(rightText, starX + starGap, currentY);
     ctx.restore();
 
-    currentY += 28;
+    currentY += 30;
 
-    // Badge Pill with Pure Bengali Text & Canvas Vector Icon (No Unicode Tofu Boxes!)
+    // Badge Pill
     let badgeText = item.type === 'quran' ? 'পবিত্র কোরআন' : 'সহীহ হাদিস';
     let badgeIcon = 'star';
 
@@ -594,71 +586,72 @@
     }
 
     ctx.save();
-    ctx.font = '600 15px "Hind Siliguri", sans-serif';
+    ctx.font = '600 16px "Hind Siliguri", sans-serif';
     const badgeTextWidth = ctx.measureText(badgeText).width;
     const iconOffset = 22;
     const badgeW = badgeTextWidth + 48 + iconOffset;
-    const badgeH = 32;
+    const badgeH = 34;
     const badgeX = (W - badgeW) / 2;
 
-    drawRoundRect(ctx, badgeX, currentY, badgeW, badgeH, 16);
+    drawRoundRect(ctx, badgeX, currentY, badgeW, badgeH, 17);
     ctx.fillStyle = theme.badgeBg;
     ctx.fill();
     ctx.strokeStyle = theme.badgeBorder;
     ctx.lineWidth = 1;
     ctx.stroke();
 
-    // Draw Vector Icon inside badge
     const iconCenterX = badgeX + 24;
-    const iconCenterY = currentY + 16;
+    const iconCenterY = currentY + 17;
     if (badgeIcon === 'moon') {
-      drawCrescentMoon(ctx, iconCenterX, iconCenterY, 6, theme.badgeText);
+      drawCrescentMoon(ctx, iconCenterX, iconCenterY, 6.5, theme.badgeText);
     } else {
-      drawIslamicStar(ctx, iconCenterX, iconCenterY, 5, 2.5, theme.badgeText);
+      drawIslamicStar(ctx, iconCenterX, iconCenterY, 5.5, 2.8, theme.badgeText);
     }
 
     ctx.fillStyle = theme.badgeText;
     ctx.textAlign = 'left';
     ctx.textBaseline = 'middle';
-    ctx.fillText(badgeText, badgeX + 38, currentY + 16);
+    ctx.fillText(badgeText, badgeX + 38, currentY + 17);
     ctx.restore();
 
-    // 4. Dynamic Typography & Layout Calculation
-    const contentMaxW = cardW - 140; // 844px text width
-    const contentCenterY = 540;
+    // 4. Large, Readable Typography Auto-Fitting
+    const contentMaxW = cardW - 130; // 854px text width
+    const contentCenterY = 535;
 
-    // Arabic Font Size Auto-Fitting
+    // Arabic Font Size (Bigger & Bolder)
     const arText = item.arabic_text || '';
-    let arFontSize = 38;
-    if (arText.length > 250) arFontSize = 26;
-    else if (arText.length > 160) arFontSize = 30;
-    else if (arText.length > 90) arFontSize = 34;
-    else arFontSize = 40;
+    let arFontSize = 48;
+    if (arText.length > 250) arFontSize = 32;
+    else if (arText.length > 160) arFontSize = 36;
+    else if (arText.length > 100) arFontSize = 42;
+    else if (arText.length > 60) arFontSize = 48;
+    else arFontSize = 52;
 
     ctx.font = `bold ${arFontSize}px "Amiri", "Traditional Arabic", serif`;
-    const arLineHeight = Math.round(arFontSize * 1.85);
+    const arLineHeight = Math.round(arFontSize * 1.8);
     const arLines = wrapText(ctx, arText, contentMaxW);
     const arTotalHeight = arLines.length * arLineHeight;
 
-    // Bangla Translation Font Size Auto-Fitting (Pure Text, No unicode quote glyphs!)
+    // Bangla Translation Font Size (Bigger & Crisp)
     const bnText = item.bangla_translation || '';
-    let bnFontSize = 27;
-    if (bnText.length > 300) bnFontSize = 20;
-    else if (bnText.length > 180) bnFontSize = 23;
-    else if (bnText.length > 110) bnFontSize = 26;
-    else bnFontSize = 29;
+    let bnFontSize = 34;
+    if (bnText.length > 300) bnFontSize = 24;
+    else if (bnText.length > 180) bnFontSize = 28;
+    else if (bnText.length > 110) bnFontSize = 32;
+    else if (bnText.length > 60) bnFontSize = 35;
+    else bnFontSize = 38;
 
     ctx.font = `600 ${bnFontSize}px "Hind Siliguri", sans-serif`;
     const bnLineHeight = Math.round(bnFontSize * 1.6);
-    const bnLines = wrapText(ctx, bnText, contentMaxW - 60);
+    const bnLines = wrapText(ctx, bnText, contentMaxW - 50);
     const bnTotalHeight = bnLines.length * bnLineHeight;
 
-    const sepHeight = 60;
+    const sepHeight = 65;
     const totalBlockHeight = arTotalHeight + sepHeight + bnTotalHeight;
 
     let textStartY = contentCenterY - (totalBlockHeight / 2) + 15;
-    if (textStartY < currentY + 65) {
-      textStartY = currentY + 65;
+    if (textStartY < currentY + 70) {
+      textStartY = currentY + 70;
     }
 
     // 5. Render Arabic Text
@@ -669,8 +662,8 @@
     ctx.textBaseline = 'middle';
 
     if (theme.isDark) {
-      ctx.shadowColor = 'rgba(230, 200, 140, 0.25)';
-      ctx.shadowBlur = 8;
+      ctx.shadowColor = 'rgba(230, 200, 140, 0.3)';
+      ctx.shadowBlur = 10;
     }
 
     let arY = textStartY;
@@ -681,36 +674,43 @@
     ctx.restore();
 
     // 6. Islamic Ornamental Divider
-    const sepY = arY + 8;
+    const sepY = arY + 12;
     ctx.save();
     ctx.strokeStyle = theme.borderColor;
-    ctx.lineWidth = 1;
+    ctx.lineWidth = 1.2;
 
     // Left line
     ctx.beginPath();
-    ctx.moveTo(W / 2 - 180, sepY);
-    ctx.lineTo(W / 2 - 40, sepY);
+    ctx.moveTo(W / 2 - 190, sepY);
+    ctx.lineTo(W / 2 - 42, sepY);
     ctx.stroke();
 
     // Center star ornaments
-    drawIslamicStar(ctx, W / 2, sepY, 9, 4.5, theme.primaryGold);
-    drawIslamicStar(ctx, W / 2 - 25, sepY, 4, 2, theme.secondaryGold);
-    drawIslamicStar(ctx, W / 2 + 25, sepY, 4, 2, theme.secondaryGold);
+    drawIslamicStar(ctx, W / 2, sepY, 9.5, 4.8, theme.primaryGold);
+    drawIslamicStar(ctx, W / 2 - 26, sepY, 4.5, 2.2, theme.secondaryGold);
+    drawIslamicStar(ctx, W / 2 + 26, sepY, 4.5, 2.2, theme.secondaryGold);
 
     // Right line
     ctx.beginPath();
-    ctx.moveTo(W / 2 + 40, sepY);
-    ctx.lineTo(W / 2 + 180, sepY);
+    ctx.moveTo(W / 2 + 42, sepY);
+    ctx.lineTo(W / 2 + 190, sepY);
     ctx.stroke();
     ctx.restore();
 
-    // 7. Render Bangla Translation with Elegant Vector Quotes
-    let bnY = sepY + 42;
+    // 7. Render Bangla Translation with Integrated Vector Quotes
+    let bnY = sepY + 46;
     ctx.save();
     ctx.font = `600 ${bnFontSize}px "Hind Siliguri", sans-serif`;
     ctx.fillStyle = theme.banglaColor;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
+
+    // Measure maximum line width to place quotes gracefully around the text
+    let maxBnLineWidth = 0;
+    for (let i = 0; i < bnLines.length; i++) {
+      const w = ctx.measureText(bnLines[i]).width;
+      if (w > maxBnLineWidth) maxBnLineWidth = w;
+    }
 
     // Render Bangla text lines
     for (let i = 0; i < bnLines.length; i++) {
@@ -719,54 +719,56 @@
     }
     ctx.restore();
 
-    // Draw Vector Quote marks framing the Bangla translation block
-    const firstLineY = sepY + 42;
+    // Place quotes hugging the text block naturally (not stuck in margins)
+    const quoteSize = 13;
+    const quoteMargin = 24;
+    const quoteLeftX = Math.max(cardX + 70, (W - maxBnLineWidth) / 2 - quoteMargin);
+    const quoteRightX = Math.min(cardX + cardW - 70, (W + maxBnLineWidth) / 2 + quoteMargin);
+    const firstLineY = sepY + 46;
     const lastLineY = bnY - bnLineHeight;
-    const quoteLeftX = cardX + 58;
-    const quoteRightX = cardX + cardW - 58;
 
-    drawVectorQuote(ctx, quoteLeftX, firstLineY - 4, 14, theme.primaryGold, false);
-    drawVectorQuote(ctx, quoteRightX, lastLineY + 6, 14, theme.primaryGold, true);
+    drawVectorQuote(ctx, quoteLeftX, firstLineY - 4, quoteSize, theme.primaryGold, false);
+    drawVectorQuote(ctx, quoteRightX, lastLineY + 4, quoteSize, theme.primaryGold, true);
 
-    // 8. Reference Box (e.g. [ সূরা আল-বাকারা : ১৫৩ ])
-    const refY = Math.max(bnY + 34, cardY + cardH - 120);
+    // 8. Reference Box (e.g. — [ সূরা আল-বাকারা : ২০১ ])
+    const refY = Math.max(bnY + 36, cardY + cardH - 122);
     const refText = `— [ ${item.reference || item.title} ]`;
 
     ctx.save();
-    ctx.font = 'bold 18px "Hind Siliguri", sans-serif';
+    ctx.font = 'bold 21px "Hind Siliguri", sans-serif';
     ctx.fillStyle = theme.metaColor;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(refText, W / 2, refY);
     ctx.restore();
 
-    // 9. Footer Section (Royal Technologies Branding & Website)
+    // 9. Footer Section (Safely placed with zero overlap from corner stars!)
     const footerY = cardY + cardH - 52;
 
     ctx.save();
     ctx.strokeStyle = theme.borderColor;
     ctx.lineWidth = 0.8;
     ctx.beginPath();
-    ctx.moveTo(cardX + 80, footerY - 18);
-    ctx.lineTo(cardX + cardW - 80, footerY - 18);
+    ctx.moveTo(cardX + 90, footerY - 18);
+    ctx.lineTo(cardX + cardW - 90, footerY - 18);
     ctx.stroke();
 
-    // Left: ROYAL TECHNOLOGIES
-    ctx.font = 'bold 14px "Hind Siliguri", sans-serif';
+    // Left: ROYAL TECHNOLOGIES (Starts safely at cardX + 90, clear of corner brackets!)
+    ctx.font = 'bold 15px "Hind Siliguri", sans-serif';
     ctx.fillStyle = theme.metaColor;
     ctx.textAlign = 'left';
     ctx.textBaseline = 'middle';
-    ctx.fillText('ROYAL TECHNOLOGIES', cardX + 45, footerY);
+    ctx.fillText('ROYAL TECHNOLOGIES', cardX + 90, footerY);
 
     // Center: কোরআন ও সহীহ সুন্নাহর আলো
-    ctx.font = '500 13px "Hind Siliguri", sans-serif';
+    ctx.font = '500 14px "Hind Siliguri", sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText('কোরআন ও সহীহ সুন্নাহর আলো', W / 2, footerY);
 
-    // Right: www.royaltechbd.com
-    ctx.font = 'bold 14px "Hind Siliguri", sans-serif';
+    // Right: www.royaltechbd.com (Ends safely at cardX + cardW - 90, clear of corner brackets!)
+    ctx.font = 'bold 15px "Hind Siliguri", sans-serif';
     ctx.textAlign = 'right';
-    ctx.fillText('www.royaltechbd.com', cardX + cardW - 45, footerY);
+    ctx.fillText('www.royaltechbd.com', cardX + cardW - 90, footerY);
     ctx.restore();
 
     return canvas;

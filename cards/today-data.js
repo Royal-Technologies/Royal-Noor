@@ -1,0 +1,19 @@
+/** Royal Noor — Today Offline Cache */
+window.ROYAL_NOOR_TODAY = {
+  "cardId": "RN-20261105-WGW9",
+  "uid": "RN-Q-013",
+  "type": "quran",
+  "title": "সূরা আল-বাকারা",
+  "reference": "সূরা আল-বাকারা : ২০১",
+  "category": "কল্যাণের দোয়া",
+  "eventTag": "general",
+  "arabicText": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+  "banglaTranslation": "হে আমাদের পালনকর্তা! আমাদের দুনিয়াতে কল্যাণ দিন এবং আখেরাতেও কল্যাণ দিন এবং আমাদের জাহান্নামের শাস্তি থেকে রক্ষা করুন।",
+  "theme": "imperial-black",
+  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nرَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ\n\n❝ হে আমাদের পালনকর্তা! আমাদের দুনিয়াতে কল্যাণ দিন এবং আখেরাতেও কল্যাণ দিন এবং আমাদের জাহান্নামের শাস্তি থেকে রক্ষা করুন। ❞\n— [ সূরা আল-বাকারা : ২০১ ]\n\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n🌐 ওয়েবসাইট: https://www.royaltechbd.com/\n🏷️ নিবেদনে: Royal Technologies\n\n#RoyalNoor #AlorPotheProtidin #QuranDaily #IslamicQuotes #DailyAyah #Hadith #RoyalTechnologies #Bangladesh #IslamicReminder",
+  "imageUrl": "https://royal-technologies.github.io/Royal-Noor/cards/today.png",
+  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261105-WGW9.png",
+  "website": "https://www.royaltechbd.com/",
+  "author": "Royal Technologies",
+  "generatedAt": "2026-11-05T07:06:37.866Z"
+};
