@@ -1,18 +1,18 @@
 /** Royal Noor — Today Offline Cache */
 window.ROYAL_NOOR_TODAY = {
-  "cardId": "RN-20261105-8Z54",
-  "uid": "RN-Q-086",
+  "cardId": "RN-20261105-VFU3",
+  "uid": "RN-Q-089",
   "type": "quran",
-  "title": "সূরা ত্বা-হা",
-  "reference": "সূরা ত্বা-হা : ১১৪",
-  "category": "জ্ঞান বৃদ্ধির দোয়া",
+  "title": "সূরা আল-আম্বিয়া",
+  "reference": "সূরা আল-আম্বিয়া : ৮৭ (দোয়া ইউনুস)",
+  "category": "বিপদে দোয়া ইউনুস",
   "eventTag": "general",
-  "arabicText": "رَّبِّ زِدْنِي عِلْمًا",
-  "banglaTranslation": "হে আমার প্রতিপালক! আমার জ্ঞান বৃদ্ধি করে দিন।",
-  "layout": "scenic-medina-sanctuary",
-  "theme": "classic-ivory",
-  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nرَّبِّ زِدْنِي عِلْمًا\n\n❝ হে আমার প্রতিপালক! আমার জ্ঞান বৃদ্ধি করে দিন। ❞\n— [ সূরা ত্বা-হা : ১১৪ ]\n\n#RoyalNoor #AlorPotheProtidin #QuranDaily #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
+  "arabicText": "لَّا إِلَٰهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ",
+  "banglaTranslation": "আপনি ছাড়া কোনো সত্য উপাস্য নেই, আপনি পরম পবিত্র! নিশ্চয়ই আমি অপরাধীদের অন্তর্ভুক্ত হয়ে গেছি।",
+  "layout": "mihrab-arch",
+  "theme": "warm-parchment",
+  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nلَّا إِلَٰهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ\n\n❝ আপনি ছাড়া কোনো সত্য উপাস্য নেই, আপনি পরম পবিত্র! নিশ্চয়ই আমি অপরাধীদের অন্তর্ভুক্ত হয়ে গেছি। ❞\n— [ সূরা আল-আম্বিয়া : ৮৭ (দোয়া ইউনুস) ]\n\n#RoyalNoor #AlorPotheProtidin #QuranDaily #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
   "imageUrl": "https://royal-technologies.github.io/Royal-Noor/cards/today.png",
-  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261105-8Z54.png",
-  "generatedAt": "2026-11-05T14:19:07.214Z"
+  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261105-VFU3.png",
+  "generatedAt": "2026-11-05T14:34:55.033Z"
 };
