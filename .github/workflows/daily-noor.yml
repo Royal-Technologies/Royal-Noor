@@ -2,9 +2,9 @@ name: Daily Royal Noor Generation & Publishing
 
 on:
   schedule:
-    # 00:05 GMT / UTC = সকাল ০৬:০৫ টা বাংলাদেশ সময় (06:05 AM BST) - গিটহাব জ্যাম এড়াতে ৫ মিনিটে সেট করা হয়েছে
+    # 00:05 UTC = সকাল ০৬:০৫ বাংলাদেশ সময়
     - cron: '5 0 * * *'
-    # 12:05 GMT / UTC = সন্ধ্যা ০৬:০৫ টা বাংলাদেশ সময় (06:05 PM BST) - গিটহাব জ্যাম এড়াতে ৫ মিনিটে সেট করা হয়েছে
+    # 12:05 UTC = সন্ধ্যা ০৬:০৫ বাংলাদেশ সময়
     - cron: '5 12 * * *'
   workflow_dispatch:
     inputs:
@@ -46,10 +46,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'npm'
+          # cache disabled — package-lock.json may not always be present
+          # cache: 'npm'
 
       - name: Install Dependencies
-        run: npm ci || npm install
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
 
       - name: Generate Daily Royal Noor Card (1080x1080 PNG)
         run: node scripts/generate-noor.js
