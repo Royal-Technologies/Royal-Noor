@@ -2,10 +2,10 @@ name: Daily Royal Noor Generation & Publishing
 
 on:
   schedule:
-    # 00:00 GMT / UTC = সকাল ০৬:০০ টা বাংলাদেশ সময় (06:00 AM BST)
-    - cron: '0 0 * * *'
-    # 12:00 GMT / UTC = সন্ধ্যা ০৬:০০ টা বাংলাদেশ সময় (06:00 PM BST)
-    - cron: '0 12 * * *'
+    # 00:05 GMT / UTC = সকাল ০৬:০৫ টা বাংলাদেশ সময় (06:05 AM BST) - গিটহাব জ্যাম এড়াতে ৫ মিনিটে সেট করা হয়েছে
+    - cron: '5 0 * * *'
+    # 12:05 GMT / UTC = সন্ধ্যা ০৬:০৫ টা বাংলাদেশ সময় (06:05 PM BST) - গিটহাব জ্যাম এড়াতে ৫ মিনিটে সেট করা হয়েছে
+    - cron: '5 12 * * *'
   workflow_dispatch:
     inputs:
       event_tag:
@@ -17,11 +17,11 @@ on:
         required: false
         default: ''
       layout:
-        description: 'Layout (mihrab-arch, royal-minimal, geometric-mandala, illuminated-manuscript, iznik-tiles, architectural-pillars, celestial-crescent, alhambra-palace, octagram-medallion, kiswah-gold-ribbon)'
+        description: 'Layout key (e.g. mihrab-arch, scenic-mountain-twilight)'
         required: false
         default: ''
       theme:
-        description: 'Theme (royal-emerald, midnight-navy, imperial-black, warm-parchment, royal-maroon, ottoman-turquoise, desert-amber, amethyst-violet, andalusian-olive, classic-ivory)'
+        description: 'Theme key (e.g. royal-emerald, imperial-black)'
         required: false
         default: ''
 
