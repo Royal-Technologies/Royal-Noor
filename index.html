@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Royal Noor — আলোর পথে প্রতিদিন | কোরআন, হাদিস ও ইসলামিক নসিহত</title>
+  <meta name="description" content="Royal Noor — পবিত্র কোরআন, সহীহ হাদিস, ইসলামিক বাণী ও নসিহতের স্বয়ংক্রিয় ১০৮০×১০৮০ কার্ড জেনারেটর প্ল্যাটফর্ম।">
+  <meta name="theme-color" content="#0f766e">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Royal Noor — আলোর পথে প্রতিদিন">
+  <meta property="og:description" content="পবিত্র কোরআন, সহীহ হাদিস ও ইসলামিক নসিহতের প্রিমিয়াম কার্ড প্ল্যাটফর্ম।">
+  <meta property="og:image" content="cards/today.png">
+  <meta property="og:type" content="website">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- ── Hero Header ── -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+      <div class="hero-brand">Royal Noor ✦ আলোর পথে প্রতিদিন</div>
+      <h1>কোরআন ও সহীহ সুন্নাহর <span>নূর প্রতিদিন</span></h1>
+      <p>কোরআন, হাদিস, ইসলামিক বাণী ও নসিহতের জন্য একটি সুন্দর ব্র্যান্ড। প্রতিদিনের অমূল্য বাণীগুলো স্বয়ংক্রিয়ভাবে সোশ্যাল মিডিয়ায় প্রকাশের জন্য প্রস্তুত।</p>
+      
+      <div class="hero-actions">
+        <a href="#todayShowcase" class="btn btn-gold">🌙 আজকের নূর দেখুন</a>
+        <button class="btn btn-glass" onclick="openAddModal()">➕ নতুন বাণী যুক্ত করুন</button>
+        <button id="themeToggle" class="btn btn-glass">☀️ লাইট মোড</button>
+        <a href="https://www.royaltechbd.com/" target="_blank" rel="noopener" class="btn btn-glass">🌐 Royal Technologies</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ── Live Stats Bar ── -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">📚</div>
+        <strong id="statTotal">--</strong>
+        <span>মোট সংরক্ষিত বাণী</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📖</div>
+        <strong id="statQuran">--</strong>
+        <span>পবিত্র কোরআনের আয়াত</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">✨</div>
+        <strong id="statHadith">--</strong>
+        <span>সহীহ হাদিস সংকলন</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🌙</div>
+        <strong id="statRamadan">--</strong>
+        <span>রমজান স্পেশাল বাণী</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🕌</div>
+        <strong id="statFriday">--</strong>
+        <span>জুমু'আ স্পেশাল বাণী</span>
+      </div>
+    </section>
+
+    <!-- ── Today's Featured Card Showcase ── -->
+    <section id="todayShowcase" class="today-showcase">
+      <div class="today-img-wrap">
+        <img id="todayImg" src="cards/today.png" alt="আজকের নূর কার্ড" onerror="this.src='cards/today.png'">
+      </div>
+      <div class="today-info">
+        <div class="today-badge-row">
+          <span id="todayBadge" class="badge badge-gold">✨ আজকের নূর</span>
+          <span class="badge" style="background:var(--soft-bg);">১০৮০×১০৮০ পোস্ট রেডি</span>
+        </div>
+        <h2 id="todayTitle">আজকের নূর লোড হচ্ছে...</h2>
+        <div id="todayArabic" class="today-arabic">...</div>
+        <div id="todayBangla" class="today-bangla">...</div>
+        <div id="todayRef" style="color:var(--gold); font-weight:700;">...</div>
+
+        <div class="today-controls">
+          <a id="btnDownloadToday" href="cards/today.png" download="RoyalNoor-Today.png" class="btn btn-gold">
+            📥 ডাউনলোড ১০৮০×১০৮০ PNG
+          </a>
+          <button id="btnCopyCaption" class="btn btn-glass" style="color:var(--text); border-color:var(--card-border);">
+            📋 ক্যাপশন কপি করুন
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Sticky Search & Filters Bar ── -->
+    <div class="tools-bar">
+      <div class="search-input-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="সূরা, হাদিস, আরবি বা বাংলা অর্থ দিয়ে তাৎক্ষণিক খুঁজুন..." autocomplete="off">
+      </div>
+
+      <div class="filter-pills" id="filterPills">
+        <button class="filter-btn active" data-filter="all">সবগুলো (All)</button>
+        <button class="filter-btn" data-filter="quran">📖 পবিত্র কোরআন</button>
+        <button class="filter-btn" data-filter="hadith">✨ সহীহ হাদিস</button>
+        <button class="filter-btn" data-filter="ramadan">🌙 রমজান স্পেশাল</button>
+        <button class="filter-btn" data-filter="friday">🕌 জুমু'আ স্পেশাল</button>
+        <button class="filter-btn" data-filter="dhul_hijjah">🕋 জিলহজ্জ ও কুরবানী</button>
+        <button class="filter-btn" data-filter="জিকির ও শুকরিয়া">🤲 জিকির ও শুকরিয়া</button>
+        <button class="filter-btn" data-filter="ধৈর্য ও সালাত">🌿 ধৈর্য ও সালাত</button>
+        <button class="filter-btn" data-filter="তওবা ও ক্ষমা">💧 তওবা ও ক্ষমা</button>
+        <button class="filter-btn" data-filter="উত্তম চরিত্র">💖 উত্তম চরিত্র</button>
+      </div>
+    </div>
+
+    <!-- ── Cards Grid ── -->
+    <section class="cards-grid" id="cardsGrid">
+      <div class="empty-state">
+        <span>⏳</span>
+        <h3>বাণীগুলো লোড হচ্ছে...</h3>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── Modal: Add New Entry ── -->
+  <div class="modal-overlay" id="addModal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeAddModal()">✕</button>
+      <h3 style="margin-bottom:6px; color:var(--gold);">➕ নতুন বাণী যুক্ত করুন</h3>
+      <p style="font-size:13px; color:var(--text-muted); margin-bottom:18px;">
+        এখানে যুক্ত করা তথ্য আপনার ব্রাউজারে সংরক্ষিত হবে এবং JSON হিসেবে এক্সপোর্ট করে সরাসরি ডাটাবেজে আপলোড করা যাবে।
+      </p>
+
+      <form onsubmit="saveNewEntry(event)">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div class="form-group">
+            <label>ধরণ (Type)</label>
+            <select name="type" class="form-control" required>
+              <option value="quran">📖 পবিত্র কোরআন</option>
+              <option value="hadith">✨ সহীহ হাদিস</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>উপলক্ষ্য / ইভেন্ট ট্যাগ</label>
+            <select name="event_tag" class="form-control">
+              <option value="general">সাধারণ দিন (General)</option>
+              <option value="ramadan">🌙 রমজানুল মোবারক</option>
+              <option value="friday">🕌 জুমু'আ বার</option>
+              <option value="dhul_hijjah">🕋 জিলহজ্জ ও কুরবানী</option>
+              <option value="ashura">🏴 মহররম ও আশুরা</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div class="form-group">
+            <label>সূরার নাম বা হাদিসের কিতাব</label>
+            <input type="text" name="title" class="form-control" placeholder="যেমন: সূরা আল-বাকারা বা সহীহ বুখারী" required>
+          </div>
+          <div class="form-group">
+            <label>রেফারেন্স (আয়াত বা হাদিস নং)</label>
+            <input type="text" name="reference" class="form-control" placeholder="যেমন: সূরা আল-বাকারা : ১৮৫" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>মূল আরবি পাঠ (হরকতসহ)</label>
+          <textarea name="arabic_text" class="form-control" style="direction:rtl; font-family:'Amiri', serif; font-size:18px;" placeholder="شَهْرُ رَمَضَانَ الَّذِي أُنزِلَ فِيهِ الْقُرْآنُ..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>সহজ ও প্রাঞ্জল বাংলা অনুবাদ</label>
+          <textarea name="bangla_translation" class="form-control" placeholder="রমজান মাস—যার মধ্যে কোরআন নাজিল করা হয়েছে..." required></textarea>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div class="form-group">
+            <label>বিষয় / ক্যাটাগরি</label>
+            <input type="text" name="category" class="form-control" placeholder="যেমন: সিয়াম ও রোজা, সবর, ক্ষমা">
+          </div>
+          <div class="form-group">
+            <label>অগ্রাধিকার (Priority 1-10)</label>
+            <input type="number" name="priority" class="form-control" min="1" max="10" value="1">
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px;">
+          <button type="button" class="btn btn-glass" style="color:var(--text); border-color:var(--card-border);" onclick="exportCustomJson()">
+            📥 কাস্টম JSON এক্সপোর্ট
+          </button>
+          <button type="submit" class="btn btn-gold">
+            💾 সংরক্ষণ করুন
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── Modal: Canvas Card Preview & Customizer ── -->
+  <div class="modal-overlay" id="previewModal">
+    <div class="modal-box" style="max-width:580px; text-align:center;">
+      <button class="modal-close" onclick="closePreviewModal()">✕</button>
+      <h3 style="color:var(--gold); margin-bottom:12px;">🖼️ রয়েল কার্ড প্রিভিউ (১০৮০×১০৮০)</h3>
+
+      <div style="margin-bottom:14px; display:inline-flex; align-items:center; gap:8px;">
+        <label style="font-size:13px; color:var(--text-muted);">রয়েল থিম বেছে নিন:</label>
+        <select id="previewThemeSelect" class="form-control" style="width:auto; padding:6px 12px;">
+          <option value="royal-emerald">Royal Emerald (গাঢ় সবুজ + সোনা)</option>
+          <option value="midnight-navy">Midnight Navy (গভীর নীল + গোল্ড)</option>
+          <option value="imperial-black">Imperial Black (লাক্সারি ডার্ক + মেটালিক)</option>
+          <option value="warm-parchment">Warm Parchment (ক্ল্যাসিক পান্ডুলিপি)</option>
+        </select>
+      </div>
+
+      <div style="max-width:440px; margin:0 auto 16px; border-radius:14px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.5);">
+        <canvas id="previewCanvas" style="width:100%; height:auto; display:block;"></canvas>
+      </div>
+
+      <div style="display:flex; justify-content:center; gap:10px;">
+        <button id="btnDownloadPreview" class="btn btn-gold">
+          📥 ডাউনলোড ১০৮০×১০৮০ PNG
+        </button>
+        <button class="btn btn-glass" style="color:var(--text); border-color:var(--card-border);" onclick="closePreviewModal()">
+          বন্ধ করুন
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="container">
+      <p style="margin-bottom:8px; font-weight:700; color:var(--gold);">
+        Royal Noor — আলোর পথে প্রতিদিন
+      </p>
+      <p style="margin-bottom:12px;">
+        পবিত্র কোরআন, সহীহ হাদিস ও ইসলামিক নসিহতের প্রতিদিনের আলো।
+      </p>
+      <p style="font-size:13px;">
+        কারিগরি সহায়তায়: <a href="https://www.royaltechbd.com/" target="_blank" rel="noopener">Royal Technologies</a> | 
+        ওয়েবসাইট: <a href="https://www.royaltechbd.com/" target="_blank" rel="noopener">www.royaltechbd.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="templates/royal-card.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

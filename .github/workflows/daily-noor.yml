@@ -1,0 +1,65 @@
+name: Daily Royal Noor Generation & Publishing
+
+on:
+  schedule:
+    # 00:00 UTC = 06:00 AM Dhaka (Morning / Fajr Noor)
+    # 06:20 UTC = 12:20 PM Dhaka (Noon Noor)
+    # 12:00 UTC = 06:00 PM Dhaka (Evening / Maghrib Noor)
+    - cron: '0 0 * * *'
+    - cron: '20 6 * * *'
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+    inputs:
+      event_tag:
+        description: 'Specific event tag (ramadan, friday, dhul_hijjah, or empty)'
+        required: false
+        default: ''
+      force_type:
+        description: 'Type: quran or hadith (or empty for auto)'
+        required: false
+        default: ''
+      theme:
+        description: 'Theme (royal-emerald, midnight-navy, imperial-black, warm-parchment)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Dhaka
+      NOOR_TAG: ${{ github.event.inputs.event_tag }}
+      NOOR_TYPE: ${{ github.event.inputs.force_type }}
+      NOOR_THEME: ${{ github.event.inputs.theme }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Generate Daily Royal Noor Card (1080x1080 PNG)
+        run: node scripts/generate-noor.js
+
+      - name: Commit & Push Daily Assets
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add cards/ database/
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            DHAKA_TIME=$(TZ=Asia/Dhaka date +'%Y-%m-%d %H:%M %Z')
+            git commit -m "chore(noor): auto-generate daily card ${DHAKA_TIME} [skip ci]"
+            git push origin main
+          fi

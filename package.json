@@ -1,0 +1,32 @@
+{
+  "name": "royal-noor",
+  "version": "1.0.0",
+  "description": "Royal Noor — আলোর পথে প্রতিদিন | কোরআন, হাদিস, ইসলামিক বাণী ও নসিহত | Royal Technologies",
+  "main": "index.html",
+  "scripts": {
+    "generate": "node scripts/generate-noor.js",
+    "init-db": "node scripts/init-db.js",
+    "import": "node scripts/import-data.js",
+    "test": "node scripts/generate-noor.js"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^1.0.13"
+  },
+  "optionalDependencies": {
+    "@napi-rs/canvas-linux-x64-gnu": "^1.0.13",
+    "@napi-rs/canvas-linux-x64-musl": "^1.0.13",
+    "@napi-rs/canvas-darwin-x64": "^1.0.13",
+    "@napi-rs/canvas-darwin-arm64": "^1.0.13",
+    "@napi-rs/canvas-linux-arm64-gnu": "^1.0.13",
+    "@napi-rs/canvas-linux-arm64-musl": "^1.0.13"
+  },
+  "keywords": [
+    "royal-noor",
+    "islamic-card-generator",
+    "quran-hadith",
+    "daily-noor",
+    "royal-technologies"
+  ],
+  "author": "Royal Technologies (https://www.royaltechbd.com/)",
+  "license": "MIT"
+}
