@@ -90,12 +90,6 @@ async function loadItemsData() {
     }
     allItems = await res.json();
 
-    // Check localStorage for any newly added items
-    const localSaved = JSON.parse(localStorage.getItem('rn_custom_items') || '[]');
-    if (localSaved.length > 0) {
-      allItems = [...localSaved, ...allItems];
-    }
-
     updateStats();
     renderCards(allItems);
   } catch (err) {

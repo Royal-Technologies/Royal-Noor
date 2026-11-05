@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Royal Noor — লোকালহোস্ট অ্যাডমিন প্যানেল</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .admin-container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .admin-header {
+      background: linear-gradient(135deg, #022c22, #0f766e);
+      padding: 24px 30px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .admin-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow);
+    }
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+    .admin-table th, .admin-table td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--card-border);
+      font-size: 14px;
+    }
+    .admin-table th {
+      background: var(--soft-bg);
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .admin-table tr:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .security-lock-screen {
+      display: none;
+      text-align: center;
+      padding: 100px 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .security-lock-screen h1 {
+      color: #ef4444;
+      font-size: 32px;
+      margin-bottom: 14px;
+    }
+    .alert-box {
+      padding: 12px 18px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      display: none;
+    }
+    .alert-success {
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid #10b981;
+      color: #34d399;
+    }
+    .alert-error {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid #ef4444;
+      color: #f87171;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── 1. Security Lock Screen (Shown if NOT localhost) ── -->
+  <div id="securityLock" class="security-lock-screen">
+    <div style="font-size: 64px; margin-bottom: 16px;">🔒</div>
+    <h1>অ্যাক্সেস সংরক্ষিত (Access Denied)</h1>
+    <p style="font-size: 16px; color: var(--text-muted); line-height: 1.8; margin-bottom: 24px;">
+      এই অ্যাডমিন প্যানেলটি শুধুমাত্র <strong>লোকালহোস্টে (Localhost)</strong> কার্যকর।<br>
+      গিটহাব বা লাইভ ওয়েব থেকে কোনো বহিরাগত ব্যক্তি ডাটাবেজে প্রবেশ বা কোনো পরিবর্তন করতে পারবে না।
+    </p>
+    <a href="index.html" class="btn btn-gold">🏠 মূল ওয়েবসাইটে ফিরে যান</a>
+  </div>
+
+  <!-- ── 2. Localhost Admin Dashboard ── -->
+  <div id="adminApp" class="admin-container" style="display: none;">
+    
+    <div class="admin-header">
+      <div>
+        <div style="color:var(--gold-light); font-size:13px; font-weight:700; letter-spacing:1px; margin-bottom:4px;">
+          ROYAL NOOR • LOCALHOST ADMIN
+        </div>
+        <h2 style="color:#fff; margin:0; font-size:24px;">🕌 লোকালহোস্ট ডাটাবেজ ম্যানেজার</h2>
+        <p style="color:rgba(255,255,255,0.85); font-size:14px; margin:4px 0 0;">
+          এখানে যুক্ত করা নতুন তথ্য সরাসরি লোকাল SQLite ডাটাবেজে সংরক্ষিত হবে।
+        </p>
+      </div>
+      <div style="display:flex; gap:10px;">
+        <button id="btnReGenerate" class="btn btn-gold" onclick="triggerRegenerate()">
+          ⚡ আজকের কার্ড জেনারেট করুন
+        </button>
+        <a href="index.html" class="btn btn-glass">🌐 পাবলিক সাইট</a>
+      </div>
+    </div>
+
+    <!-- Alert Box -->
+    <div id="alertBox" class="alert-box"></div>
+
+    <!-- Form: Add New Verse or Hadith -->
+    <div class="admin-card">
+      <h3 style="color:var(--gold); margin-bottom:18px; display:flex; align-items:center; gap:8px;">
+        <span>➕</span> নতুন আয়াত বা সহীহ হাদিস যুক্ত করুন
+      </h3>
+
+      <form id="addForm" onsubmit="submitForm(event)">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div class="form-group">
+            <label>ধরণ (Type)</label>
+            <select name="type" class="form-control" required>
+              <option value="quran">📖 পবিত্র কোরআনের আয়াত</option>
+              <option value="hadith">✨ সহীহ হাদিস</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>উপলক্ষ্য / ইভেন্ট ট্যাগ</label>
+            <select name="event_tag" class="form-control">
+              <option value="general">সাধারণ দিন (General)</option>
+              <option value="ramadan">🌙 রমজানুল মোবারক স্পেশাল</option>
+              <option value="friday">🕌 জুমু'আ বার স্পেশাল</option>
+              <option value="dhul_hijjah">🕋 জিলহজ্জ ও কুরবানী</option>
+              <option value="ashura">🏴 মহররম ও আশুরা</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div class="form-group">
+            <label>সূরার নাম বা হাদিসের কিতাব</label>
+            <input type="text" name="title" class="form-control" placeholder="যেমন: সূরা আল-ইমরান বা সহীহ বুখারী" required>
+          </div>
+          <div class="form-group">
+            <label>রেফারেন্স (আয়াত বা হাদিস নং)</label>
+            <input type="text" name="reference" class="form-control" placeholder="যেমন: সূরা আল-ইমরান : ১৩৯" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>মূল আরবি পাঠ (হরকতসহ)</label>
+          <textarea name="arabic_text" class="form-control" style="direction:rtl; font-family:'Amiri', serif; font-size:18px; min-height:85px;" placeholder="وَلَا تَهِنُوا وَلَا تَحْزَنُوا وَأَنتُمُ الْأَعْلَوْنَ إِن كُنتُم مُّؤْمِنِينَ..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>সহজ ও প্রাঞ্জল বাংলা অনুবাদ</label>
+          <textarea name="bangla_translation" class="form-control" style="min-height:75px;" placeholder="তোমরা হতাশ হয়ো না এবং দুঃখ করো না। তোমরাই বিজয়ী হবে, যদি তোমরা প্রকৃত মুমিন হও..." required></textarea>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div class="form-group">
+            <label>বিষয় / ক্যাটাগরি</label>
+            <input type="text" name="category" class="form-control" placeholder="যেমন: ধৈর্য ও বিজয়, সালাত, ক্ষমা">
+          </div>
+          <div class="form-group">
+            <label>অগ্রাধিকার (Priority 1-10)</label>
+            <input type="number" name="priority" class="form-control" min="1" max="10" value="1">
+          </div>
+        </div>
+
+        <div style="text-align:right; margin-top:12px;">
+          <button type="submit" id="btnSubmit" class="btn btn-gold" style="padding:12px 28px;">
+            💾 SQLite ডাটাবেজে সংরক্ষণ করুন
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Database Existing Items List -->
+    <div class="admin-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
+        <h3 style="color:var(--gold); margin:0;">
+          🗄️ ডাটাবেজে সংরক্ষিত বাণীসমূহ (<span id="totalItemsCount">0</span>)
+        </h3>
+        <input type="text" id="adminSearch" placeholder="খুঁজুন..." class="form-control" style="width:250px; padding:6px 14px;" oninput="filterAdminTable()">
+      </div>
+
+      <div style="overflow-x:auto;">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th style="width:60px;">#</th>
+              <th style="width:110px;">ধরণ</th>
+              <th style="width:160px;">রেফারেন্স</th>
+              <th>বাংলা অনুবাদ</th>
+              <th style="width:120px;">ইভেন্ট ট্যাগ</th>
+              <th style="width:80px;">ব্যবহার</th>
+              <th style="width:70px; text-align:center;">একশন</th>
+            </tr>
+          </thead>
+          <tbody id="adminTableBody">
+            <tr>
+              <td colspan="7" style="text-align:center; color:var(--text-muted);">তথ্য লোড হচ্ছে...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let dbItems = [];
+    let apiEndpoint = '/api/items';
+
+    // ── 1. Security Check ──
+    const isLocal = ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname);
+    if (!isLocal) {
+      document.getElementById('securityLock').style.display = 'block';
+      document.getElementById('adminApp').style.display = 'none';
+    } else {
+      document.getElementById('securityLock').style.display = 'none';
+      document.getElementById('adminApp').style.display = 'block';
+      initAdmin();
+    }
+
+    // ── 2. Determine Local API Type (Node Server vs Laragon PHP) ──
+    async function initAdmin() {
+      // Test if Node admin server is responding
+      try {
+        const testNode = await fetch('/api/items');
+        if (testNode.ok) {
+          apiEndpoint = '/api/items';
+          loadItems();
+          return;
+        }
+      } catch (e) {}
+
+      // Fallback to PHP API in Laragon
+      try {
+        const testPhp = await fetch('api/admin.php');
+        if (testPhp.ok) {
+          apiEndpoint = 'api/admin.php';
+          loadItems();
+          return;
+        }
+      } catch (e) {}
+
+      showAlert('⚠️ লোকাল সার্ভার পাওয়া যায়নি। অনুগ্রহ করে "npm run admin" চালান অথবা Laragon এ চালান।', 'error');
+    }
+
+    // ── 3. Load Items ──
+    async function loadItems() {
+      try {
+        const res = await fetch(apiEndpoint + '?t=' + Date.now());
+        dbItems = await res.json();
+        document.getElementById('totalItemsCount').textContent = dbItems.length;
+        renderAdminTable(dbItems);
+      } catch (err) {
+        showAlert('ডাটাবেজ লোড করতে সমস্যা: ' + err.message, 'error');
+      }
+    }
+
+    // ── 4. Render Table ──
+    function renderAdminTable(items) {
+      const tbody = document.getElementById('adminTableBody');
+      if (!items || items.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">কোনো তথ্য পাওয়া যায়নি</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = items.map((item, index) => {
+        const isQuran = item.type === 'quran';
+        const tagLabel = item.event_tag === 'ramadan' ? '🌙 রমজান' : 
+                         item.event_tag === 'friday' ? '🕌 জুমা' : 
+                         item.event_tag === 'dhul_hijjah' ? '🕋 জিলহজ্জ' : 'সাধারণ';
+
+        return `
+          <tr>
+            <td>${index + 1}</td>
+            <td><span class="badge ${isQuran ? 'badge-teal' : 'badge-gold'}">${isQuran ? 'কোরআন' : 'হাদিস'}</span></td>
+            <td><strong>${escapeHtml(item.reference || item.title)}</strong></td>
+            <td>${escapeHtml(item.bangla_translation.substring(0, 75))}...</td>
+            <td><span class="badge" style="background:var(--soft-bg);">${tagLabel}</span></td>
+            <td>${item.used_count || 0} বার</td>
+            <td style="text-align:center;">
+              <button class="btn-icon" title="মুছে ফেলুন" style="color:#ef4444;" onclick="deleteItem(${item.id})">🗑️</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // ── 5. Search Filter in Table ──
+    function filterAdminTable() {
+      const q = document.getElementById('adminSearch').value.toLowerCase();
+      const filtered = dbItems.filter(item => 
+        (item.reference && item.reference.toLowerCase().includes(q)) ||
+        (item.title && item.title.toLowerCase().includes(q)) ||
+        (item.bangla_translation && item.bangla_translation.toLowerCase().includes(q)) ||
+        (item.event_tag && item.event_tag.toLowerCase().includes(q))
+      );
+      renderAdminTable(filtered);
+    }
+
+    // ── 6. Submit New Entry ──
+    async function submitForm(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSubmit');
+      btn.disabled = true;
+      btn.textContent = 'সংরক্ষণ হচ্ছে...';
+
+      const form = e.target;
+      const data = {
+        type: form.type.value,
+        title: form.title.value.trim(),
+        reference: form.reference.value.trim(),
+        arabic_text: form.arabic_text.value.trim(),
+        bangla_translation: form.bangla_translation.value.trim(),
+        category: form.category.value.trim() || 'সাধারণ',
+        event_tag: form.event_tag.value || 'general',
+        priority: parseInt(form.priority.value, 10) || 1
+      };
+
+      try {
+        const res = await fetch(apiEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const result = await res.json();
+
+        if (res.ok) {
+          showAlert('✅ ' + (result.message || 'সফলভাবে ডাটাবেজে যুক্ত হয়েছে!'), 'success');
+          form.reset();
+          loadItems();
+        } else {
+          showAlert('❌ ' + (result.error || 'ত্রুটি ঘটেছে'), 'error');
+        }
+      } catch (err) {
+        showAlert('❌ সার্ভার সমস্যা: ' + err.message, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '💾 SQLite ডাটাবেজে সংরক্ষণ করুন';
+      }
+    }
+
+    // ── 7. Delete Item ──
+    async function deleteItem(id) {
+      if (!confirm('আপনি কি নিশ্চিতভাবে এই আইটেমটি ডাটাবেজ থেকে মুছে ফেলতে চান?')) return;
+
+      try {
+        const deleteUrl = apiEndpoint.endsWith('.php') ? `${apiEndpoint}?id=${id}` : `${apiEndpoint}/${id}`;
+        const res = await fetch(deleteUrl, { method: 'DELETE' });
+        const result = await res.json();
+
+        if (res.ok) {
+          showAlert('✅ মুছে ফেলা হয়েছে!', 'success');
+          loadItems();
+        } else {
+          showAlert('❌ ' + (result.error || 'মুছতে ব্যর্থ হয়েছে'), 'error');
+        }
+      } catch (err) {
+        showAlert('❌ সমস্যা: ' + err.message, 'error');
+      }
+    }
+
+    // ── 8. Trigger Regenerate Today Card ──
+    async function triggerRegenerate() {
+      const btn = document.getElementById('btnReGenerate');
+      btn.disabled = true;
+      btn.textContent = 'জেনারেট হচ্ছে...';
+
+      try {
+        const res = await fetch('/api/generate', { method: 'POST' });
+        const result = await res.json();
+        if (res.ok) {
+          showAlert('🎉 আজকের নতুন কার্ড সফলভাবে জেনারেট হয়েছে!', 'success');
+        } else {
+          showAlert('⚠️ লোকাল জেনারেশন ত্রুটি: ' + (result.error || 'ব্যর্থ হয়েছে'), 'error');
+        }
+      } catch (err) {
+        showAlert('ℹ️ কমান্ড টার্মিনালে "npm run generate" রান করুন।', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '⚡ আজকের কার্ড জেনারেট করুন';
+      }
+    }
+
+    function showAlert(msg, type) {
+      const box = document.getElementById('alertBox');
+      box.textContent = msg;
+      box.className = `alert-box alert-${type}`;
+      box.style.display = 'block';
+      setTimeout(() => { box.style.display = 'none'; }, 5000);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+  </script>
+</body>
+</html>

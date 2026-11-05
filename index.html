@@ -28,7 +28,6 @@
       
       <div class="hero-actions">
         <a href="#todayShowcase" class="btn btn-gold">🌙 আজকের নূর দেখুন</a>
-        <button class="btn btn-glass" onclick="openAddModal()">➕ নতুন বাণী যুক্ত করুন</button>
         <button id="themeToggle" class="btn btn-glass">☀️ লাইট মোড</button>
         <a href="https://www.royaltechbd.com/" target="_blank" rel="noopener" class="btn btn-glass">🌐 Royal Technologies</a>
       </div>
@@ -120,80 +119,6 @@
       </div>
     </section>
   </main>
-
-  <!-- ── Modal: Add New Entry ── -->
-  <div class="modal-overlay" id="addModal">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeAddModal()">✕</button>
-      <h3 style="margin-bottom:6px; color:var(--gold);">➕ নতুন বাণী যুক্ত করুন</h3>
-      <p style="font-size:13px; color:var(--text-muted); margin-bottom:18px;">
-        এখানে যুক্ত করা তথ্য আপনার ব্রাউজারে সংরক্ষিত হবে এবং JSON হিসেবে এক্সপোর্ট করে সরাসরি ডাটাবেজে আপলোড করা যাবে।
-      </p>
-
-      <form onsubmit="saveNewEntry(event)">
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-          <div class="form-group">
-            <label>ধরণ (Type)</label>
-            <select name="type" class="form-control" required>
-              <option value="quran">📖 পবিত্র কোরআন</option>
-              <option value="hadith">✨ সহীহ হাদিস</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>উপলক্ষ্য / ইভেন্ট ট্যাগ</label>
-            <select name="event_tag" class="form-control">
-              <option value="general">সাধারণ দিন (General)</option>
-              <option value="ramadan">🌙 রমজানুল মোবারক</option>
-              <option value="friday">🕌 জুমু'আ বার</option>
-              <option value="dhul_hijjah">🕋 জিলহজ্জ ও কুরবানী</option>
-              <option value="ashura">🏴 মহররম ও আশুরা</option>
-            </select>
-          </div>
-        </div>
-
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-          <div class="form-group">
-            <label>সূরার নাম বা হাদিসের কিতাব</label>
-            <input type="text" name="title" class="form-control" placeholder="যেমন: সূরা আল-বাকারা বা সহীহ বুখারী" required>
-          </div>
-          <div class="form-group">
-            <label>রেফারেন্স (আয়াত বা হাদিস নং)</label>
-            <input type="text" name="reference" class="form-control" placeholder="যেমন: সূরা আল-বাকারা : ১৮৫" required>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>মূল আরবি পাঠ (হরকতসহ)</label>
-          <textarea name="arabic_text" class="form-control" style="direction:rtl; font-family:'Amiri', serif; font-size:18px;" placeholder="شَهْرُ رَمَضَانَ الَّذِي أُنزِلَ فِيهِ الْقُرْآنُ..." required></textarea>
-        </div>
-
-        <div class="form-group">
-          <label>সহজ ও প্রাঞ্জল বাংলা অনুবাদ</label>
-          <textarea name="bangla_translation" class="form-control" placeholder="রমজান মাস—যার মধ্যে কোরআন নাজিল করা হয়েছে..." required></textarea>
-        </div>
-
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-          <div class="form-group">
-            <label>বিষয় / ক্যাটাগরি</label>
-            <input type="text" name="category" class="form-control" placeholder="যেমন: সিয়াম ও রোজা, সবর, ক্ষমা">
-          </div>
-          <div class="form-group">
-            <label>অগ্রাধিকার (Priority 1-10)</label>
-            <input type="number" name="priority" class="form-control" min="1" max="10" value="1">
-          </div>
-        </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px;">
-          <button type="button" class="btn btn-glass" style="color:var(--text); border-color:var(--card-border);" onclick="exportCustomJson()">
-            📥 কাস্টম JSON এক্সপোর্ট
-          </button>
-          <button type="submit" class="btn btn-gold">
-            💾 সংরক্ষণ করুন
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
 
   <!-- ── Modal: Canvas Card Preview & Customizer ── -->
   <div class="modal-overlay" id="previewModal">

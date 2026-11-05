@@ -4,6 +4,7 @@
   "description": "Royal Noor — আলোর পথে প্রতিদিন | কোরআন, হাদিস, ইসলামিক বাণী ও নসিহত | Royal Technologies",
   "main": "index.html",
   "scripts": {
+    "admin": "node scripts/admin-server.js",
     "generate": "node scripts/generate-noor.js",
     "init-db": "node scripts/init-db.js",
     "import": "node scripts/import-data.js",
