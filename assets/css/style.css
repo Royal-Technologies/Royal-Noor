@@ -462,7 +462,7 @@ body.light .tools-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 6px;
   padding: 0 12px;
   border: 1px solid var(--card-border);
   background: var(--card-bg);
@@ -472,7 +472,9 @@ body.light .tools-bar {
   height: 42px;
   min-height: 42px;
   max-height: 42px;
+  overflow: hidden;
   flex-wrap: nowrap;
+  white-space: nowrap;
   box-sizing: border-box;
 }
 
@@ -1112,4 +1114,55 @@ body.light .form-control {
     white-space: nowrap;
     padding-bottom: 2px;
   }
+}
+
+
+/* ── Floating Scroll to Top Button ── */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(14px);
+  transition: all 0.25s ease;
+  z-index: 990;
+}
+
+.scroll-top-btn.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.scroll-top-btn:hover {
+  background: var(--gold);
+  color: #0b0f19;
+  box-shadow: 0 6px 22px rgba(212, 175, 55, 0.5);
+  transform: translateY(-2px);
+}
+
+body.light .scroll-top-btn {
+  background: #ffffff;
+  border-color: #047857;
+  color: #047857;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+body.light .scroll-top-btn:hover {
+  background: #047857;
+  color: #ffffff;
 }

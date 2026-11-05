@@ -267,19 +267,36 @@ function updateMultiDisplay(displayId, dropdownId) {
   }
 
   const dropdown = document.getElementById(dropdownId);
-  const firstLabelEl = dropdown ? dropdown.querySelector(`input[value="${checked[0]}"]`)?.closest('label') : null;
-  const firstLabel = firstLabelEl ? firstLabelEl.textContent.trim() : checked[0];
-  
-  const labelText = checked.length === 1
-    ? firstLabel
-    : `${firstLabel} (+${checked.length - 1})`;
+  const firstVal = checked[0];
+  const firstLabelEl = dropdown ? dropdown.querySelector(`input[value="${firstVal}"]`)?.closest('label') : null;
+  const firstLabel = firstLabelEl ? firstLabelEl.textContent.trim() : firstVal;
+
+  const firstChip = `<span class="multi-chip" style="max-width:140px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${firstLabel}">${firstLabel} <span class="multi-chip-remove" data-val="${firstVal}" data-dropdown="${dropdownId}" data-display="${displayId}">✕</span></span>`;
+
+  const extraBadge = checked.length > 1
+    ? `<span class="multi-chip" style="font-weight:700; flex-shrink:0;">+${checked.length - 1}</span>`
+    : '';
 
   display.innerHTML = `
-    <span class="multi-selected-text" style="color:var(--gold); font-size:13.5px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1;" title="${checked.length}টি নির্বাচিত">
-      ${labelText}
-    </span>
+    <div style="display:flex; align-items:center; gap:5px; overflow:hidden; flex:1; white-space:nowrap;">
+      ${firstChip}
+      ${extraBadge}
+    </div>
     ${arrow}
   `;
+
+  // Attach chip remove listener
+  const removeBtn = display.querySelector('.multi-chip-remove');
+  if (removeBtn) {
+    removeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const cb = document.getElementById(removeBtn.dataset.dropdown)?.querySelector(`input[value="${removeBtn.dataset.val}"]`);
+      if (cb) {
+        cb.checked = false;
+        cb.dispatchEvent(new Event('change'));
+      }
+    });
+  }
 }
 
 function resetMultiSelect(dropdownId, displayId) {
@@ -415,6 +432,23 @@ function setupEventListeners() {
   // Apply Filter button
   const btnApply = document.getElementById('btnApplyFilters');
   if (btnApply) btnApply.addEventListener('click', filterItems);
+
+  
+  // Scroll to Top Floating Button
+  const btnScrollTop = document.getElementById('btnScrollTop');
+  if (btnScrollTop) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        btnScrollTop.classList.add('visible');
+      } else {
+        btnScrollTop.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    btnScrollTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 
   // Reset Filters button
   const btnReset = document.getElementById('btnResetFilters');
