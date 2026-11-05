@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#022117" />
+      <stop offset="50%" stop-color="#064e3b" />
+      <stop offset="100%" stop-color="#021a12" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF0C8" />
+      <stop offset="50%" stop-color="#E5C383" />
+      <stop offset="100%" stop-color="#B88F3A" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Circular Base -->
+  <circle cx="64" cy="64" r="60" fill="url(#bgGrad)" stroke="url(#goldGrad)" stroke-width="3" />
+  <circle cx="64" cy="64" r="54" fill="none" stroke="rgba(229, 195, 131, 0.3)" stroke-width="1" stroke-dasharray="2,3" />
+
+  <!-- Royal Crescent Moon -->
+  <path d="M 68 28 A 36 36 0 1 0 94 88 A 30 30 0 1 1 68 28 Z" fill="url(#goldGrad)" filter="url(#glow)" />
+
+  <!-- 8-Point Islamic Star -->
+  <g transform="translate(76, 50) scale(0.9)" filter="url(#glow)">
+    <!-- 8-point star polygon -->
+    <path d="M 0 -14 L 3.8 -3.8 L 14 0 L 3.8 3.8 L 0 14 L -3.8 3.8 L -14 0 L -3.8 -3.8 Z" fill="url(#goldGrad)" />
+    <circle cx="0" cy="0" r="2.5" fill="#022117" />
+  </g>
+</svg>

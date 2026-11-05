@@ -125,13 +125,6 @@ async function loadItemsData() {
     // Already populated by window.ROYAL_NOOR_DATA
   }
 }
-          <h3>তথ্য লোড হতে সমস্যা হয়েছে</h3>
-          <p>অনুগ্রহ করে সার্ভার রানিং রাখুন অথবা ফাইল চেক করুন।</p>
-        </div>
-      `;
-    }
-  }
-}
 
 // ── Update Live Stats ──
 function updateStats() {
