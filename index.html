@@ -39,27 +39,27 @@
   <main class="container">
     <!-- ── Live Stats Bar ── -->
     <section class="stats-grid">
-      <div class="stat-card">
+      <div class="stat-card" id="statCardTotal" style="cursor:pointer;" title="সবগুলো বাণী দেখুন">
         <div class="stat-icon">📚</div>
         <strong id="statTotal">--</strong>
         <span>মোট সংরক্ষিত বাণী</span>
       </div>
-      <div class="stat-card">
+      <div class="stat-card" id="statCardQuran" style="cursor:pointer;" title="পবিত্র কোরআনের আয়াত ফিল্টার করুন">
         <div class="stat-icon">📖</div>
         <strong id="statQuran">--</strong>
         <span>পবিত্র কোরআনের আয়াত</span>
       </div>
-      <div class="stat-card">
+      <div class="stat-card" id="statCardHadith" style="cursor:pointer;" title="সহীহ হাদিস সংকলন ফিল্টার করুন">
         <div class="stat-icon">✨</div>
         <strong id="statHadith">--</strong>
         <span>সহীহ হাদিস সংকলন</span>
       </div>
-      <div class="stat-card">
+      <div class="stat-card" id="statCardRamadan" style="cursor:pointer;" title="রমজান স্পেশাল বাণী ফিল্টার করুন">
         <div class="stat-icon">🌙</div>
         <strong id="statRamadan">--</strong>
         <span>রমজান স্পেশাল বাণী</span>
       </div>
-      <div class="stat-card">
+      <div class="stat-card" id="statCardFriday" style="cursor:pointer;" title="জুমু'আ স্পেশাল বাণী ফিল্টার করুন">
         <div class="stat-icon">🕌</div>
         <strong id="statFriday">--</strong>
         <span>জুমু'আ স্পেশাল বাণী</span>
@@ -95,25 +95,99 @@
       </div>
     </section>
 
-    <!-- ── Sticky Search & Filters Bar ── -->
+    <!-- ── Sticky Search & Dropdown Filters Bar ── -->
     <div class="tools-bar">
-      <div class="search-input-wrap">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="সূরা, হাদিস, আরবি বা বাংলা অর্থ দিয়ে তাৎক্ষণিক খুঁজুন..." autocomplete="off">
-      </div>
+      <div class="filter-grid-row">
 
-      <div class="filter-pills" id="filterPills">
-        <button class="filter-btn active" data-filter="all">সবগুলো (All)</button>
-        <button class="filter-btn" data-filter="quran">📖 পবিত্র কোরআন</button>
-        <button class="filter-btn" data-filter="hadith">✨ সহীহ হাদিস</button>
-        <button class="filter-btn" data-filter="ramadan">🌙 রমজান স্পেশাল</button>
-        <button class="filter-btn" data-filter="friday">🕌 জুমু'আ স্পেশাল</button>
-        <button class="filter-btn" data-filter="dhul_hijjah">🕋 জিলহজ্জ ও কুরবানী</button>
-        <button class="filter-btn" data-filter="জিকির ও শুকরিয়া">🤲 জিকির ও শুকরিয়া</button>
-        <button class="filter-btn" data-filter="ধৈর্য ও সালাত">🌿 ধৈর্য ও সালাত</button>
-        <button class="filter-btn" data-filter="তওবা ও ক্ষমা">💧 তওবা ও ক্ষমা</button>
-        <button class="filter-btn" data-filter="উত্তম চরিত্র">💖 উত্তম চরিত্র</button>
+        <!-- Search -->
+        <div class="filter-col filter-col-search">
+          <div class="search-input-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="আরবি বা বাংলায় খুঁজুন..." autocomplete="off">
+          </div>
+        </div>
+
+        <!-- উৎস (Source) -->
+        <div class="filter-col">
+          <label class="filter-label">উৎস (Source)</label>
+          <div class="custom-select-wrap">
+            <select id="filterSource" class="custom-select">
+              <option value="all">সব উৎস (All Sources)</option>
+              <option value="quran">📖 পবিত্র কোরআন</option>
+              <option value="hadith">✨ সহীহ হাদিস</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- বিষয় (Category) -->
+        <div class="filter-col">
+          <label class="filter-label">বিষয় (Category)</label>
+          <div class="custom-select-wrap">
+            <div class="multi-select" id="categorySelect">
+              <div class="multi-select-display" id="categoryDisplay" data-placeholder="সব বিষয়">
+                <span class="multi-placeholder">সব বিষয়</span>
+                <span class="multi-arrow">▾</span>
+              </div>
+              <div class="multi-select-dropdown" id="categoryDropdown">
+                <label class="multi-opt"><input type="checkbox" value="faith-tawakkul"> ঈমান ও আল্লাহর ওপর ভরসা</label>
+                <label class="multi-opt"><input type="checkbox" value="prayer-worship"> নামাজ ও ইবাদত</label>
+                <label class="multi-opt"><input type="checkbox" value="dua"> দোয়া ও মুনাজাত</label>
+                <label class="multi-opt"><input type="checkbox" value="dhikr-istighfar"> জিকির ও ইস্তিগফার</label>
+                <label class="multi-opt"><input type="checkbox" value="patience-gratitude"> ধৈর্য ও কৃতজ্ঞতা</label>
+                <label class="multi-opt"><input type="checkbox" value="repentance-forgiveness"> তওবা ও ক্ষমা</label>
+                <label class="multi-opt"><input type="checkbox" value="good-character"> উত্তম চরিত্র ও আদব</label>
+                <label class="multi-opt"><input type="checkbox" value="halal-rizq"> হালাল রিজিক ও বরকত</label>
+                <label class="multi-opt"><input type="checkbox" value="parents-family"> বাবা-মা ও পরিবারের অধিকার</label>
+                <label class="multi-opt"><input type="checkbox" value="human-rights"> মানুষের অধিকার ও সামাজিক জীবন</label>
+                <label class="multi-opt"><input type="checkbox" value="avoid-sins"> গুনাহ থেকে বেঁচে থাকা</label>
+                <label class="multi-opt"><input type="checkbox" value="hardship-anxiety"> বিপদ-আপদ ও দুশ্চিন্তা</label>
+                <label class="multi-opt"><input type="checkbox" value="sunnah-daily-amal"> সুন্নাহ ও দৈনন্দিন আমল</label>
+                <label class="multi-opt"><input type="checkbox" value="death-afterlife"> মৃত্যু ও আখিরাত</label>
+                <label class="multi-opt"><input type="checkbox" value="jannah-jahannam"> জান্নাত ও জাহান্নাম</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- বিশেষ উপলক্ষ (Occasion) -->
+        <div class="filter-col">
+          <label class="filter-label">বিশেষ উপলক্ষ (Occasion)</label>
+          <div class="custom-select-wrap">
+            <div class="multi-select" id="occasionSelect">
+              <div class="multi-select-display" id="occasionDisplay" data-placeholder="সব উপলক্ষ">
+                <span class="multi-placeholder">সব উপলক্ষ</span>
+                <span class="multi-arrow">▾</span>
+              </div>
+              <div class="multi-select-dropdown" id="occasionDropdown">
+                <label class="multi-opt"><input type="checkbox" value="jumuah"> 🕌 জুমুআ</label>
+                <label class="multi-opt"><input type="checkbox" value="ramadan"> 🌙 রমজান</label>
+                <label class="multi-opt"><input type="checkbox" value="laylatul-qadr"> ✨ শবে কদর</label>
+                <label class="multi-opt"><input type="checkbox" value="eid-ul-fitr"> 🎉 ঈদুল ফিতর</label>
+                <label class="multi-opt"><input type="checkbox" value="eid-ul-adha"> 🐑 ঈদুল আজহা</label>
+                <label class="multi-opt"><input type="checkbox" value="dhul-hijjah"> 🕋 জিলহজ</label>
+                <label class="multi-opt"><input type="checkbox" value="day-of-arafah"> ⛰️ আরাফার দিন</label>
+                <label class="multi-opt"><input type="checkbox" value="ashura"> 📅 আশুরা</label>
+                <label class="multi-opt"><input type="checkbox" value="muharram"> 🗓️ মহররম</label>
+                <label class="multi-opt"><input type="checkbox" value="hajj-umrah"> 🕌 হজ ও উমরাহ</label>
+                <label class="multi-opt"><input type="checkbox" value="monday-thursday"> 📆 সোম ও বৃহস্পতি</label>
+                <label class="multi-opt"><input type="checkbox" value="hijri-new-year"> 🌙 নতুন হিজরি বছর</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="filter-col filter-col-actions">
+          <label class="filter-label">&nbsp;</label>
+          <div class="filter-action-btns">
+            <button id="btnResetFilters" class="btn btn-glass btn-sm">↺ রিসেট</button>
+            <button id="btnApplyFilters" class="btn btn-gold btn-sm">ফিল্টার প্রয়োগ</button>
+          </div>
+        </div>
+
       </div>
+      <!-- Active Filter Chips -->
+      <div class="active-chips-row" id="activeChipsRow" style="display:none;"></div>
     </div>
 
     <!-- ── Cards Grid ── -->

@@ -7,7 +7,9 @@
 
 let allItems = [];
 let filteredItems = [];
-let currentFilter = 'all';
+let currentSource = 'all';          // 'all' | 'quran' | 'hadith'
+let selectedCategories = new Set(); // e.g. Set{'faith-tawakkul', 'dua'}
+let selectedOccasions = new Set();  // e.g. Set{'jumuah', 'ramadan'}
 let currentSearch = '';
 let activePreviewItem = null;
 let currentPreviewLayout = 'mihrab-arch';
@@ -17,7 +19,7 @@ let currentPreviewTheme = 'royal-emerald';
 const elements = {
   cardsGrid: document.getElementById('cardsGrid'),
   searchInput: document.getElementById('searchInput'),
-  filterPills: document.getElementById('filterPills'),
+  filterSource: document.getElementById('filterSource'),
   statTotal: document.getElementById('statTotal'),
   statQuran: document.getElementById('statQuran'),
   statHadith: document.getElementById('statHadith'),
@@ -55,6 +57,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadTodayData();
   await loadItemsData();
   setupEventListeners();
+  setupMultiSelects();
 });
 
 // ── Load Today's Featured Card ──
@@ -62,18 +65,10 @@ async function loadTodayData() {
   let data = null;
   try {
     const res = await fetch('cards/today.json?t=' + Date.now());
-    if (res.ok) {
-      data = await res.json();
-    }
-  } catch (err) {
-    // Handled by offline fallback below
-  }
+    if (res.ok) data = await res.json();
+  } catch (err) {}
 
-  // Fallback to offline cache (for file:/// browser compatibility)
-  if (!data && window.ROYAL_NOOR_TODAY) {
-    data = window.ROYAL_NOOR_TODAY;
-  }
-
+  if (!data && window.ROYAL_NOOR_TODAY) data = window.ROYAL_NOOR_TODAY;
   if (!data) return;
 
   if (elements.todayImg) elements.todayImg.src = data.imageUrl || 'cards/today.png';
@@ -91,7 +86,7 @@ async function loadTodayData() {
   if (elements.btnCopyCaption) {
     elements.btnCopyCaption.onclick = () => {
       navigator.clipboard.writeText(data.caption);
-      showToast('📋 সোশ্যাল মিডিয়া ক্যাপশন কপি করা হয়েছে!');
+      showToast('📋 সোশ্যাল মিডিয়া ক্যাপশন কপি করা হয়েছে!');
     };
   }
 
@@ -107,26 +102,22 @@ async function loadTodayData() {
   }
 }
 
-// ── Load All Items from SQLite JSON / JS ──
+// ── Load All Items ──
 async function loadItemsData() {
-  // 1. Instant load from offline cache (ensures 100% visibility even under file:/// protocol)
   if (window.ROYAL_NOOR_DATA && Array.isArray(window.ROYAL_NOOR_DATA) && window.ROYAL_NOOR_DATA.length > 0) {
     allItems = window.ROYAL_NOOR_DATA;
     updateStats();
     renderCards(allItems);
   }
 
-  // 2. Fetch fresh JSON over HTTP if available
   try {
-    let res = await fetch('database/items.json?t=' + Date.now());
+    const res = await fetch('database/items.json?t=' + Date.now());
     if (res.ok) {
       allItems = await res.json();
       updateStats();
       renderCards(allItems);
     }
-  } catch (err) {
-    // Already populated by window.ROYAL_NOOR_DATA
-  }
+  } catch (err) {}
 }
 
 // ── Update Live Stats ──
@@ -134,46 +125,219 @@ function updateStats() {
   const total = allItems.length;
   const quran = allItems.filter(i => i.type === 'quran').length;
   const hadith = allItems.filter(i => i.type === 'hadith').length;
-  const ramadan = allItems.filter(i => i.event_tag === 'ramadan').length;
-  const friday = allItems.filter(i => i.event_tag === 'friday' || i.target_day === 'friday').length;
+  const ramadan = allItems.filter(i =>
+    (Array.isArray(i.occasion_slugs) && i.occasion_slugs.includes('ramadan')) ||
+    i.event_tag === 'ramadan'
+  ).length;
+  const friday = allItems.filter(i =>
+    (Array.isArray(i.occasion_slugs) && i.occasion_slugs.includes('jumuah')) ||
+    i.event_tag === 'friday' || i.target_day === 'friday'
+  ).length;
 
   if (elements.statTotal) elements.statTotal.textContent = total;
   if (elements.statQuran) elements.statQuran.textContent = quran;
   if (elements.statHadith) elements.statHadith.textContent = hadith;
   if (elements.statRamadan) elements.statRamadan.textContent = ramadan;
   if (elements.statFriday) elements.statFriday.textContent = friday;
+
+  // Stat cards click to filter
+  const statCardTotal = document.getElementById('statCardTotal');
+  const statCardQuran = document.getElementById('statCardQuran');
+  const statCardHadith = document.getElementById('statCardHadith');
+  const statCardRamadan = document.getElementById('statCardRamadan');
+  const statCardFriday = document.getElementById('statCardFriday');
+
+  if (statCardTotal) statCardTotal.onclick = () => { currentSource = 'all'; if (elements.filterSource) elements.filterSource.value = 'all'; filterItems(); };
+  if (statCardQuran) statCardQuran.onclick = () => { currentSource = 'quran'; if (elements.filterSource) elements.filterSource.value = 'quran'; filterItems(); };
+  if (statCardHadith) statCardHadith.onclick = () => { currentSource = 'hadith'; if (elements.filterSource) elements.filterSource.value = 'hadith'; filterItems(); };
+  if (statCardRamadan) statCardRamadan.onclick = () => {
+    selectedOccasions.clear(); selectedOccasions.add('ramadan');
+    resetMultiSelect('occasionDropdown', 'occasionDisplay');
+    const cb = document.querySelector('#occasionDropdown input[value="ramadan"]');
+    if (cb) { cb.checked = true; updateMultiDisplay('occasionDisplay', 'occasionDropdown'); }
+    filterItems();
+  };
+  if (statCardFriday) statCardFriday.onclick = () => {
+    selectedOccasions.clear(); selectedOccasions.add('jumuah');
+    resetMultiSelect('occasionDropdown', 'occasionDisplay');
+    const cb = document.querySelector('#occasionDropdown input[value="jumuah"]');
+    if (cb) { cb.checked = true; updateMultiDisplay('occasionDisplay', 'occasionDropdown'); }
+    filterItems();
+  };
 }
 
-// ── Filter and Search Logic ──
+// ── Combined Filter Logic ──
 function filterItems() {
   filteredItems = allItems.filter(item => {
-    // 1. Tag / Category filter
-    let matchesCategory = true;
-    if (currentFilter === 'quran') matchesCategory = item.type === 'quran';
-    else if (currentFilter === 'hadith') matchesCategory = item.type === 'hadith';
-    else if (currentFilter === 'ramadan') matchesCategory = item.event_tag === 'ramadan';
-    else if (currentFilter === 'friday') matchesCategory = item.event_tag === 'friday' || item.target_day === 'friday';
-    else if (currentFilter === 'dhul_hijjah') matchesCategory = item.event_tag === 'dhul_hijjah';
-    else if (currentFilter !== 'all') matchesCategory = item.category === currentFilter;
+    // 1. Source filter
+    if (currentSource === 'quran' && item.type !== 'quran') return false;
+    if (currentSource === 'hadith' && item.type !== 'hadith') return false;
 
-    // 2. Search term
-    let matchesSearch = true;
+    // 2. Category multi-filter (item must match ANY selected)
+    if (selectedCategories.size > 0) {
+      const itemCats = Array.isArray(item.category_slugs) ? item.category_slugs : [];
+      if (![...selectedCategories].some(s => itemCats.includes(s))) return false;
+    }
+
+    // 3. Occasion multi-filter (item must match ANY selected)
+    if (selectedOccasions.size > 0) {
+      const itemOccs = Array.isArray(item.occasion_slugs) ? item.occasion_slugs : [];
+      // Also check legacy event_tag
+      const legacyOccMap = { ramadan: 'ramadan', friday: 'jumuah', dhul_hijjah: 'dhul-hijjah' };
+      const legacySlug = legacyOccMap[item.event_tag] || null;
+      if (![...selectedOccasions].some(s => itemOccs.includes(s) || s === legacySlug)) return false;
+    }
+
+    // 4. Search term
     if (currentSearch) {
       const q = currentSearch.toLowerCase();
-      matchesSearch =
+      return (
         (item.title && item.title.toLowerCase().includes(q)) ||
         (item.reference && item.reference.toLowerCase().includes(q)) ||
         (item.arabic_text && item.arabic_text.toLowerCase().includes(q)) ||
         (item.bangla_translation && item.bangla_translation.toLowerCase().includes(q)) ||
-        (item.category && item.category.toLowerCase().includes(q)) ||
-        (item.event_tag && item.event_tag.toLowerCase().includes(q));
+        (Array.isArray(item.categories) && item.categories.join(' ').toLowerCase().includes(q)) ||
+        (Array.isArray(item.occasions) && item.occasions.join(' ').toLowerCase().includes(q))
+      );
     }
 
-    return matchesCategory && matchesSearch;
+    return true;
   });
 
   renderCards(filteredItems);
+  renderActiveChips();
 }
+
+// ── Multi-Select Dropdown Component ──
+function setupMultiSelects() {
+  setupMultiSelect('categoryDisplay', 'categoryDropdown', () => {
+    selectedCategories = new Set(getCheckedValues('categoryDropdown'));
+    filterItems();
+  });
+
+  setupMultiSelect('occasionDisplay', 'occasionDropdown', () => {
+    selectedOccasions = new Set(getCheckedValues('occasionDropdown'));
+    filterItems();
+  });
+}
+
+function setupMultiSelect(displayId, dropdownId, onChange) {
+  const display = document.getElementById(displayId);
+  const dropdown = document.getElementById(dropdownId);
+  if (!display || !dropdown) return;
+
+  const wrap = display.closest('.multi-select');
+
+  display.addEventListener('click', (e) => {
+    e.stopPropagation();
+    document.querySelectorAll('.multi-select.open').forEach(el => {
+      if (el !== wrap) el.classList.remove('open');
+    });
+    wrap.classList.toggle('open');
+  });
+
+  dropdown.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      onChange();
+      updateMultiDisplay(displayId, dropdownId);
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (wrap && !wrap.contains(e.target)) wrap.classList.remove('open');
+  });
+}
+
+function getCheckedValues(dropdownId) {
+  const el = document.getElementById(dropdownId);
+  if (!el) return [];
+  return [...el.querySelectorAll('input[type="checkbox"]:checked')].map(cb => cb.value);
+}
+
+function updateMultiDisplay(displayId, dropdownId) {
+  const display = document.getElementById(displayId);
+  if (!display) return;
+  const checked = getCheckedValues(dropdownId);
+  const placeholder = display.dataset.placeholder || 'সব';
+  const arrow = '<span class="multi-arrow">▾</span>';
+
+  if (checked.length === 0) {
+    display.innerHTML = `<span class="multi-placeholder">${placeholder}</span>${arrow}`;
+    return;
+  }
+
+  const dropdown = document.getElementById(dropdownId);
+  const chips = checked.slice(0, 2).map(val => {
+    const labelEl = dropdown ? dropdown.querySelector(`input[value="${val}"]`)?.closest('label') : null;
+    const label = labelEl ? labelEl.textContent.trim() : val;
+    return `<span class="multi-chip">${label} <span class="multi-chip-remove" data-val="${val}" data-dropdown="${dropdownId}" data-display="${displayId}">✕</span></span>`;
+  }).join('');
+  const extra = checked.length > 2 ? `<span class="multi-chip">+${checked.length - 2}</span>` : '';
+  display.innerHTML = chips + extra + arrow;
+
+  display.querySelectorAll('.multi-chip-remove').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const cb = document.getElementById(btn.dataset.dropdown)?.querySelector(`input[value="${btn.dataset.val}"]`);
+      if (cb) { cb.checked = false; cb.dispatchEvent(new Event('change')); }
+    });
+  });
+}
+
+function resetMultiSelect(dropdownId, displayId) {
+  const dropdown = document.getElementById(dropdownId);
+  if (dropdown) dropdown.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+  updateMultiDisplay(displayId, dropdownId);
+}
+
+// ── Active Filter Chips ──
+let _activeChipClears = [];
+function renderActiveChips() {
+  const row = document.getElementById('activeChipsRow');
+  if (!row) return;
+  _activeChipClears = [];
+  const chips = [];
+
+  if (currentSource !== 'all') {
+    const labels = { quran: '📖 পবিত্র কোরআন', hadith: '✨ সহীহ হাদিস' };
+    chips.push({ label: labels[currentSource] || currentSource, clear: () => {
+      currentSource = 'all'; if (elements.filterSource) elements.filterSource.value = 'all'; filterItems();
+    }});
+  }
+
+  selectedCategories.forEach(slug => {
+    const cb = document.querySelector(`#categoryDropdown input[value="${slug}"]`);
+    const label = cb?.closest('label')?.textContent?.trim() || slug;
+    chips.push({ label: `বিষয়: ${label}`, clear: () => {
+      selectedCategories.delete(slug);
+      const c = document.querySelector(`#categoryDropdown input[value="${slug}"]`);
+      if (c) { c.checked = false; updateMultiDisplay('categoryDisplay', 'categoryDropdown'); }
+      filterItems();
+    }});
+  });
+
+  selectedOccasions.forEach(slug => {
+    const cb = document.querySelector(`#occasionDropdown input[value="${slug}"]`);
+    const label = cb?.closest('label')?.textContent?.trim() || slug;
+    chips.push({ label: `উপলক্ষ: ${label}`, clear: () => {
+      selectedOccasions.delete(slug);
+      const c = document.querySelector(`#occasionDropdown input[value="${slug}"]`);
+      if (c) { c.checked = false; updateMultiDisplay('occasionDisplay', 'occasionDropdown'); }
+      filterItems();
+    }});
+  });
+
+  if (chips.length === 0) { row.style.display = 'none'; return; }
+
+  _activeChipClears = chips.map(c => c.clear);
+  row.style.display = 'flex';
+  row.innerHTML = '<span style="font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;">সক্রিয় ফিল্টার:</span> ' +
+    chips.map((c, i) => `<span class="active-chip">${escapeHtml(c.label)} <button onclick="clearChip(${i})">✕</button></span>`).join('');
+}
+
+window.clearChip = function(i) {
+  if (_activeChipClears[i]) _activeChipClears[i]();
+};
 
 // ── Render Cards to DOM ──
 function renderCards(items) {
@@ -183,8 +347,8 @@ function renderCards(items) {
     elements.cardsGrid.innerHTML = `
       <div class="empty-state">
         <span>🔍</span>
-        <h3>কোনো তথ্য পাওয়া যায়নি</h3>
-        <p>ভিন্ন কোনো শব্দ দিয়ে অনুসন্ধান করুন অথবা ফিল্টার পরিবর্তন করুন।</p>
+        <h3>কোনো তথ্য পাওয়া যায়নি</h3>
+        <p>ভিন্ন কোনো শব্দ দিয়ে অনুসন্ধান করুন অথবা ফিল্টার পরিবর্তন করুন।</p>
       </div>
     `;
     return;
@@ -193,12 +357,11 @@ function renderCards(items) {
   elements.cardsGrid.innerHTML = items.map((item, index) => {
     const isQuran = item.type === 'quran';
     const typeLabel = isQuran ? '📖 পবিত্র কোরআন' : '✨ সহীহ হাদিস';
-    let eventBadge = '';
-    if (item.event_tag === 'ramadan') {
-      eventBadge = '<span class="badge badge-gold">🌙 রমজান</span>';
-    } else if (item.event_tag === 'friday' || item.target_day === 'friday') {
-      eventBadge = '<span class="badge badge-teal">🕌 জুমু\'আ</span>';
-    }
+    const catLabel = Array.isArray(item.categories) && item.categories.length > 0
+      ? item.categories[0]
+      : (item.category || 'সাধারণ');
+    const occLabel = Array.isArray(item.occasions) && item.occasions.length > 0
+      ? `<span class="badge badge-gold">${item.occasions[0]}</span>` : '';
 
     return `
       <div class="item-card" data-id="${item.id || index}">
@@ -207,9 +370,9 @@ function renderCards(items) {
             <div class="card-meta-left">
               <span class="card-num">#${index + 1}</span>
               <span class="badge ${isQuran ? 'badge-teal' : 'badge-gold'}">${typeLabel}</span>
-              ${eventBadge}
+              ${occLabel}
             </div>
-            <span class="badge" style="background:var(--soft-bg);">${item.category || 'সাধারণ'}</span>
+            <span class="badge" style="background:var(--soft-bg); font-size:11px;">${escapeHtml(catLabel)}</span>
           </div>
 
           <div class="card-arabic-box">${escapeHtml(item.arabic_text)}</div>
@@ -219,15 +382,9 @@ function renderCards(items) {
         <div class="card-footer-row">
           <div class="card-ref-tag">${escapeHtml(item.reference || item.title)}</div>
           <div class="card-actions-row">
-            <button class="btn-icon" title="আরবি কপি করুন" onclick="copyText('${escapeAttr(item.arabic_text)}')">
-              📋
-            </button>
-            <button class="btn-icon" title="বাংলা কপি করুন" onclick="copyText('${escapeAttr(item.bangla_translation + ' — [' + item.reference + ']')}')">
-              ✍️
-            </button>
-            <button class="btn btn-gold" style="padding:4px 12px; font-size:13px;" onclick="openPreviewModal(${JSON.stringify(item).replace(/"/g, '&quot;')})">
-              🖼️ কার্ড বানান
-            </button>
+            <button class="btn-icon" title="আরবি কপি করুন" onclick="copyText('${escapeAttr(item.arabic_text)}')">📋</button>
+            <button class="btn-icon" title="বাংলা কপি করুন" onclick="copyText('${escapeAttr(item.bangla_translation + ' — [' + item.reference + ']')}')">✍️</button>
+            <button class="btn btn-gold" style="padding:4px 12px; font-size:13px;" onclick="openPreviewModal(${JSON.stringify(item).replace(/"/g, '&quot;')})">🖼️ কার্ড বানান</button>
           </div>
         </div>
       </div>
@@ -237,7 +394,7 @@ function renderCards(items) {
 
 // ── Event Listeners ──
 function setupEventListeners() {
-  // Search Input
+  // Search
   if (elements.searchInput) {
     elements.searchInput.addEventListener('input', (e) => {
       currentSearch = e.target.value.trim();
@@ -245,19 +402,36 @@ function setupEventListeners() {
     });
   }
 
-  // Filter Pills
-  if (elements.filterPills) {
-    elements.filterPills.addEventListener('click', (e) => {
-      if (e.target.classList.contains('filter-btn')) {
-        elements.filterPills.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-        e.target.classList.add('active');
-        currentFilter = e.target.getAttribute('data-filter') || 'all';
-        filterItems();
-      }
+  // Source dropdown
+  if (elements.filterSource) {
+    elements.filterSource.addEventListener('change', (e) => {
+      currentSource = e.target.value;
+      filterItems();
     });
   }
 
-  // Theme Toggle (Dark / Light)
+  // Apply Filter button
+  const btnApply = document.getElementById('btnApplyFilters');
+  if (btnApply) btnApply.addEventListener('click', filterItems);
+
+  // Reset Filters button
+  const btnReset = document.getElementById('btnResetFilters');
+  if (btnReset) {
+    btnReset.addEventListener('click', () => {
+      currentSource = 'all';
+      selectedCategories.clear();
+      selectedOccasions.clear();
+      currentSearch = '';
+      if (elements.filterSource) elements.filterSource.value = 'all';
+      if (elements.searchInput) elements.searchInput.value = '';
+      resetMultiSelect('categoryDropdown', 'categoryDisplay');
+      resetMultiSelect('occasionDropdown', 'occasionDisplay');
+      filterItems();
+      showToast('↺ সব ফিল্টার রিসেট হয়েছে!');
+    });
+  }
+
+  // Theme Toggle
   if (elements.themeToggle) {
     elements.themeToggle.addEventListener('click', () => {
       document.body.classList.toggle('light');
@@ -267,167 +441,119 @@ function setupEventListeners() {
     });
   }
 
-  // Preview Layout Switcher (10 Distinct Architectures)
+  // Preview Layout Switcher
   if (elements.previewLayoutSelect) {
     elements.previewLayoutSelect.addEventListener('change', (e) => {
       currentPreviewLayout = e.target.value;
-      if (activePreviewItem) {
-        renderPreviewCanvas(activePreviewItem, currentPreviewLayout, currentPreviewTheme);
-      }
+      if (activePreviewItem) renderPreviewCanvas(activePreviewItem, currentPreviewLayout, currentPreviewTheme);
     });
   }
 
-  // Preview Theme Switcher (10 Royal Color Palettes)
+  // Preview Theme Switcher
   if (elements.previewThemeSelect) {
     elements.previewThemeSelect.addEventListener('change', (e) => {
       currentPreviewTheme = e.target.value;
-      if (activePreviewItem) {
-        renderPreviewCanvas(activePreviewItem, currentPreviewLayout, currentPreviewTheme);
-      }
+      if (activePreviewItem) renderPreviewCanvas(activePreviewItem, currentPreviewLayout, currentPreviewTheme);
     });
   }
 
-  // Random Combination Button (Cycles across 100 designs)
+  // Random Combo Button
   if (elements.btnRandomCombo) {
     elements.btnRandomCombo.addEventListener('click', () => {
       if (!window.RoyalCardTemplate) return;
-      const layouts = window.RoyalCardTemplate.LAYOUT_KEYS || Object.keys(window.RoyalCardTemplate.LAYOUTS);
-      const themes = window.RoyalCardTemplate.THEME_KEYS || Object.keys(window.RoyalCardTemplate.THEMES);
-
+      const layouts = window.RoyalCardTemplate.LAYOUT_KEYS || Object.keys(window.RoyalCardTemplate.LAYOUTS || {});
+      const themes = window.RoyalCardTemplate.THEME_KEYS || Object.keys(window.RoyalCardTemplate.THEMES || {});
       currentPreviewLayout = layouts[Math.floor(Math.random() * layouts.length)];
       currentPreviewTheme = themes[Math.floor(Math.random() * themes.length)];
-
       if (elements.previewLayoutSelect) elements.previewLayoutSelect.value = currentPreviewLayout;
       if (elements.previewThemeSelect) elements.previewThemeSelect.value = currentPreviewTheme;
-
-      if (activePreviewItem) {
-        renderPreviewCanvas(activePreviewItem, currentPreviewLayout, currentPreviewTheme);
-      }
-      showToast('🎲 নতুন র‍্যান্ডম ডিজাইন ও কালার কম্বিনেশন রেন্ডার হয়েছে!');
+      if (activePreviewItem) renderPreviewCanvas(activePreviewItem, currentPreviewLayout, currentPreviewTheme);
+      showToast('🎲 নতুন র‍্যান্ডম ডিজাইন ও কালার কম্বিনেশন রেন্ডার হয়েছে!');
     });
   }
 
-  // Share Modal Action Buttons
+  // Share Modal Buttons
   if (elements.btnShareCopyImage) {
     elements.btnShareCopyImage.addEventListener('click', async () => {
       if (activeShareBlob && navigator.clipboard && window.ClipboardItem) {
         try {
-          await navigator.clipboard.write([
-            new ClipboardItem({ 'image/png': activeShareBlob })
-          ]);
-          showToast('📋 কার্ড ইমেজটি ক্লিপবোর্ডে কপি হয়েছে! ফেসবুক বা হোয়াটসঅ্যাপে সরাসরি Paste (Ctrl+V) করুন।');
-          closeShareModal();
-          return;
-        } catch (e) {
-          console.warn(e);
-        }
+          await navigator.clipboard.write([new ClipboardItem({ 'image/png': activeShareBlob })]);
+          showToast('📋 কার্ড ইমেজটি ক্লিপবোর্ডে কপি হয়েছে!');
+          closeShareModal(); return;
+        } catch (e) { console.warn(e); }
       }
-      showToast('⚠️ ইমেজ কপি করা যায়নি। অনুগ্রহ করে ডাউনলোড বাটন ব্যবহার করুন।');
+      showToast('⚠️ ইমেজ কপি করা যায়নি। ডাউনলোড বাটন ব্যবহার করুন।');
     });
   }
 
   if (elements.btnShareWhatsApp) {
     elements.btnShareWhatsApp.addEventListener('click', () => {
-      const shareUrl = activeShareUrl || window.location.href;
-      window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent('Royal Noor — আলোর পথে প্রতিদিন\n' + shareUrl), '_blank');
+      window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent('Royal Noor — আলোর পথে প্রতিদিন\n' + (activeShareUrl || window.location.href)), '_blank');
       closeShareModal();
     });
   }
 
   if (elements.btnShareFacebook) {
     elements.btnShareFacebook.addEventListener('click', () => {
-      const shareUrl = activeShareUrl || window.location.href;
-      window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl), '_blank');
+      window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(activeShareUrl || window.location.href), '_blank');
       closeShareModal();
     });
   }
 
   if (elements.btnShareTelegram) {
     elements.btnShareTelegram.addEventListener('click', () => {
-      const shareUrl = activeShareUrl || window.location.href;
-      window.open('https://t.me/share/url?url=' + encodeURIComponent(shareUrl) + '&text=' + encodeURIComponent('Royal Noor — আলোর পথে প্রতিদিন'), '_blank');
+      window.open('https://t.me/share/url?url=' + encodeURIComponent(activeShareUrl || window.location.href) + '&text=' + encodeURIComponent('Royal Noor — আলোর পথে প্রতিদিন'), '_blank');
       closeShareModal();
     });
   }
 
   if (elements.btnShareCopyLink) {
     elements.btnShareCopyLink.addEventListener('click', () => {
-      const shareUrl = activeShareUrl || window.location.href;
-      navigator.clipboard.writeText(shareUrl);
-      showToast('🔗 কার্ডের সরাসরি ইমেজ লিংক কপি করা হয়েছে!');
+      navigator.clipboard.writeText(activeShareUrl || window.location.href);
+      showToast('🔗 লিংক কপি করা হয়েছে!');
       closeShareModal();
     });
   }
 }
 
-// ── Share Engine (Shares ONLY the Card PNG Image) ──
+// ── Share Engine ──
 let activeShareBlob = null;
 let activeShareUrl = '';
 
 async function shareCardImage(source, filename = 'RoyalNoor-Card.png', publicUrl = '') {
   try {
     let blob = null;
-
     if (source instanceof HTMLCanvasElement) {
       blob = await new Promise(resolve => source.toBlob(resolve, 'image/png'));
     } else if (typeof source === 'string') {
-      try {
-        const res = await fetch(source);
-        blob = await res.blob();
-      } catch (e) {
-        // Fallback for canvas or direct url
-      }
+      try { const res = await fetch(source); blob = await res.blob(); } catch (e) {}
     } else if (source instanceof Blob) {
       blob = source;
     }
 
     activeShareBlob = blob;
-    activeShareUrl = publicUrl || (window.location.origin + window.location.pathname.replace('index.html', '') + 'cards/today.png');
+    activeShareUrl = publicUrl || window.location.href;
 
-    // 1. Mobile & Modern Web Share API: Shares ONLY the image file
     if (blob && navigator.canShare) {
-      const testFile = new File([blob], filename, { type: 'image/png' });
-      if (navigator.canShare({ files: [testFile] })) {
-        try {
-          await navigator.share({
-            files: [testFile]
-          });
-          showToast('✅ কার্ড শেয়ার সম্পন্ন হয়েছে!');
-          return;
-        } catch (shareErr) {
-          if (shareErr.name === 'AbortError') return;
-        }
+      const f = new File([blob], filename, { type: 'image/png' });
+      if (navigator.canShare({ files: [f] })) {
+        try { await navigator.share({ files: [f] }); showToast('✅ কার্ড শেয়ার সম্পন্ন!'); return; }
+        catch (err) { if (err.name === 'AbortError') return; }
       }
     }
 
-    // 2. Desktop Fallback: Copy image directly to Clipboard
     if (blob && navigator.clipboard && window.ClipboardItem) {
       try {
-        await navigator.clipboard.write([
-          new ClipboardItem({ 'image/png': blob })
-        ]);
-        showToast('📋 কার্ড ইমেজটি ক্লিপবোর্ডে কপি হয়েছে! ফেসবুক বা হোয়াটসঅ্যাপে সরাসরি Paste (Ctrl+V) করুন।');
-      } catch (clipErr) {
-        console.warn('Clipboard image write failed:', clipErr);
-      }
+        await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+        showToast('📋 কার্ড ইমেজ ক্লিপবোর্ডে কপি হয়েছে!');
+      } catch (e) {}
     }
-
-    // 3. Open Share Modal for quick social buttons
     openShareModal();
-
-  } catch (err) {
-    console.error('Share error:', err);
-    openShareModal();
-  }
+  } catch (err) { openShareModal(); }
 }
 
-function openShareModal() {
-  if (elements.shareModal) elements.shareModal.classList.add('active');
-}
-
-function closeShareModal() {
-  if (elements.shareModal) elements.shareModal.classList.remove('active');
-}
+function openShareModal() { if (elements.shareModal) elements.shareModal.classList.add('active'); }
+function closeShareModal() { if (elements.shareModal) elements.shareModal.classList.remove('active'); }
 
 // ── Canvas Preview Modal ──
 function openPreviewModal(item) {
@@ -445,7 +571,6 @@ function renderPreviewCanvas(item, layout, theme) {
   if (!elements.previewCanvas || !window.RoyalCardTemplate) return;
   elements.previewCanvas.width = 1080;
   elements.previewCanvas.height = 1080;
-
   window.RoyalCardTemplate.render(elements.previewCanvas, item, {
     layout: layout || currentPreviewLayout,
     theme: theme || currentPreviewTheme
@@ -453,12 +578,11 @@ function renderPreviewCanvas(item, layout, theme) {
 
   if (elements.btnDownloadPreview) {
     elements.btnDownloadPreview.onclick = () => {
-      const dataUrl = elements.previewCanvas.toDataURL('image/png');
       const a = document.createElement('a');
-      a.href = dataUrl;
+      a.href = elements.previewCanvas.toDataURL('image/png');
       a.download = `RoyalNoor-${item.uid || 'Card'}.png`;
       a.click();
-      showToast('📥 কার্ড ডাউনলোড সম্পন্ন হয়েছে!');
+      showToast('📥 কার্ড ডাউনলোড সম্পন্ন!');
     };
   }
 
@@ -470,13 +594,8 @@ function renderPreviewCanvas(item, layout, theme) {
 }
 
 // ── Add New Entry Modal ──
-function openAddModal() {
-  if (elements.addModal) elements.addModal.classList.add('active');
-}
-
-function closeAddModal() {
-  if (elements.addModal) elements.addModal.classList.remove('active');
-}
+function openAddModal() { if (elements.addModal) elements.addModal.classList.add('active'); }
+function closeAddModal() { if (elements.addModal) elements.addModal.classList.remove('active'); }
 
 function saveNewEntry(event) {
   event.preventDefault();
@@ -489,6 +608,10 @@ function saveNewEntry(event) {
     arabic_text: form.arabic_text.value.trim(),
     bangla_translation: form.bangla_translation.value.trim(),
     category: form.category.value.trim() || 'সাধারণ',
+    categories: [form.category.value.trim() || 'সাধারণ'],
+    category_slugs: [],
+    occasions: [],
+    occasion_slugs: [],
     event_tag: form.event_tag.value || 'general',
     target_day: form.event_tag.value === 'friday' ? 'friday' : null,
     priority: parseInt(form.priority.value, 10) || 1,
@@ -496,7 +619,6 @@ function saveNewEntry(event) {
     created_at: new Date().toISOString()
   };
 
-  // Save to LocalStorage
   const localSaved = JSON.parse(localStorage.getItem('rn_custom_items') || '[]');
   localSaved.unshift(newItem);
   localStorage.setItem('rn_custom_items', JSON.stringify(localSaved));
@@ -506,25 +628,21 @@ function saveNewEntry(event) {
   filterItems();
   closeAddModal();
   form.reset();
-
-  showToast('✅ নতুন কার্ড সফলভাবে যুক্ত হয়েছে!');
+  showToast('✅ নতুন কার্ড সফলভাবে যুক্ত হয়েছে!');
 }
 
 function exportCustomJson() {
   const localSaved = JSON.parse(localStorage.getItem('rn_custom_items') || '[]');
-  if (localSaved.length === 0) {
-    alert('কোনো নতুন কাস্টম এন্ট্রি পাওয়া যায়নি!');
-    return;
-  }
+  if (localSaved.length === 0) { alert('কোনো নতুন কাস্টম এন্ট্রি পাওয়া যায়নি!'); return; }
   const blob = new Blob([JSON.stringify(localSaved, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = 'imports.json';
   a.click();
-  showToast('📥 imports.json ডাউনলোড সম্পন্ন! আপনি এটি database/imports.json-এ রেখে npm run import চালাতে পারেন।');
+  showToast('📥 imports.json ডাউনলোড সম্পন্ন!');
 }
 
-// ── Helper Utilities ──
+// ── Utilities ──
 function setupTheme() {
   const saved = localStorage.getItem('rn_theme');
   if (saved === 'light') {
@@ -535,24 +653,17 @@ function setupTheme() {
 
 function copyText(text) {
   navigator.clipboard.writeText(text);
-  showToast('📋 টেক্সট কপি করা হয়েছে!');
+  showToast('📋 টেক্সট কপি করা হয়েছে!');
 }
 
 function showToast(msg) {
   const toast = document.createElement('div');
   toast.textContent = msg;
   toast.style.cssText = `
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background: #0f766e;
-    color: #fff;
-    padding: 12px 22px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    z-index: 9999;
+    position: fixed; bottom: 24px; right: 24px;
+    background: #0f766e; color: #fff; padding: 12px 22px;
+    border-radius: 12px; font-size: 14px; font-weight: 600;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 9999;
     animation: fadeIn 0.3s ease;
   `;
   document.body.appendChild(toast);
@@ -569,7 +680,7 @@ function escapeAttr(str) {
   return str.replace(/'/g, "\\'").replace(/"/g, '&quot;').replace(/\n/g, ' ');
 }
 
-// Expose functions globally for HTML inline handlers
+// Global bindings
 window.copyText = copyText;
 window.openPreviewModal = openPreviewModal;
 window.closePreviewModal = closePreviewModal;
