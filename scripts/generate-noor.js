@@ -174,7 +174,7 @@ let eventBanner = '';
 if (item.event_tag === 'ramadan') eventBanner = '🌙 মাহে রমজান স্পেশাল\n';
 else if (item.event_tag === 'friday' || dayOfWeek === 'friday') eventBanner = '🕌 জুমু\'আ মুবারক\n';
 
-const caption = `${eventBanner}✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\n${item.arabic_text}\n\n❝ ${item.bangla_translation} ❞\n— [ ${item.reference} ]\n\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n🌐 ওয়েবসাইট: https://www.royaltechbd.com/\n🏷️ নিবেদনে: Royal Technologies\n\n#RoyalNoor #AlorPotheProtidin #${isQuran ? 'QuranDaily' : 'HadithOfTheDay'} #IslamicQuotes #DailyAyah #Hadith #RoyalTechnologies #Bangladesh #IslamicReminder`;
+const caption = `${eventBanner}✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\n${item.arabic_text}\n\n❝ ${item.bangla_translation} ❞\n— [ ${item.reference} ]\n\n#RoyalNoor #AlorPotheProtidin #${isQuran ? 'QuranDaily' : 'HadithOfTheDay'} #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder`;
 
 // ── 9. Save today.json ──
 const repoBaseUrl = 'https://royal-technologies.github.io/Royal-Noor';
@@ -193,8 +193,6 @@ const todayJson = {
   caption: caption,
   imageUrl: `${repoBaseUrl}/cards/today.png`,
   archiveUrl: `${repoBaseUrl}/cards/${archivePngName}`,
-  website: 'https://www.royaltechbd.com/',
-  author: 'Royal Technologies',
   generatedAt: new Date().toISOString()
 };
 
