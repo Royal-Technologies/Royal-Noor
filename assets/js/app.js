@@ -205,7 +205,7 @@ function filterItems() {
   });
 
   renderCards(filteredItems);
-  renderActiveChips();
+  // active chips row removed
 }
 
 // ── Multi-Select Dropdown Component ──
@@ -262,26 +262,24 @@ function updateMultiDisplay(displayId, dropdownId) {
   const arrow = '<span class="multi-arrow">▾</span>';
 
   if (checked.length === 0) {
-    display.innerHTML = `<span class="multi-placeholder">${placeholder}</span>${arrow}`;
+    display.innerHTML = `<span class="multi-placeholder" style="color:var(--text-muted); font-size:13.5px;">${placeholder}</span>${arrow}`;
     return;
   }
 
   const dropdown = document.getElementById(dropdownId);
-  const chips = checked.slice(0, 2).map(val => {
-    const labelEl = dropdown ? dropdown.querySelector(`input[value="${val}"]`)?.closest('label') : null;
-    const label = labelEl ? labelEl.textContent.trim() : val;
-    return `<span class="multi-chip">${label} <span class="multi-chip-remove" data-val="${val}" data-dropdown="${dropdownId}" data-display="${displayId}">✕</span></span>`;
-  }).join('');
-  const extra = checked.length > 2 ? `<span class="multi-chip">+${checked.length - 2}</span>` : '';
-  display.innerHTML = chips + extra + arrow;
+  const firstLabelEl = dropdown ? dropdown.querySelector(`input[value="${checked[0]}"]`)?.closest('label') : null;
+  const firstLabel = firstLabelEl ? firstLabelEl.textContent.trim() : checked[0];
+  
+  const labelText = checked.length === 1
+    ? firstLabel
+    : `${firstLabel} (+${checked.length - 1})`;
 
-  display.querySelectorAll('.multi-chip-remove').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const cb = document.getElementById(btn.dataset.dropdown)?.querySelector(`input[value="${btn.dataset.val}"]`);
-      if (cb) { cb.checked = false; cb.dispatchEvent(new Event('change')); }
-    });
-  });
+  display.innerHTML = `
+    <span class="multi-selected-text" style="color:var(--gold); font-size:13.5px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1;" title="${checked.length}টি নির্বাচিত">
+      ${labelText}
+    </span>
+    ${arrow}
+  `;
 }
 
 function resetMultiSelect(dropdownId, displayId) {

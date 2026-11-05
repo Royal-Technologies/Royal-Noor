@@ -320,27 +320,42 @@ for (const item of existingItems) {
   });
 
   // Map to Occasions
-  if (item.event_tag === 'ramadan' || text.includes('রমজান') || text.includes('রোজা') || text.includes('সিয়াম') || text.includes('ইফতার')) {
+  if (item.event_tag === 'ramadan' || text.includes('রমজান') || text.includes('রোজা') || text.includes('সিয়াম') || text.includes('ইফতার') || text.includes('তারাবীহ') || text.includes('সাহরি')) {
     insertContentOccasion.run(contentId, occasionMap['ramadan']);
   }
-  if (item.event_tag === 'friday' || item.target_day === 'friday' || text.includes('জুমুআ') || text.includes('জুমু\'আ') || text.includes('দরুদ')) {
+  if (item.event_tag === 'jumuah' || item.event_tag === 'friday' || item.target_day === 'friday' || text.includes('জুমুআ') || text.includes('জুমু\'আ') || text.includes('জুমার দিন')) {
     insertContentOccasion.run(contentId, occasionMap['jumuah']);
   }
-  if (item.event_tag === 'dhul_hijjah' || text.includes('জিলহজ') || text.includes('হজ') || text.includes('কুরবানী')) {
-    insertContentOccasion.run(contentId, occasionMap['dhul-hijjah']);
-    if (text.includes('হজ')) insertContentOccasion.run(contentId, occasionMap['hajj-umrah']);
-  }
-  if (text.includes('কদর') || text.includes('লাইলাতুল কদর')) {
+  if (item.event_tag === 'laylatul-qadr' || text.includes('কদর') || text.includes('লাইলাতুল কদর') || text.includes('শবে কদর')) {
     insertContentOccasion.run(contentId, occasionMap['laylatul-qadr']);
   }
-  if (text.includes('আশুরা') || text.includes('মহররম')) {
+  if (item.event_tag === 'eid-ul-fitr' || text.includes('ঈদুল ফিতর') || text.includes('সাদাকাতুল ফিতর') || text.includes('ঈদের দিন')) {
+    insertContentOccasion.run(contentId, occasionMap['eid-ul-fitr']);
+  }
+  if (item.event_tag === 'eid-ul-adha' || text.includes('ঈদুল আজহা') || text.includes('কুরবানী') || text.includes('কোরবানী') || text.includes('পশু জবেহ')) {
+    insertContentOccasion.run(contentId, occasionMap['eid-ul-adha']);
+  }
+  if (item.event_tag === 'dhul-hijjah' || item.event_tag === 'dhul_hijjah' || text.includes('জিলহজ') || text.includes('জিলহজ্জ') || text.includes('আরাফাত') || text.includes('কুরবানী')) {
+    insertContentOccasion.run(contentId, occasionMap['dhul-hijjah']);
+  }
+  if (item.event_tag === 'day-of-arafah' || text.includes('আরাফা') || text.includes('আরাফার দিন') || text.includes('আরাফাতের ময়দান')) {
+    insertContentOccasion.run(contentId, occasionMap['day-of-arafah']);
+  }
+  if (item.event_tag === 'ashura' || text.includes('আশুরা') || text.includes('আশুরার রোজা')) {
     insertContentOccasion.run(contentId, occasionMap['ashura']);
+  }
+  if (item.event_tag === 'muharram' || text.includes('মহররম') || text.includes('পবিত্র মহররম')) {
     insertContentOccasion.run(contentId, occasionMap['muharram']);
   }
-  if (text.includes('সোমবার') || text.includes('বৃহস্পতিবার')) {
+  if (item.event_tag === 'hajj-umrah' || text.includes('হজ') || text.includes('উমরাহ') || text.includes('উমরা') || text.includes('তাওয়াফ')) {
+    insertContentOccasion.run(contentId, occasionMap['hajj-umrah']);
+  }
+  if (item.event_tag === 'monday-thursday' || text.includes('সোমবার') || text.includes('বৃহস্পতিবার') || text.includes('সোম ও বৃহস্পতি')) {
     insertContentOccasion.run(contentId, occasionMap['monday-thursday']);
   }
-
+  if (item.event_tag === 'hijri-new-year' || text.includes('নতুন হিজরি') || text.includes('হিজরি বছর') || text.includes('মাসের সংখ্যা বারো')) {
+    insertContentOccasion.run(contentId, occasionMap['hijri-new-year']);
+  }
   // Map to Dua Types
   if (text.includes('সকাল') || text.includes('সন্ধ্যা') || text.includes('ফজর') || text.includes('মাগরিব')) {
     insertContentDuaType.run(contentId, duaTypeMap['morning-evening']);

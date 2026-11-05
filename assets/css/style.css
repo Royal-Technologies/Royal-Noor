@@ -462,15 +462,18 @@ body.light .tools-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 6px;
-  padding: 10px 12px;
+  gap: 8px;
+  padding: 0 12px;
   border: 1px solid var(--card-border);
   background: var(--card-bg);
   border-radius: 10px;
   cursor: pointer;
   transition: var(--transition);
+  height: 42px;
   min-height: 42px;
-  flex-wrap: wrap;
+  max-height: 42px;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
 }
 
 .multi-select-display:hover,

@@ -221,12 +221,70 @@ function getAllItems() {
 function exportToJson() {
   try {
     const db = getDb();
-    const rows = db.prepare('SELECT * FROM royal_noor_items WHERE is_active = 1 ORDER BY id ASC').all();
-    fs.writeFileSync(itemsJsonPath, JSON.stringify(rows, null, 2), 'utf8');
+    let contents = [];
 
-    // Also export as JavaScript variable for offline/file:/// browser compatibility
+    // Try exporting from normalized contents table with taxonomy relations
+    try {
+      contents = db.prepare(`
+        SELECT c.*, 
+               s.name_bn as source_name_bn, s.slug as source_slug,
+               h.name_bn as hadith_collection_name_bn, h.slug as hadith_collection_slug
+        FROM contents c
+        JOIN sources s ON c.source_id = s.id
+        LEFT JOIN hadith_collections h ON c.hadith_collection_id = h.id
+        WHERE c.is_active = 1
+        ORDER BY c.id ASC
+      `).all();
+
+      for (const c of contents) {
+        const cats = db.prepare(`
+          SELECT cat.name_bn, cat.slug 
+          FROM content_categories cc
+          JOIN categories cat ON cc.category_id = cat.id
+          WHERE cc.content_id = ?
+        `).all(c.id);
+        c.categories = cats.map(x => x.name_bn);
+        c.category_slugs = cats.map(x => x.slug);
+
+        const occs = db.prepare(`
+          SELECT o.name_bn, o.slug
+          FROM content_occasions co
+          JOIN occasions o ON co.occasion_id = o.id
+          WHERE co.content_id = ?
+        `).all(c.id);
+        c.occasions = occs.map(x => x.name_bn);
+        c.occasion_slugs = occs.map(x => x.slug);
+
+        const duas = db.prepare(`
+          SELECT d.name_bn, d.slug
+          FROM content_dua_types cd
+          JOIN dua_types d ON cd.dua_type_id = d.id
+          WHERE cd.content_id = ?
+        `).all(c.id);
+        c.dua_types = duas.map(x => x.name_bn);
+        c.dua_type_slugs = duas.map(x => x.slug);
+
+        const tgs = db.prepare(`
+          SELECT t.name, t.slug
+          FROM content_tags ct
+          JOIN tags t ON ct.tag_id = t.id
+          WHERE ct.content_id = ?
+        `).all(c.id);
+        c.tags = tgs.map(x => x.name);
+        c.tag_slugs = tgs.map(x => x.slug);
+
+        c.type = c.source_slug === 'quran' ? 'quran' : 'hadith';
+        c.category = c.categories[0] || 'সাধারণ';
+        c.event_tag = c.occasion_slugs[0] || 'general';
+      }
+    } catch (eRel) {
+      contents = db.prepare('SELECT * FROM royal_noor_items WHERE is_active = 1 ORDER BY id ASC').all();
+    }
+
+    fs.writeFileSync(itemsJsonPath, JSON.stringify(contents, null, 2), 'utf8');
+
     const itemsJsPath = path.join(dbDir, 'items-data.js');
-    const jsContent = `/** Royal Noor — Offline Database Cache */\nwindow.ROYAL_NOOR_DATA = ${JSON.stringify(rows, null, 2)};\n`;
+    const jsContent = `/** Royal Noor — Offline Database Cache */\nwindow.ROYAL_NOOR_DATA = ${JSON.stringify(contents, null, 2)};\n`;
     fs.writeFileSync(itemsJsPath, jsContent, 'utf8');
   } catch (err) {
     console.error('[Database] Export JSON error:', err.message);
