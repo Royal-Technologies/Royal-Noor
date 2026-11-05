@@ -260,7 +260,7 @@
       desc: 'কাবার গিলাফের অনুকরণে প্রশস্ত স্বর্ণলতা ফিতা ফ্রেম'
     },
     // ═════════════════════════════════════════════════════════════════
-    // 🌄 TEN MUSLIMPRO-STYLE SCENIC BACKGROUNDS (১০টি সিনিক ব্যাকগ্রাউন্ড)
+    // 🌄 TEN ROYAL SCENIC & ARTISTIC BACKGROUNDS (১০টি সিনিক ব্যাকগ্রাউন্ড)
     // ═════════════════════════════════════════════════════════════════
     'scenic-mountain-twilight': {
       key: 'scenic-mountain-twilight',
@@ -1186,7 +1186,7 @@
         ctx.stroke();
         drawCornerBrackets(ctx, cardX + 28, cardY + 28, cardW - 56, cardH - 56, 26, '#D4AF37');
       } else {
-        // MuslimPro-style signature crisp white hairline photo frame
+        // Royal signature crisp white hairline photo frame
         ctx.strokeStyle = 'rgba(255, 255, 255, 0.38)';
         ctx.lineWidth = 1.4;
         ctx.strokeRect(cardX + 20, cardY + 20, cardW - 40, cardH - 40);
