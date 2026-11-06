@@ -1,18 +1,18 @@
 /** Royal Noor — Today Offline Cache */
 window.ROYAL_NOOR_TODAY = {
-  "cardId": "RN-20261105-VFU3",
-  "uid": "RN-Q-089",
+  "cardId": "RN-20261106-94DC",
+  "uid": "RN-Q-114",
   "type": "quran",
-  "title": "সূরা আল-আম্বিয়া",
-  "reference": "সূরা আল-আম্বিয়া : ৮৭ (দোয়া ইউনুস)",
-  "category": "বিপদে দোয়া ইউনুস",
-  "eventTag": "general",
-  "arabicText": "لَّا إِلَٰهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ",
-  "banglaTranslation": "আপনি ছাড়া কোনো সত্য উপাস্য নেই, আপনি পরম পবিত্র! নিশ্চয়ই আমি অপরাধীদের অন্তর্ভুক্ত হয়ে গেছি।",
-  "layout": "mihrab-arch",
-  "theme": "warm-parchment",
-  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nلَّا إِلَٰهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ\n\n❝ আপনি ছাড়া কোনো সত্য উপাস্য নেই, আপনি পরম পবিত্র! নিশ্চয়ই আমি অপরাধীদের অন্তর্ভুক্ত হয়ে গেছি। ❞\n— [ সূরা আল-আম্বিয়া : ৮৭ (দোয়া ইউনুস) ]\n\n#RoyalNoor #AlorPotheProtidin #QuranDaily #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
+  "title": "সূরা আল-আহযাব",
+  "reference": "সূরা আল-আহযাব : ৫৬",
+  "category": "দুরুদ শরীফের নির্দেশ",
+  "eventTag": "friday",
+  "arabicText": "إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ ۚ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا",
+  "banglaTranslation": "নিশ্চয়ই আল্লাহ ও তাঁর ফেরেশতাগণ নবীর প্রতি সালাত ও রহমত প্রেরণ করেন। হে মুমিনগণ! তোমরাও তাঁর প্রতি একনিষ্ঠভাবে দরুদ ও সালাম পাঠাও।",
+  "layout": "illuminated-manuscript",
+  "theme": "midnight-navy",
+  "caption": "🕌 জুমু'আ মুবারক\n✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nإِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ ۚ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا\n\n❝ নিশ্চয়ই আল্লাহ ও তাঁর ফেরেশতাগণ নবীর প্রতি সালাত ও রহমত প্রেরণ করেন। হে মুমিনগণ! তোমরাও তাঁর প্রতি একনিষ্ঠভাবে দরুদ ও সালাম পাঠাও। ❞\n— [ সূরা আল-আহযাব : ৫৬ ]\n\n#RoyalNoor #AlorPotheProtidin #QuranDaily #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
   "imageUrl": "https://royal-technologies.github.io/Royal-Noor/cards/today.png",
-  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261105-VFU3.png",
-  "generatedAt": "2026-11-05T14:34:55.033Z"
+  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261106-94DC.png",
+  "generatedAt": "2026-11-06T06:13:50.853Z"
 };
