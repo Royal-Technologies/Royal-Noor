@@ -1,18 +1,18 @@
 /** Royal Noor — Today Offline Cache */
 window.ROYAL_NOOR_TODAY = {
-  "cardId": "RN-20261106-94DC",
-  "uid": "RN-Q-114",
+  "cardId": "RN-20261107-5042",
+  "uid": "RN-Q-100",
   "type": "quran",
-  "title": "সূরা আল-আহযাব",
-  "reference": "সূরা আল-আহযাব : ৫৬",
-  "category": "দুরুদ শরীফের নির্দেশ",
-  "eventTag": "friday",
-  "arabicText": "إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ ۚ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا",
-  "banglaTranslation": "নিশ্চয়ই আল্লাহ ও তাঁর ফেরেশতাগণ নবীর প্রতি সালাত ও রহমত প্রেরণ করেন। হে মুমিনগণ! তোমরাও তাঁর প্রতি একনিষ্ঠভাবে দরুদ ও সালাম পাঠাও।",
-  "layout": "illuminated-manuscript",
-  "theme": "midnight-navy",
-  "caption": "🕌 জুমু'আ মুবারক\n✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nإِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ ۚ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا\n\n❝ নিশ্চয়ই আল্লাহ ও তাঁর ফেরেশতাগণ নবীর প্রতি সালাত ও রহমত প্রেরণ করেন। হে মুমিনগণ! তোমরাও তাঁর প্রতি একনিষ্ঠভাবে দরুদ ও সালাম পাঠাও। ❞\n— [ সূরা আল-আহযাব : ৫৬ ]\n\n#RoyalNoor #AlorPotheProtidin #QuranDaily #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
+  "title": "সূরা আল-ফুরকান",
+  "reference": "সূরা আল-ফুরকান : ৭৪",
+  "category": "পরিবারের কল্যাণে দোয়া",
+  "eventTag": "general",
+  "arabicText": "رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا",
+  "banglaTranslation": "হে আমাদের পালনকর্তা! আমাদের স্ত্রী ও সন্তানদের আমাদের জন্য নয়নপ্রীতিকর করুন এবং আমাদের মুত্তাকীদের আদর্শ নেতা বানান।",
+  "layout": "royal-minimal",
+  "theme": "ottoman-turquoise",
+  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nرَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا\n\n❝ হে আমাদের পালনকর্তা! আমাদের স্ত্রী ও সন্তানদের আমাদের জন্য নয়নপ্রীতিকর করুন এবং আমাদের মুত্তাকীদের আদর্শ নেতা বানান। ❞\n— [ সূরা আল-ফুরকান : ৭৪ ]\n\n#RoyalNoor #AlorPotheProtidin #QuranDaily #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
   "imageUrl": "https://royal-technologies.github.io/Royal-Noor/cards/today.png",
-  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261106-94DC.png",
-  "generatedAt": "2026-11-06T06:13:50.853Z"
+  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261107-5042.png",
+  "generatedAt": "2026-11-06T19:15:03.055Z"
 };
