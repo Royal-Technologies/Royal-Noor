@@ -1,18 +1,18 @@
 /** Royal Noor — Today Offline Cache */
 window.ROYAL_NOOR_TODAY = {
-  "cardId": "RN-20261110-ENGY",
-  "uid": "RN-Q-178",
+  "cardId": "RN-20261111-LUGA",
+  "uid": "RN-Q-183",
   "type": "quran",
-  "title": "সূরা আল-আলাক",
-  "reference": "সূরা আল-আলাক : ১-৩",
-  "category": "ইলম ও কোরআনের প্রথম বাণী",
+  "title": "সূরা আল-আসর",
+  "reference": "সূরা আল-আসর : ১-৩",
+  "category": "সময়ের মূল্য ও সফলতা",
   "eventTag": "general",
-  "arabicText": "اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ ۝ خَلَقَ الْإِنسَانَ مِنْ عَلَقٍ ۝ اقْرَأْ وَرَبُّكَ الْأَكْرَمُ",
-  "banglaTranslation": "পাঠ করুন আপনার রবের নামে যিনি সৃষ্টি করেছেন। যিনি মানুষকে সৃষ্টি করেছেন জমাট রক্ত থেকে। পাঠ করুন, আর আপনার প্রতিপালক পরম সম্মানিত।",
-  "layout": "illuminated-manuscript",
-  "theme": "imperial-black",
-  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nاقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ ۝ خَلَقَ الْإِنسَانَ مِنْ عَلَقٍ ۝ اقْرَأْ وَرَبُّكَ الْأَكْرَمُ\n\n❝ পাঠ করুন আপনার রবের নামে যিনি সৃষ্টি করেছেন। যিনি মানুষকে সৃষ্টি করেছেন জমাট রক্ত থেকে। পাঠ করুন, আর আপনার প্রতিপালক পরম সম্মানিত। ❞\n— [ সূরা আল-আলাক : ১-৩ ]\n\n#RoyalNoor #AlorPotheProtidin #QuranDaily #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
+  "arabicText": "وَالْعَصْرِ ۝ إِنَّ الْإِنسَانَ لَفِي خُسْرٍ ۝ إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ",
+  "banglaTranslation": "সময়ের শপথ! নিশ্চয়ই মানুষ চরম ক্ষতিগ্রস্ততায় নিমজ্জিত; কেবল তারা ছাড়া যারা ঈমান এনেছে, সৎকাজ করেছে এবং পরস্পরকে সত্যের ও ধৈর্যের উপদেশ দিয়েছে।",
+  "layout": "royal-minimal",
+  "theme": "desert-amber",
+  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nوَالْعَصْرِ ۝ إِنَّ الْإِنسَانَ لَفِي خُسْرٍ ۝ إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ\n\n❝ সময়ের শপথ! নিশ্চয়ই মানুষ চরম ক্ষতিগ্রস্ততায় নিমজ্জিত; কেবল তারা ছাড়া যারা ঈমান এনেছে, সৎকাজ করেছে এবং পরস্পরকে সত্যের ও ধৈর্যের উপদেশ দিয়েছে। ❞\n— [ সূরা আল-আসর : ১-৩ ]\n\n#RoyalNoor #AlorPotheProtidin #QuranDaily #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
   "imageUrl": "https://royal-technologies.github.io/Royal-Noor/cards/today.png",
-  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261110-ENGY.png",
-  "generatedAt": "2026-11-10T06:58:30.918Z"
+  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261111-LUGA.png",
+  "generatedAt": "2026-11-10T19:37:36.325Z"
 };
