@@ -1,18 +1,18 @@
 /** Royal Noor — Today Offline Cache */
 window.ROYAL_NOOR_TODAY = {
-  "cardId": "RN-20261110-4126",
-  "uid": "RN-Q-174",
+  "cardId": "RN-20261110-ENGY",
+  "uid": "RN-Q-178",
   "type": "quran",
-  "title": "সূরা আল-ইনশিরাহ",
-  "reference": "সূরা আল-ইনশিরাহ : ৫-৬",
-  "category": "কষ্টের পর স্বস্তি",
+  "title": "সূরা আল-আলাক",
+  "reference": "সূরা আল-আলাক : ১-৩",
+  "category": "ইলম ও কোরআনের প্রথম বাণী",
   "eventTag": "general",
-  "arabicText": "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا ۝ إِنَّ مَعَ الْعُسْرِ يُسْرًا",
-  "banglaTranslation": "সুতরাং নিশ্চয়ই কষ্টের সাথেই রয়েছে স্বস্তি। নিঃসন্দেহে কষ্টের সাথেই রয়েছে স্বস্তি।",
-  "layout": "mihrab-arch",
-  "theme": "warm-parchment",
-  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nفَإِنَّ مَعَ الْعُسْرِ يُسْرًا ۝ إِنَّ مَعَ الْعُسْرِ يُسْرًا\n\n❝ সুতরাং নিশ্চয়ই কষ্টের সাথেই রয়েছে স্বস্তি। নিঃসন্দেহে কষ্টের সাথেই রয়েছে স্বস্তি। ❞\n— [ সূরা আল-ইনশিরাহ : ৫-৬ ]\n\n#RoyalNoor #AlorPotheProtidin #QuranDaily #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
+  "arabicText": "اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ ۝ خَلَقَ الْإِنسَانَ مِنْ عَلَقٍ ۝ اقْرَأْ وَرَبُّكَ الْأَكْرَمُ",
+  "banglaTranslation": "পাঠ করুন আপনার রবের নামে যিনি সৃষ্টি করেছেন। যিনি মানুষকে সৃষ্টি করেছেন জমাট রক্ত থেকে। পাঠ করুন, আর আপনার প্রতিপালক পরম সম্মানিত।",
+  "layout": "illuminated-manuscript",
+  "theme": "imperial-black",
+  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nاقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ ۝ خَلَقَ الْإِنسَانَ مِنْ عَلَقٍ ۝ اقْرَأْ وَرَبُّكَ الْأَكْرَمُ\n\n❝ পাঠ করুন আপনার রবের নামে যিনি সৃষ্টি করেছেন। যিনি মানুষকে সৃষ্টি করেছেন জমাট রক্ত থেকে। পাঠ করুন, আর আপনার প্রতিপালক পরম সম্মানিত। ❞\n— [ সূরা আল-আলাক : ১-৩ ]\n\n#RoyalNoor #AlorPotheProtidin #QuranDaily #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
   "imageUrl": "https://royal-technologies.github.io/Royal-Noor/cards/today.png",
-  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261110-4126.png",
-  "generatedAt": "2026-11-09T22:13:52.226Z"
+  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261110-ENGY.png",
+  "generatedAt": "2026-11-10T06:58:30.918Z"
 };
