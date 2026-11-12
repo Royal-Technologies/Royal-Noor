@@ -1,18 +1,18 @@
 /** Royal Noor — Today Offline Cache */
 window.ROYAL_NOOR_TODAY = {
-  "cardId": "RN-20261112-6IK5",
-  "uid": "RN-Q-189",
+  "cardId": "RN-20261112-G88F",
+  "uid": "RN-Q-190",
   "type": "quran",
-  "title": "সূরা আল-ফালাক",
-  "reference": "সূরা আল-ফালাক : ১-২",
-  "category": "আল্লাহর সুরক্ষা ও আশ্রয়",
+  "title": "সূরা আন-নাস",
+  "reference": "সূরা আন-নাস : ১-৪",
+  "category": "কুমন্ত্রণা থেকে আশ্রয়",
   "eventTag": "general",
-  "arabicText": "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِن شَرِّ مَا خَلَقَ",
-  "banglaTranslation": "বলুন: আমি প্রভাতের রবের আশ্রয় প্রার্থনা করছি, তিনি যা সৃষ্টি করেছেন তার সকল অনিষ্ট থেকে।",
-  "layout": "kiswah-gold-ribbon",
-  "theme": "ottoman-turquoise",
-  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nقُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِن شَرِّ مَا خَلَقَ\n\n❝ বলুন: আমি প্রভাতের রবের আশ্রয় প্রার্থনা করছি, তিনি যা সৃষ্টি করেছেন তার সকল অনিষ্ট থেকে। ❞\n— [ সূরা আল-ফালাক : ১-২ ]\n\n#RoyalNoor #AlorPotheProtidin #QuranDaily #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
+  "arabicText": "قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَٰهِ النَّاسِ ۝ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ",
+  "banglaTranslation": "বলুন: আমি মানুষের রবের আশ্রয় চাই, যিনি মানুষের অধিপতি, মানুষের একমাত্র উপাস্য; আত্মগোপনকারী কুমন্ত্রণাদাতার অনিষ্ট থেকে।",
+  "layout": "architectural-pillars",
+  "theme": "classic-ivory",
+  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nقُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَٰهِ النَّاسِ ۝ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ\n\n❝ বলুন: আমি মানুষের রবের আশ্রয় চাই, যিনি মানুষের অধিপতি, মানুষের একমাত্র উপাস্য; আত্মগোপনকারী কুমন্ত্রণাদাতার অনিষ্ট থেকে। ❞\n— [ সূরা আন-নাস : ১-৪ ]\n\n#RoyalNoor #AlorPotheProtidin #QuranDaily #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
   "imageUrl": "https://royal-technologies.github.io/Royal-Noor/cards/today.png",
-  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261112-6IK5.png",
-  "generatedAt": "2026-11-11T19:29:30.421Z"
+  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261112-G88F.png",
+  "generatedAt": "2026-11-12T06:54:35.188Z"
 };
