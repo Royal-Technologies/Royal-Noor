@@ -1,18 +1,18 @@
 /** Royal Noor — Today Offline Cache */
 window.ROYAL_NOOR_TODAY = {
-  "cardId": "RN-20261114-OE3N",
-  "uid": "RN-H-003",
+  "cardId": "RN-20261114-4UX9",
+  "uid": "RN-H-007",
   "type": "hadith",
   "title": "সহীহ বুখারী",
-  "reference": "সহীহ বুখারী : ১৩",
-  "category": "ভ্রাতৃত্ব ও ভালোবাসা",
+  "reference": "সহীহ বুখারী : ৬০৩৫",
+  "category": "মুখের হেফাজত",
   "eventTag": "general",
-  "arabicText": "لاَ يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ",
-  "banglaTranslation": "রাসূলুল্লাহ ﷺ বলেছেন: তোমাদের কেউ ততক্ষণ পর্যন্ত পূর্ণ মুমিন হতে পারবে না, যতক্ষণ না সে তার ভাইয়ের জন্য তাই পছন্দ করে যা নিজের জন্য পছন্দ করে।",
-  "layout": "alhambra-palace",
+  "arabicText": "مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَاليَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ",
+  "banglaTranslation": "রাসূলুল্লাহ ﷺ বলেছেন: যে ব্যক্তি আল্লাহ ও পরকালের প্রতি বিশ্বাস রাখে, সে যেন ভালো কথা বলে অথবা চুপ থাকে।",
+  "layout": "scenic-mosque-dusk",
   "theme": "andalusian-olive",
-  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nلاَ يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ\n\n❝ রাসূলুল্লাহ ﷺ বলেছেন: তোমাদের কেউ ততক্ষণ পর্যন্ত পূর্ণ মুমিন হতে পারবে না, যতক্ষণ না সে তার ভাইয়ের জন্য তাই পছন্দ করে যা নিজের জন্য পছন্দ করে। ❞\n— [ সহীহ বুখারী : ১৩ ]\n\n#RoyalNoor #AlorPotheProtidin #HadithOfTheDay #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
+  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nمَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَاليَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ\n\n❝ রাসূলুল্লাহ ﷺ বলেছেন: যে ব্যক্তি আল্লাহ ও পরকালের প্রতি বিশ্বাস রাখে, সে যেন ভালো কথা বলে অথবা চুপ থাকে। ❞\n— [ সহীহ বুখারী : ৬০৩৫ ]\n\n#RoyalNoor #AlorPotheProtidin #HadithOfTheDay #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
   "imageUrl": "https://royal-technologies.github.io/Royal-Noor/cards/today.png",
-  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261114-OE3N.png",
-  "generatedAt": "2026-11-14T05:58:48.153Z"
+  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261114-4UX9.png",
+  "generatedAt": "2026-11-14T17:53:58.911Z"
 };
