@@ -608,7 +608,8 @@
     const arTotalHeight = arLines.length * arLineHeight;
 
     // Bangla Translation Font Size (Bigger & Crisp)
-    const bnText = item.bangla_translation || '';
+    // ﷺ (U+FDFA) → (সা.) — Hind Siliguri ফন্টে ﷺ গ্লিফ নেই, তাই বাংলা প্রমাণিত পদ্ধতিতে প্রতিস্থাপন
+    const bnText = (item.bangla_translation || '').replace(/\uFDFA/g, '(সা.)').replace(/ﷺ/g, '(সা.)');
     let bnFontSize = 34;
     if (bnText.length > 300) bnFontSize = 24;
     else if (bnText.length > 180) bnFontSize = 28;
