@@ -1,18 +1,18 @@
 /** Royal Noor — Today Offline Cache */
 window.ROYAL_NOOR_TODAY = {
-  "cardId": "RN-20261120-7W7V",
-  "uid": "RN-H-024",
+  "cardId": "RN-20261120-PAYI",
+  "uid": "RN-H-057",
   "type": "hadith",
-  "title": "সুনানে আবু দাউদ",
-  "reference": "সুনানে আবু দাউদ : ১০৪৭",
-  "category": "জুমার দিনে দরুদ",
+  "title": "সহীহ মুসলিম",
+  "reference": "সহীহ মুসলিম : ৪০৮",
+  "category": "দরুদ শরীফের ফজিলত",
   "eventTag": "friday",
-  "arabicText": "أَكْثِرُوا عَلَيَّ مِنَ الصَّلَاةِ يَوْمَ الْجُمُعَةِ فَإِنَّ صَلَاتَكُمْ مَعْرُوضَةٌ عَلَيَّ",
-  "banglaTranslation": "রাসূলুল্লাহ ﷺ বলেছেন: জুমার দিনে তোমরা আমার প্রতি বেশি বেশি দরুদ পাঠ কর, কেননা তোমাদের দরুদ আমার কাছে পেশ করা হয়।",
-  "layout": "alhambra-palace",
-  "theme": "andalusian-olive",
-  "caption": "🕌 জুমু'আ মুবারক\n✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nأَكْثِرُوا عَلَيَّ مِنَ الصَّلَاةِ يَوْمَ الْجُمُعَةِ فَإِنَّ صَلَاتَكُمْ مَعْرُوضَةٌ عَلَيَّ\n\n❝ রাসূলুল্লাহ ﷺ বলেছেন: জুমার দিনে তোমরা আমার প্রতি বেশি বেশি দরুদ পাঠ কর, কেননা তোমাদের দরুদ আমার কাছে পেশ করা হয়। ❞\n— [ সুনানে আবু দাউদ : ১০৪৭ ]\n\n#RoyalNoor #AlorPotheProtidin #HadithOfTheDay #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
+  "arabicText": "مَنْ صَلَّى عَلَيَّ صَلاَةً صَلَّى اللَّهُ عَلَيْهِ بِهَا عَشْرًا",
+  "banglaTranslation": "রাসূলুল্লাহ ﷺ বলেছেন: যে ব্যক্তি আমার ওপর একবার দরুদ পাঠ করে, আল্লাহ তার প্রতি দশটি রহমত নাজিল করেন।",
+  "layout": "scenic-medina-sanctuary",
+  "theme": "imperial-black",
+  "caption": "🕌 জুমু'আ মুবারক\n✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nمَنْ صَلَّى عَلَيَّ صَلاَةً صَلَّى اللَّهُ عَلَيْهِ بِهَا عَشْرًا\n\n❝ রাসূলুল্লাহ ﷺ বলেছেন: যে ব্যক্তি আমার ওপর একবার দরুদ পাঠ করে, আল্লাহ তার প্রতি দশটি রহমত নাজিল করেন। ❞\n— [ সহীহ মুসলিম : ৪০৮ ]\n\n#RoyalNoor #AlorPotheProtidin #HadithOfTheDay #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
   "imageUrl": "https://royal-technologies.github.io/Royal-Noor/cards/today.png",
-  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261120-7W7V.png",
-  "generatedAt": "2026-11-19T20:26:16.049Z"
+  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261120-PAYI.png",
+  "generatedAt": "2026-11-20T06:53:34.360Z"
 };
