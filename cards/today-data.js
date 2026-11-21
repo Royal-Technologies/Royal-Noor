@@ -1,18 +1,18 @@
 /** Royal Noor — Today Offline Cache */
 window.ROYAL_NOOR_TODAY = {
-  "cardId": "RN-20261121-11F6",
-  "uid": "RN-H-054",
+  "cardId": "RN-20261121-4DRN",
+  "uid": "RN-H-069",
   "type": "hadith",
-  "title": "সহীহ মুসলিম",
-  "reference": "সহীহ মুসলিম : ২৬৯৯ (সি)",
-  "category": "আল্লাহর সাহায্য পাওয়ার পথ",
+  "title": "সহীহ বুখারী",
+  "reference": "সহীহ বুখারী : ৬৩০৬ (সাইয়্যিদুল ইস্তিগফার)",
+  "category": "সাইয়্যিদুল ইস্তিগফার",
   "eventTag": "general",
-  "arabicText": "وَاللَّهُ فِي عَوْنِ العَبْدِ مَا كَانَ العَبْدُ فِي عَوْنِ أَخِيهِ",
-  "banglaTranslation": "রাসূলুল্লাহ ﷺ বলেছেন: আল্লাহ বান্দার সাহায্যে অবিচল থাকেন, যতক্ষণ বান্দা তার ভাইয়ের সাহায্যে নিয়োজিত থাকে।",
-  "layout": "royal-minimal",
-  "theme": "ottoman-turquoise",
-  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nوَاللَّهُ فِي عَوْنِ العَبْدِ مَا كَانَ العَبْدُ فِي عَوْنِ أَخِيهِ\n\n❝ রাসূলুল্লাহ ﷺ বলেছেন: আল্লাহ বান্দার সাহায্যে অবিচল থাকেন, যতক্ষণ বান্দা তার ভাইয়ের সাহায্যে নিয়োজিত থাকে। ❞\n— [ সহীহ মুসলিম : ২৬৯৯ (সি) ]\n\n#RoyalNoor #AlorPotheProtidin #HadithOfTheDay #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
+  "arabicText": "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ",
+  "banglaTranslation": "রাসূলুল্লাহ ﷺ বলেছেন: সাইয়্যিদুল ইস্তিগফার হলো—হে আল্লাহ! আপনিই আমার রব, আপনি ছাড়া কোনো ইলাহ নেই। আপনি আমাকে সৃষ্টি করেছেন এবং আমি আপনারই বান্দা; আমি আমার সাধ্যমতো আপনার অঙ্গীকার ও প্রতিশ্রুতিতে অটল রয়েছি।",
+  "layout": "scenic-medina-sanctuary",
+  "theme": "desert-amber",
+  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nاللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ\n\n❝ রাসূলুল্লাহ ﷺ বলেছেন: সাইয়্যিদুল ইস্তিগফার হলো—হে আল্লাহ! আপনিই আমার রব, আপনি ছাড়া কোনো ইলাহ নেই। আপনি আমাকে সৃষ্টি করেছেন এবং আমি আপনারই বান্দা; আমি আমার সাধ্যমতো আপনার অঙ্গীকার ও প্রতিশ্রুতিতে অটল রয়েছি। ❞\n— [ সহীহ বুখারী : ৬৩০৬ (সাইয়্যিদুল ইস্তিগফার) ]\n\n#RoyalNoor #AlorPotheProtidin #HadithOfTheDay #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
   "imageUrl": "https://royal-technologies.github.io/Royal-Noor/cards/today.png",
-  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261121-11F6.png",
-  "generatedAt": "2026-11-20T19:56:45.245Z"
+  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261121-4DRN.png",
+  "generatedAt": "2026-11-21T06:49:21.542Z"
 };
