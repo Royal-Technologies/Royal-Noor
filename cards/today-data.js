@@ -1,18 +1,18 @@
 /** Royal Noor — Today Offline Cache */
 window.ROYAL_NOOR_TODAY = {
-  "cardId": "RN-20261124-KSTJ",
-  "uid": "RN-H-093",
+  "cardId": "RN-20261125-LOQR",
+  "uid": "RN-H-096",
   "type": "hadith",
-  "title": "সুনানে আত-তিরমিজী",
-  "reference": "সুনানে আত-তিরমিজী : ২৩৪৪",
-  "category": "পাখির মতো তাওয়াক্কুল",
+  "title": "সহীহ মুসলিম",
+  "reference": "সহীহ মুসলিম : ২৯৯৯",
+  "category": "মুমিনের অনন্য অবস্থা",
   "eventTag": "general",
-  "arabicText": "لَوْ أَنَّكُمْ تَتَوَكَّلُونَ عَلَى اللَّهِ حَقَّ تَوَكُّلِهِ لَرَزَقَكُمْ كَمَا يَرْزُقُ الطَّيْرَ",
-  "banglaTranslation": "রাসূলুল্লাহ ﷺ বলেছেন: তোমরা যদি আল্লাহর ওপর যেভাবে ভরসা করা উচিত সেভাবে তাওয়াক্কুল করতে, তবে তিনি পাখিদের যেভাবে রিজিক দেন সেভাবে তোমাদেরও রিজিক দান করতেন।",
-  "layout": "iznik-tiles",
+  "arabicText": "عَجَبًا لأَمْرِ المُؤْمِنِ، إِنَّ أَمْرَهُ كُلَّهُ خَيْرٌ: إِنْ أَصَابَتْهُ سَرَّاءُ شَكَرَ فَكَانَ خَيْرًا لَهُ، وَإِنْ أَصَابَتْهُ ضَرَّاءُ صَبَرَ فَكَانَ خَيْرًا لَهُ",
+  "banglaTranslation": "রাসূলুল্লাহ ﷺ বলেছেন: মুমিনের বিষয়টি কতই না বিস্ময়কর! তার সবকিছুতেই কল্যাণ রয়েছে—সুখ এলে সে শুকরিয়া আদায় করে যা তার জন্য কল্যাণকর, আর বিপদ এলে সে ধৈর্য ধারণ করে যা তার জন্য কল্যাণকর।",
+  "layout": "scenic-mosque-dusk",
   "theme": "amethyst-violet",
-  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nلَوْ أَنَّكُمْ تَتَوَكَّلُونَ عَلَى اللَّهِ حَقَّ تَوَكُّلِهِ لَرَزَقَكُمْ كَمَا يَرْزُقُ الطَّيْرَ\n\n❝ রাসূলুল্লাহ ﷺ বলেছেন: তোমরা যদি আল্লাহর ওপর যেভাবে ভরসা করা উচিত সেভাবে তাওয়াক্কুল করতে, তবে তিনি পাখিদের যেভাবে রিজিক দেন সেভাবে তোমাদেরও রিজিক দান করতেন। ❞\n— [ সুনানে আত-তিরমিজী : ২৩৪৪ ]\n\n#RoyalNoor #AlorPotheProtidin #HadithOfTheDay #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
+  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nعَجَبًا لأَمْرِ المُؤْمِنِ، إِنَّ أَمْرَهُ كُلَّهُ خَيْرٌ: إِنْ أَصَابَتْهُ سَرَّاءُ شَكَرَ فَكَانَ خَيْرًا لَهُ، وَإِنْ أَصَابَتْهُ ضَرَّاءُ صَبَرَ فَكَانَ خَيْرًا لَهُ\n\n❝ রাসূলুল্লাহ ﷺ বলেছেন: মুমিনের বিষয়টি কতই না বিস্ময়কর! তার সবকিছুতেই কল্যাণ রয়েছে—সুখ এলে সে শুকরিয়া আদায় করে যা তার জন্য কল্যাণকর, আর বিপদ এলে সে ধৈর্য ধারণ করে যা তার জন্য কল্যাণকর। ❞\n— [ সহীহ মুসলিম : ২৯৯৯ ]\n\n#RoyalNoor #AlorPotheProtidin #HadithOfTheDay #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
   "imageUrl": "https://royal-technologies.github.io/Royal-Noor/cards/today.png",
-  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261124-KSTJ.png",
-  "generatedAt": "2026-11-24T09:35:30.191Z"
+  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261125-LOQR.png",
+  "generatedAt": "2026-11-24T22:16:38.499Z"
 };
