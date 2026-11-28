@@ -1,18 +1,18 @@
 /** Royal Noor — Today Offline Cache */
 window.ROYAL_NOOR_TODAY = {
-  "cardId": "RN-20261128-QXZJ",
-  "uid": "RN-H-110",
+  "cardId": "RN-20261128-8NOC",
+  "uid": "RN-H-112",
   "type": "hadith",
   "title": "সহীহ বুখারী",
-  "reference": "সহীহ বুখারী : ৬০৬৫",
-  "category": "ভ্রাতৃত্ব ও হিংসা বর্জন",
+  "reference": "সহীহ বুখারী : ২৪৪৮",
+  "category": "মাজলুমের দোয়া কবুল",
   "eventTag": "general",
-  "arabicText": "لاَ تَقَاطَعُوا، وَلاَ تَدَابَرُوا، وَلاَ تَبَاغَضُوا، وَلاَ تَحَاسَدُوا، وَكُونُوا عِبَادَ اللَّهِ إِخْوَانًا",
-  "banglaTranslation": "রাসূলুল্লাহ ﷺ বলেছেন: তোমরা পরস্পর সম্পর্ক ছিন্ন করো না, একে অপরের প্রতি শত্রুতা পোষণ করো না, পরস্পর বিদ্বেষ রেখো না এবং হিংসা করো না; আর হে আল্লাহর বান্দাগণ! তোমরা সবাই ভাই ভাই হয়ে যাও।",
-  "layout": "scenic-medina-sanctuary",
-  "theme": "andalusian-olive",
-  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nلاَ تَقَاطَعُوا، وَلاَ تَدَابَرُوا، وَلاَ تَبَاغَضُوا، وَلاَ تَحَاسَدُوا، وَكُونُوا عِبَادَ اللَّهِ إِخْوَانًا\n\n❝ রাসূলুল্লাহ ﷺ বলেছেন: তোমরা পরস্পর সম্পর্ক ছিন্ন করো না, একে অপরের প্রতি শত্রুতা পোষণ করো না, পরস্পর বিদ্বেষ রেখো না এবং হিংসা করো না; আর হে আল্লাহর বান্দাগণ! তোমরা সবাই ভাই ভাই হয়ে যাও। ❞\n— [ সহীহ বুখারী : ৬০৬৫ ]\n\n#RoyalNoor #AlorPotheProtidin #HadithOfTheDay #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
+  "arabicText": "وَاتَّقِ دَعْوَةَ المَظْلُومِ، فَإِنَّهُ لَيْسَ بَيْنَهَا وَبَيْنَ اللَّهِ حِجَابٌ",
+  "banglaTranslation": "রাসূলুল্লাহ ﷺ বলেছেন: মাজলুম বা নির্যাতিতের বদদোয়াকে ভয় কর; কেননা তার দোয়া এবং আল্লাহর মাঝে কোনো পর্দা বা অন্তরায় থাকে না।",
+  "layout": "scenic-desert-stars",
+  "theme": "desert-amber",
+  "caption": "✨ আজকের নূর | Royal Noor — আলোর পথে প্রতিদিন\n\nوَاتَّقِ دَعْوَةَ المَظْلُومِ، فَإِنَّهُ لَيْسَ بَيْنَهَا وَبَيْنَ اللَّهِ حِجَابٌ\n\n❝ রাসূলুল্লাহ ﷺ বলেছেন: মাজলুম বা নির্যাতিতের বদদোয়াকে ভয় কর; কেননা তার দোয়া এবং আল্লাহর মাঝে কোনো পর্দা বা অন্তরায় থাকে না। ❞\n— [ সহীহ বুখারী : ২৪৪৮ ]\n\n#RoyalNoor #AlorPotheProtidin #HadithOfTheDay #IslamicQuotes #DailyAyah #Hadith #Bangladesh #IslamicReminder",
   "imageUrl": "https://royal-technologies.github.io/Royal-Noor/cards/today.png",
-  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261128-QXZJ.png",
-  "generatedAt": "2026-11-27T21:01:50.683Z"
+  "archiveUrl": "https://royal-technologies.github.io/Royal-Noor/cards/RN-20261128-8NOC.png",
+  "generatedAt": "2026-11-28T07:27:09.501Z"
 };
